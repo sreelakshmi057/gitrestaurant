@@ -4,17 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
-import com.utilities.WebbrowserUtilities;
 
 public class ProductPage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
 
@@ -53,37 +50,39 @@ public class ProductPage {
 	public WebElement productDescription;
 	@FindBy(xpath = "//button[@class='btn btn-add']")
 	public WebElement productSubmitButton;
-	
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[1]")
+	@FindBy(xpath = "//body/div[@id='stock']/div[@id='stockModal']/div[1]/div[3]/button[2]")
+	public WebElement productStockSubmitButton;
+
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	public WebElement productCode_SearchResult;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[2]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
 	public WebElement productName_SearchResult;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[3]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
 	public WebElement productCategory_SearchResult;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[4]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
 	public WebElement productDescription_SearchResult;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[5]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
 	public WebElement productTax_SearchResult;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[6]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[6]")
 	public WebElement productPrice_SearchResult;
-	@FindBy(xpath="//input[@type='search']")
+	@FindBy(xpath = "//input[@type='search']")
 	public WebElement productSearchButton;
-	
-	@FindBy(xpath="(//a[@class='btn btn-default'])[3]")
-	public WebElement productEditButton;
-	@FindBy(xpath="(//a[@class='btn btn-default'])[1]")
-	public WebElement productDeleteButton;
-	@FindBy(xpath="//button[@type='submit']")
-	public WebElement productEditSubmitButton;
-	@FindBy(xpath="//a[@class='btn btn-danger']")
-	public WebElement productConfirmDeleteMsg;
-	@FindBy(xpath="(//table[@id='Table']//tr//td)[1]")
+	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	public WebElement delete_SearchResult;
+
+	@FindBy(xpath = "(//a[@class='btn btn-default'])[3]")
+	public WebElement productEditButton;
+	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
+	public WebElement productDeleteButton;
+	@FindBy(xpath = "//button[@type='submit']")
+	public WebElement productEditSubmitButton;
+	@FindBy(xpath = "//a[@class='btn btn-danger']")
+	public WebElement productConfirmDeleteMsg;
 
 	public void clickOnAddProductButton() {
 		actionUtil.clickElement(driver, addProductButton);
 	}
-	
+
 	public void clickOnProductType() {
 		actionUtil.clickElement(driver, productType);
 	}
@@ -94,59 +93,73 @@ public class ProductPage {
 	 * @return
 	 */
 	public Boolean isProductTypeDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productType, 20);
 		return actionUtil.isElementDisplayed(driver, productType);
 	}
-	
+
 	public Boolean isproductCodeDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productCode, 20);
 		return actionUtil.isElementDisplayed(driver, productCode);
 	}
 
 	public Boolean isProductNameDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productName, 20);
 		return actionUtil.isElementDisplayed(driver, productName);
 	}
 
 	public Boolean isProductCategoryDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productCategory, 20);
 		return actionUtil.isElementDisplayed(driver, productCategory);
 	}
 
 	public Boolean isProductSupplierDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productSupplier, 20);
 		return actionUtil.isElementDisplayed(driver, productSupplier);
 	}
 
 	public Boolean isProductPurchasePriceDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productPurchasePrice, 20);
 		return actionUtil.isElementDisplayed(driver, productPurchasePrice);
 	}
 
 	public Boolean isProductTaxDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productTax, 20);
 		return actionUtil.isElementDisplayed(driver, productTax);
 	}
 
 	public Boolean isProductTaxMethodDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productTaxMethod, 20);
 		return actionUtil.isElementDisplayed(driver, productTaxMethod);
 	}
 
 	public Boolean isProductPriceDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productPrice, 20);
 		return actionUtil.isElementDisplayed(driver, productPrice);
 	}
-	
+
 	public Boolean isProductUnitDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productUnit, 20);
 		return actionUtil.isElementDisplayed(driver, productUnit);
 	}
 
 	public Boolean isProductAlertQuantityDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productAlertQuantity, 20);
 		return actionUtil.isElementDisplayed(driver, productAlertQuantity);
 	}
 
 	public Boolean isProductOptionsDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productOptions, 20);
 		return actionUtil.isElementDisplayed(driver, productOptions);
 	}
 
 	public Boolean isProductDescriptionDisplayed() {
+		waitUtil.waitForElementTobeClickable(driver, productDescription, 20);
 		return actionUtil.isElementDisplayed(driver, productDescription);
 	}
 
 	/**
 	 * This methods are to fill up the add product field
+	 * 
 	 * @param value
 	 * @param index
 	 */
@@ -218,8 +231,10 @@ public class ProductPage {
 
 	public void clickOnProductSubmitButton() {
 		actionUtil.clickElement(driver, productSubmitButton);
+		waitUtil.waitForElementTobeClickable(driver, productStockSubmitButton, 5);
+		actionUtil.clickElement(driver, productStockSubmitButton);
 	}
-	
+
 	/**
 	 * This method is to search for the added productvalues
 	 * 
@@ -228,36 +243,37 @@ public class ProductPage {
 
 	public void searchForProductValue(String value) {
 		actionUtil.clickElement(driver, productSearchButton);
+		waitUtil.waitForElementTobeClickable(driver, productSearchButton, 5);
 		actionUtil.enterValue(driver, productSearchButton, value);
 	}
-	
+
 	/**
-	 *This method is to get text of search result 
+	 * This method is to get text of search result
 	 */
 	public String getProductCodeFromSearchResult() {
 		return actionUtil.getElementText(driver, productCode_SearchResult);
 	}
-	
+
 	public String getProductNameFromSearchResult() {
 		return actionUtil.getElementText(driver, productName_SearchResult);
 	}
-	
+
 	public String getProductCategoryFromSearchResult() {
 		return actionUtil.getElementText(driver, productCategory_SearchResult);
 	}
-	
+
 	public String getProductDescriptionFromSearchResult() {
 		return actionUtil.getElementText(driver, productDescription_SearchResult);
 	}
-	
+
 	public String getProductTaxFromSearchResult() {
 		return actionUtil.getElementText(driver, productTax_SearchResult);
 	}
-		
+
 	public String getProductPriceFromSearchResult() {
 		return actionUtil.getElementText(driver, productPrice_SearchResult);
-	}	
-	
+	}
+
 	/**
 	 * Method for editing the productvalues
 	 */
@@ -267,6 +283,7 @@ public class ProductPage {
 	}
 
 	public void clickOnProductEditSubmitButton() {
+		waitUtil.waitForElementTobeClickable(driver, productEditSubmitButton, 10);
 		actionUtil.clickElement(driver, productEditSubmitButton);
 	}
 
@@ -276,32 +293,13 @@ public class ProductPage {
 	public void clickOnProductDeleteIcon() {
 		actionUtil.clickElement(driver, productDeleteButton);
 	}
-		
+
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, productConfirmDeleteMsg);
-	}	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}	
+	}
 
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, delete_SearchResult);
+	}
+
+}

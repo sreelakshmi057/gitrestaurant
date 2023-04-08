@@ -28,7 +28,7 @@ public class HomePageTest extends AutomationBase {
 		driver = getDriver();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		waitUtil.implicitWait(driver, 10);
+		waitUtil.implicitWait(driver, 5);
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 	}

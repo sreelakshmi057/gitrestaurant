@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.pages.LogoutPage;
 import com.utilities.PropertyUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebbrowserUtilities;
@@ -13,11 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 
-public class LoginPageTest extends AutomationBase {
+public class LogoutTestPage extends AutomationBase {
 	WebDriver driver;
-	LoginPage loginpg;
-	HomePage homepg;
+	LogoutPage logoutpg;
 	Properties prop;
+	HomePage homepg;
+	LoginPage loginpg;
 
 	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 	PropertyUtilities propUtil = new PropertyUtilities();
@@ -28,18 +30,17 @@ public class LoginPageTest extends AutomationBase {
 		driver = getDriver();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		waitUtil.implicitWait(driver, 5);
 		loginpg = new LoginPage(driver);
-		homepg = new HomePage(driver);
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		logoutpg = homepg.navigateToLogoutPage();
 	}
 
-	@Test(priority = 1, enabled = true)
-	public void validateLoginPage() {
-		loginpg.enterValueToUsername(prop.getProperty("username"));
-		loginpg.enterValueToPassword(prop.getProperty("password"));
-		loginpg.clickLoginButton();
+	@Test(priority = 38, enabled = true)
+	public void validateLogoutPage() {
+		logoutpg.clickOnLogout();
+		waitUtil.waitForElementTobeClickable(driver, logoutpg.loginButton, 15);
 
-		Assert.assertTrue(homepg.isProductLinkDisplayed(), "Failure Message:Login failed");
+		Assert.assertTrue(logoutpg.isLoginButtonDisplayed(), "Failure Message:Logout failed");
 	}
 
 }

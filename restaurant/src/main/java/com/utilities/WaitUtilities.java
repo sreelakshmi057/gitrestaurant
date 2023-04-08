@@ -37,10 +37,10 @@ public class WaitUtilities {
 	 * @param elementlocator
 	 * @param i
 	 */
-	public void waitForVisibilityOfElement(WebDriver driver, By element, long i) {
+	public void waitForVisibilityOfElement(WebDriver driver, WebElement element, long i) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By) element));
 		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());
@@ -55,10 +55,10 @@ public class WaitUtilities {
 	 * @param element
 	 * @param i
 	 */
-	public void waitForPresenceOfElement(WebDriver driver, By element, int i) {
+	public void waitForPresenceOfElement(WebDriver driver,WebElement element, int i) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
-			wait.until(ExpectedConditions.presenceOfElementLocated(element));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By) element));
 		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());

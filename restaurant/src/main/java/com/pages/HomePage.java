@@ -4,15 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.utilities.WebActionUtilities;
-import com.utilities.WebbrowserUtilities;
 
 public class HomePage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
-	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -33,6 +30,10 @@ public class HomePage {
 	public WebElement expenseLink;
 	@FindBy(xpath = "//span[text()='Categories ']")
 	public WebElement categoriesLink;
+	@FindBy(xpath = "(//span[text()='Product'])[2]")
+	public WebElement productCategoriesLink;
+	@FindBy(xpath = "(//span[text()='Expense'])[2]")
+	public WebElement expenseCategoriesLink;
 	@FindBy(xpath = "//span[text()='Setting']")
 	public WebElement settingsLink;
 	@FindBy(xpath = "//span[text()='Reports']")
@@ -42,12 +43,21 @@ public class HomePage {
 	@FindBy(xpath = "//i[@class='fa fa-sign-out fa-lg']")
 	public WebElement logout;
 	@FindBy(xpath = "//span[text()='Waiters']")
-	public WebElement waiterPeople;
+	public WebElement waiterPeopleLink;
 	@FindBy(xpath = "//span[text()='Customers']")
-	public WebElement customersPeople;
+	public WebElement customersPeopleLink;
 	@FindBy(xpath = "//span[text()='Suppliers']")
-	public WebElement suppliersPeople;
-
+	public WebElement suppliersPeopleLink;
+	@FindBy(xpath = "//a[@title='Logout']")
+	public WebElement logOut;
+	@FindBy(xpath = "(//a[@data-toggle='tab'])[2]")
+	public WebElement usersButton;
+	
+	/**
+	 * This method is to check whether elements are displayed
+	 * 
+	 * @return
+	 */
 	public boolean isPosLinkDisplayed() {
 		boolean flag = actionUtil.isElementDisplayed(driver, posLink);
 		return flag;
@@ -103,31 +113,69 @@ public class HomePage {
 		return flag;
 	}
 	
+	/**
+	 * This methods are used to navigate to corresponding pages
+	 * @return
+	 */
+
 	public ProductPage navigateToProductPage() {
 		actionUtil.clickElement(driver, productLink);
 		return new ProductPage(driver);
 	}
-	
+
 	public StorePage navigateToStorePage() {
 		actionUtil.clickElement(driver, storeLink);
 		return new StorePage(driver);
 	}
-	
+
 	public WaiterPage navigateToWaiterInPeopleLink() {
 		actionUtil.clickElement(driver, peopleLink);
-		actionUtil.clickElement(driver, waiterPeople);
+		actionUtil.clickElement(driver, waiterPeopleLink);
 		return new WaiterPage(driver);
 	}
-	
+
 	public CustomerPage navigateToCustomersInPeopleLink() {
 		actionUtil.clickElement(driver, peopleLink);
-		actionUtil.clickElement(driver, customersPeople);
+		actionUtil.clickElement(driver, customersPeopleLink);
 		return new CustomerPage(driver);
 	}
-	
-	public SuppliersPage navigateToSuppliersInPeopleLink() {
+
+	public SupplierPage navigateToSuppliersInPeopleLink() {
 		actionUtil.clickElement(driver, peopleLink);
-		actionUtil.clickElement(driver, suppliersPeople);
-		return new SuppliersPage(driver);
+		actionUtil.clickElement(driver, suppliersPeopleLink);
+		return new SupplierPage(driver);
+	}
+
+	public ExpensePage navigateToExpensePage() {
+		actionUtil.clickElement(driver, expenseLink);
+		return new ExpensePage(driver);
+	}
+
+	public ProductInCategoriesPage navigateToProductInCategoriesPage() {
+		actionUtil.clickElement(driver, categoriesLink);
+		actionUtil.clickElement(driver, productCategoriesLink);
+		return new ProductInCategoriesPage(driver);
+	}
+
+	public ExpenseInCategoriesPage navigateToExpenseInCategoriesPage() {
+		actionUtil.clickElement(driver, categoriesLink);
+		actionUtil.clickElement(driver, expenseCategoriesLink);
+		return new ExpenseInCategoriesPage(driver);
+	}
+
+	public SettingsPage navigateToSettingsPage() {
+		actionUtil.clickElement(driver, settingsLink);
+		return new SettingsPage(driver);
+	}
+
+	public LogoutPage navigateToLogoutPage() {
+		actionUtil.clickElement(driver, logOut);
+		return new LogoutPage(driver);
+	}
+	
+	public UsersPage navigateToUsersPage() {
+		actionUtil.clickElement(driver, settingsLink);
+		actionUtil.clickElement(driver, usersButton);
+		return new UsersPage(driver);
 	}
 }

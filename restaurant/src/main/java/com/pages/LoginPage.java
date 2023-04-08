@@ -9,7 +9,7 @@ import com.utilities.WebActionUtilities;
 
 public class LoginPage {
 	WebDriver driver;
-	WebActionUtilities webaction = new WebActionUtilities();
+	WebActionUtilities actionUtil = new WebActionUtilities();
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -24,15 +24,15 @@ public class LoginPage {
 	public WebElement loginButton;
 
 	public void enterValueToUsername(String value) {
-		webaction.enterValue(driver, username, value);
+		actionUtil.enterValue(driver, username, value);
 	}
 
 	public void enterValueToPassword(String value) {
-		webaction.enterValue(driver, password, value);
+		actionUtil.enterValue(driver, password, value);
 	}
 
 	public void clickLoginButton() {
-		webaction.clickElement(driver, loginButton);
+		actionUtil.clickElement(driver, loginButton);
 	}
 
 	public HomePage login(String username, String password) {

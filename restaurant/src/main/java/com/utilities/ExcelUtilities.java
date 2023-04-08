@@ -9,14 +9,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelUtilities {
 
 	public static final String currentDir = System.getProperty("user.dir");
-	public static String filePath = currentDir + "/src/test/resources";
-	String file = "testdataframe.xlsx";
-
+	public static String filePath = currentDir + "\\src\\test\\resources";
+	static String excelPath;
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;
 
-	public ExcelUtilities(String fileName, String sheetName) throws IOException {
-		String excelPath = filePath + fileName;
+	public ExcelUtilities(String fileName) throws IOException {
+		excelPath = filePath + fileName;
 		workbook = new XSSFWorkbook(excelPath);
 		sheet = (XSSFSheet) workbook.getSheetAt(0);
 
@@ -42,9 +41,8 @@ public class ExcelUtilities {
 		return colCount;
 	}
 
-	public static String readStringData(String fileName, String sheetname, int rowNum, int colNum) throws IOException {
-
-		String excelPath = filePath + fileName;
+	public String readStringData(String sheetname, int rowNum, int colNum) throws IOException {
+		
 		workbook = new XSSFWorkbook(excelPath);
 		sheet = workbook.getSheet(sheetname);
 		Row row = sheet.getRow(rowNum);

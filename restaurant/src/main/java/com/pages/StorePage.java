@@ -1,23 +1,18 @@
 package com.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.DataProvider;
-
 import com.utilities.JavaScriptExecutorUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
-import com.utilities.WebbrowserUtilities;
 
 public class StorePage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
-	JavaScriptExecutorUtilities javaUtil = new JavaScriptExecutorUtilities();
 
 	public StorePage(WebDriver driver) {
 		this.driver = driver;
@@ -108,7 +103,6 @@ public class StorePage {
 
 	public void submit() {
 		actionUtil.clickElement(driver, storeSubmitButton);
-		// javaUtil.elementClick(storeSubmitButton);
 	}
 
 	/**
@@ -144,7 +138,7 @@ public class StorePage {
 	 */
 
 	public void searchForStoreValue(String value) {
-		waitUtil.waitForElementTobeClickable(driver, storeSubmitButton, 10);
+		waitUtil.waitForElementTobeClickable(driver, storeSearch, 10);
 		actionUtil.clickElement(driver, storeSearch);
 		actionUtil.enterValue(driver, storeSearch, value);
 	}
@@ -157,27 +151,22 @@ public class StorePage {
 	 */
 
 	public String getStoreNameFromSearch() {
-		waitUtil.waitForPresenceOfElement(driver, By.xpath("//table[@id='Table']//tr//td)[2]"), 10);
 		return actionUtil.getElementText(driver, storeName_searchResult);
 	}
 
 	public String getStoreMailFromSearch() {
-		waitUtil.waitForPresenceOfElement(driver, By.xpath("//table[@id='Table']//tr//td)[2]"), 10);
 		return actionUtil.getElementText(driver, storeEmail_searchResult);
 	}
 
 	public String getStorePhoneFromSearch() {
-		waitUtil.waitForPresenceOfElement(driver, By.xpath("//table[@id='Table']//tr//td)[2]"), 10);
 		return actionUtil.getElementText(driver, storePhone_searchResult);
 	}
 
 	public String getStoreCountryFromSearch() {
-		waitUtil.waitForPresenceOfElement(driver, By.xpath("//table[@id='Table']//tr//td)[2]"), 10);
 		return actionUtil.getElementText(driver, storeCountry_searchResult);
 	}
 
 	public String getStoreCityFromSearch() {
-		waitUtil.waitForPresenceOfElement(driver, By.xpath("//table[@id='Table']//tr//td)[2]"), 10);
 		return actionUtil.getElementText(driver, storeCity_searchResult);
 	}
 
@@ -204,15 +193,8 @@ public class StorePage {
 		actionUtil.clickElement(driver, storeDeleteButton);
 	}
 
-//	@DataProvider(name = "Storevalues")
-//	public void testData() {
-//		Object[][] data = new Object[1][5];
-//
-//		data[0][0] = "AA STORE";
-//		data[0][1] = "aa@gmail.com";
-//		data[0][2] = "1234567890";
-//		data[0][3] = "INDIA";
-//		data[0][4] = "Adoor";
-//	}
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, storedelete_searchResult);
+	}
 
 }
