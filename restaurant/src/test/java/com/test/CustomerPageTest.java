@@ -59,7 +59,8 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.enterValueToCustomerEmail("aac@gmail.com");
 		customerpg.enterValueToCustomerDiscount("10");
 		customerpg.clickOnCustomerSubmitButton();
-		waitUtil.waitForVisibilityOfElement(driver, customerpg.customerPhone_SearchResult, 20);
+		waitUtil.waitForElementTobeClickable(driver, customerpg.customerPhone_SearchResult, 20);
+		
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
 				"Failure Message: CustomerName not displayed");

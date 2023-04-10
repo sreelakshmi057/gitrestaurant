@@ -85,6 +85,7 @@ public class StorePageTest extends AutomationBase {
 		storepg.searchForStoreValue("AAA");
 		storepg.clickOnEditIcon();
 		storepg.enterValueToStoreMail("abcd@gmail.com");
+		waitUtil.waitForElementTobeClickable(driver, storepg.storeEditSubmitButton, 20);
 		storepg.clickOnEditSubmitButton();
 		storepg.searchForStoreValue("AAA");
 

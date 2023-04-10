@@ -33,7 +33,7 @@ public class LoginPageTest extends AutomationBase {
 		homepg = new HomePage(driver);
 	}
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = true, groups = { "smoke" })
 	public void validateLoginPage() {
 		loginpg.enterValueToUsername(prop.getProperty("username"));
 		loginpg.enterValueToPassword(prop.getProperty("password"));

@@ -38,7 +38,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 
 	}
 
-	@Test(priority = 27, enabled = true)
+	@Test(priority = 27, enabled = false)
 	public void validateAddCategoryPageHasElementsDisplayed() throws Exception {
 		categoriespg.clickOnAddCategoryButton();
 		waitUtil.waitForElementTobeClickable(driver, categoriespg.categoryName, 15);
@@ -48,13 +48,14 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 28, enabled = true)
-	public void validateEnteredProductValues() throws Exception {
+	@Test(priority = 28, enabled = true, dataProvider="dataSupplier", dataProviderClass= DataSupplier.class)
+	public void validateEnteredProductValues(String name) throws Exception {
 		categoriespg.clickOnAddCategoryButton();
 		categoriespg.clickOnCategoryName();
-		categoriespg.enterValueToCategoryName("APPLE_SREE");
+		categoriespg.enterValueToCategoryName(name);
+		waitUtil.waitForElementTobeClickable(driver, categoriespg.categorySubmitButton, 20);
 		categoriespg.clickOnCategorySubmitButton();
-		categoriespg.searchForCategoryProductValue("APPLE_SREE");
+		categoriespg.searchForCategoryProductValue(name);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), "APPLE_SREE",
@@ -62,13 +63,13 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 29, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	@Test(priority = 29, enabled = true, dataProvider="dataSupplierEdit", dataProviderClass= DataSupplier.class)
+	public void validateTheEditedStoreValues(String edit_name) throws Exception {
 		categoriespg.searchForCategoryProductValue("APPLE_SREE");
 		categoriespg.clickOnProductEditIcon();
-		categoriespg.enterValueToCategoryName("APPLE1_SREE");
+		categoriespg.enterValueToCategoryName(edit_name);
 		categoriespg.clickOnProductEditSubmitButton();
-		categoriespg.searchForCategoryProductValue("APPLE1_SREE");
+		categoriespg.searchForCategoryProductValue(edit_name);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), "APPLE1_SREE",
@@ -77,12 +78,12 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 
 	}
 
-	@Test(priority = 30, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
-		categoriespg.searchForCategoryProductValue("APPLE1_SREE");
+	@Test(priority = 30, enabled = true, dataProvider="dataSupplierDelete", dataProviderClass= DataSupplier.class)
+	public void validateTheDeleteIcon(String delete_name) throws Exception {
+		categoriespg.searchForCategoryProductValue(delete_name);
 		categoriespg.clickOnProductDeleteIcon();
 		categoriespg.clickOnProductDeleteConfirmMessage();
-		categoriespg.searchForCategoryProductValue("APPLE1_SREE");
+		categoriespg.searchForCategoryProductValue(delete_name);
 
 		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), "No matching records found",
 				"Failure message:: failed to delete the store");

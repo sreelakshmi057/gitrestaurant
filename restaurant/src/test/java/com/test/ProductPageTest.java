@@ -45,7 +45,7 @@ public class ProductPageTest extends AutomationBase {
 		excelUtil= new ExcelUtilities("restaurantdata.xlsx");
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void validateAddProductPageHasElementsDisplayed() throws Exception {
 		productpg.clickOnAddProductButton();
 

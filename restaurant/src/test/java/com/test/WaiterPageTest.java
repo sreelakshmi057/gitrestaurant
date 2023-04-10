@@ -39,7 +39,7 @@ public class WaiterPageTest extends AutomationBase {
 	@Test(priority = 11, enabled = true)
 	public void validateAddWaiterPageHasElementsDisplayed() throws Exception {
 		waiterpg.clickOnAddWaiterButton();
-		waitUtil.waitForVisibilityOfElement(driver, waiterpg.waiterName, 15);
+		waitUtil.waitForElementTobeClickable(driver, waiterpg.waiterName, 25);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(waiterpg.isWaiterNameDisplayed(), "Failure Message: WaiterName not displayed");

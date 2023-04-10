@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import com.utilities.JavaScriptExecutorUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 

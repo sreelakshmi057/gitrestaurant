@@ -35,7 +35,7 @@ public class LogoutTestPage extends AutomationBase {
 		logoutpg = homepg.navigateToLogoutPage();
 	}
 
-	@Test(priority = 38, enabled = true)
+	@Test(priority = 38, enabled = true, groups = { "smoke" })
 	public void validateLogoutPage() {
 		logoutpg.clickOnLogout();
 		waitUtil.waitForElementTobeClickable(driver, logoutpg.loginButton, 15);

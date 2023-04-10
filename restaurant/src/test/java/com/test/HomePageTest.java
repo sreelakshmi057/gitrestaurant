@@ -33,7 +33,7 @@ public class HomePageTest extends AutomationBase {
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 2, enabled = true, groups = { "smoke" })
 	public void validateTheLinkDisplayedOnTheHomePage() {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(homepg.isPosLinkDisplayed(), "Failure Message: poslink not displayed");

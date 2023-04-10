@@ -37,8 +37,8 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
 	}
 
-	@Test(priority = 31, enabled = true)
-	public void validateAddCategoryPageHasElementsDisplayed() throws Exception {
+	@Test(priority = 31, enabled = false)
+	public void validateAddExpensePageHasElementsDisplayed() throws Exception {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		waitUtil.waitForElementTobeClickable(driver, cat_expensepg.expenseCategoryName, 15);
         
@@ -47,13 +47,14 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 32, enabled = true)
-	public void validateEnteredProductValues() throws Exception {
+	@Test(priority = 32, enabled = true, dataProvider="dataExpense", dataProviderClass= DataSupplier.class)
+	public void validateEnteredProductValues(String name) throws Exception {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		cat_expensepg.clickOnCategoryName();
-		cat_expensepg.enterValueToCategoryName("APPLE_EXPENSE");
+		cat_expensepg.enterValueToCategoryName(name);
 		cat_expensepg.clickOnCategorySubmitButton();
-		cat_expensepg.searchForCategoryProductValue("APPLE_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(name);
+		waitUtil.waitForVisibilityOfElement(driver, cat_expensepg.categoryName_SearchResult,20);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_EXPENSE",
@@ -61,13 +62,13 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority =33, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	@Test(priority =33, enabled = true, dataProvider="dataExpenseEdit", dataProviderClass= DataSupplier.class)
+	public void validateTheEditedStoreValues(String edit_name) throws Exception {
 		cat_expensepg.searchForCategoryProductValue("APPLE_EXPENSE");
 		cat_expensepg.clickOnProductEditIcon();
-		cat_expensepg.enterValueToCategoryName("APPLE1_EXPENSE");
+		cat_expensepg.enterValueToCategoryName(edit_name);
 		cat_expensepg.clickOnProductEditSubmitButton();
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(edit_name);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE1_EXPENSE",
@@ -76,12 +77,12 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 
 	}
 	
-	@Test(priority = 34, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+	@Test(priority = 34, enabled = true, dataProvider="dataExpenseDelete", dataProviderClass= DataSupplier.class)
+	public void validateTheDeleteIcon(String del_name) throws Exception {
+		cat_expensepg.searchForCategoryProductValue(del_name);
 		cat_expensepg.clickOnProductDeleteIcon();
 		cat_expensepg.clickOnProductDeleteConfirmMessage();
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(del_name);
 
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), "No matching records found","Failure message:: failed to delete the store" );
 

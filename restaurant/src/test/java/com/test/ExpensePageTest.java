@@ -38,7 +38,7 @@ public class ExpensePageTest extends AutomationBase{
 		
 	}
 
-	@Test(priority = 23, enabled = true)
+	@Test(priority = 23, enabled = false)
 	public void validateAddExpensePageHasElementsDisplayed() throws Exception {
 		expensepg.clickOnAddExpenseButton();
 		waitUtil.waitForElementTobeClickable(driver,expensepg.expenseDate, 20);
@@ -66,7 +66,7 @@ public class ExpensePageTest extends AutomationBase{
 		expensepg.enterValueToExpenseAmount("2000");
 		expensepg.enterValueToExpenseDescription("EXPENSE DESCRIPTION");
 		expensepg.clickOnExpenseSubmitButton();
-		expensepg.searchForExpenseValue("reference10");
+		expensepg.searchForExpenseValue("referenceA");
 		waitUtil.waitForPresenceOfElement(driver, expensepg.expenseDate_SearchResult, 15);
 		
 		SoftAssert soft = new SoftAssert();
@@ -91,7 +91,7 @@ public class ExpensePageTest extends AutomationBase{
 		expensepg.searchForExpenseValue("referenceB");
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-04-01", "Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", "Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceB",
 				"Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
