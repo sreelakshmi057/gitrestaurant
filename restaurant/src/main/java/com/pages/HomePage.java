@@ -4,12 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
 public class HomePage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
+	WaitUtilities waitUtil = new WaitUtilities();
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -17,42 +20,42 @@ public class HomePage {
 	}
 
 	@FindBy(xpath = "//span[contains(text(),'POS')]")
-	public WebElement posLink;
+	private WebElement posLink;
 	@FindBy(xpath = "(//span[text()='Product'])[1]")
-	public WebElement productLink;
+	private WebElement productLink;
 	@FindBy(xpath = "//span[text()='Stores'and @class='menu-text']")
-	public WebElement storeLink;
+	private WebElement storeLink;
 	@FindBy(xpath = "//span[text()='People'and@class='menu-text']")
-	public WebElement peopleLink;
+	private WebElement peopleLink;
 	@FindBy(xpath = "//span[text()='Sales'and@class='menu-text']")
-	public WebElement salesLink;
+	private WebElement salesLink;
 	@FindBy(xpath = "(//span[text()='Expense'])[1]")
-	public WebElement expenseLink;
+	private WebElement expenseLink;
 	@FindBy(xpath = "//span[text()='Categories ']")
-	public WebElement categoriesLink;
+	private WebElement categoriesLink;
 	@FindBy(xpath = "(//span[text()='Product'])[2]")
-	public WebElement productCategoriesLink;
+	private WebElement productCategoriesLink;
 	@FindBy(xpath = "(//span[text()='Expense'])[2]")
-	public WebElement expenseCategoriesLink;
+	private WebElement expenseCategoriesLink;
 	@FindBy(xpath = "//span[text()='Setting']")
-	public WebElement settingsLink;
+	private WebElement settingsLink;
 	@FindBy(xpath = "//span[text()='Reports']")
-	public WebElement reportLink;
+	private WebElement reportLink;
 	@FindBy(xpath = "//li[@class='dropdown language']")
-	public WebElement languageLink;
+	private WebElement languageLink;
 	@FindBy(xpath = "//i[@class='fa fa-sign-out fa-lg']")
-	public WebElement logout;
+	private WebElement logout;
 	@FindBy(xpath = "//span[text()='Waiters']")
-	public WebElement waiterPeopleLink;
+	private WebElement waiterPeopleLink;
 	@FindBy(xpath = "//span[text()='Customers']")
-	public WebElement customersPeopleLink;
+	private WebElement customersPeopleLink;
 	@FindBy(xpath = "//span[text()='Suppliers']")
-	public WebElement suppliersPeopleLink;
+	private WebElement suppliersPeopleLink;
 	@FindBy(xpath = "//a[@title='Logout']")
-	public WebElement logOut;
+	private WebElement logOut;
 	@FindBy(xpath = "(//a[@data-toggle='tab'])[2]")
-	public WebElement usersButton;
-	
+	private WebElement usersButton;
+
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
@@ -113,8 +116,13 @@ public class HomePage {
 		return flag;
 	}
 	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
+	}
+
 	/**
 	 * This methods are used to navigate to corresponding pages
+	 * 
 	 * @return
 	 */
 
@@ -172,7 +180,7 @@ public class HomePage {
 		actionUtil.clickElement(driver, logOut);
 		return new LogoutPage(driver);
 	}
-	
+
 	public UsersPage navigateToUsersPage() {
 		actionUtil.clickElement(driver, settingsLink);
 		actionUtil.clickElement(driver, usersButton);

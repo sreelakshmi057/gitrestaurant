@@ -28,9 +28,15 @@ public class StorePageTest extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -38,9 +44,8 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 7, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() throws Exception {
+	public void validateAddStorePageHasElementsDisplayed() {
 		storepg.clickOnAddStoreButton();
-		waitUtil.waitForElementTobeClickable(driver,storepg.storeName ,20);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(storepg.isStoreNameDisplayed(), "Failure Message: Storename not displayed");
@@ -53,10 +58,8 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 8, enabled = true)
-	public void validateEnteredStoreValues() throws Exception {
+	public void validateTheEnteredStoreValues() throws Exception {
 		storepg.clickOnAddStoreButton();
-		waitUtil.waitForElementTobeClickable(driver, storepg.storeName, 20);
-		storepg.clickOnStoreName();
 		storepg.enterValueToStoreName("AAA");
 		storepg.enterValueToStoreMail("aaa@gmail.com");
 		storepg.enterValueToStoreNumber("9498571245");
@@ -66,7 +69,6 @@ public class StorePageTest extends AutomationBase {
 		storepg.enterValueToStoreCustomerFooter("done by AKHIL");
 		storepg.submit();
 		storepg.searchForStoreValue("AAA");
-		waitUtil.waitForVisibilityOfElement(driver, storepg.storeName_searchResult, 20);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", "Failure Message: No matching records found");
@@ -85,7 +87,6 @@ public class StorePageTest extends AutomationBase {
 		storepg.searchForStoreValue("AAA");
 		storepg.clickOnEditIcon();
 		storepg.enterValueToStoreMail("abcd@gmail.com");
-		waitUtil.waitForElementTobeClickable(driver, storepg.storeEditSubmitButton, 20);
 		storepg.clickOnEditSubmitButton();
 		storepg.searchForStoreValue("AAA");
 
@@ -107,7 +108,8 @@ public class StorePageTest extends AutomationBase {
 		storepg.clickOnDeleteIcon();
 		storepg.searchForStoreValue("AAA");
 
-		Assert.assertEquals(storepg.getTheSearchResultOfDeletedEntry(), "No matching records found","Failure message:: failed to delete the store" );
+		Assert.assertEquals(storepg.getTheSearchResultOfDeletedEntry(), "No matching records found",
+				"Failure message:: failed to delete the store");
 
 	}
 

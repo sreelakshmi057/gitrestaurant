@@ -1,10 +1,13 @@
 package com.utilities;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtilities {
@@ -42,7 +45,7 @@ public class WaitUtilities {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 			wait.until(ExpectedConditions.visibilityOfElementLocated((By) element));
 		} catch (Exception e) {
-			
+
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -55,12 +58,12 @@ public class WaitUtilities {
 	 * @param element
 	 * @param i
 	 */
-	public void waitForPresenceOfElement(WebDriver driver,WebElement element, int i) {
+	public void waitForPresenceOfElement(WebDriver driver, WebElement element, int i) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By) element));
 		} catch (Exception e) {
-			
+
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -82,6 +85,19 @@ public class WaitUtilities {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
+	}
+
+	/**
+	 * this method ic to implement fluent wait
+	 * 
+	 * @param driver
+	 * @param element
+	 */
+
+	public void fluentWait(WebDriver driver, WebElement element) {
+		Wait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofMillis(5000))
+				.pollingEvery(Duration.ofMillis(250)).ignoring(NoSuchElementException.class);
+		fwait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 }

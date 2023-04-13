@@ -5,7 +5,6 @@ import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
 import com.utilities.WebbrowserUtilities;
 import java.io.IOException;
 import java.util.Properties;
@@ -21,14 +20,12 @@ public class LoginPageTest extends AutomationBase {
 
 	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
 	public void prerun() throws IOException {
 		driver = getDriver();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		waitUtil.implicitWait(driver, 5);
 		loginpg = new LoginPage(driver);
 		homepg = new HomePage(driver);
 	}

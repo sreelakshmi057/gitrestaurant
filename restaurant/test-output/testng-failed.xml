@@ -4,13 +4,13 @@
   <test thread-count="5" name="Test(failed)">
     <parameter name="browserName" value="chrome"/>
     <classes>
-      <class name="com.test.ProductPageTest">
+      <class name="com.test.WaiterPageTest">
         <methods>
-          <include name="prerun"/>
-          <include name="validateEnteredProductValues"/>
+          <include name="validateTheEditedWaiterValues"/>
           <include name="launchBrowser"/>
+          <include name="prerun"/>
         </methods>
-      </class> <!-- com.test.ProductPageTest -->
+      </class> <!-- com.test.WaiterPageTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

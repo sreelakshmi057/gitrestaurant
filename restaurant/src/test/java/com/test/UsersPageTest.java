@@ -31,20 +31,24 @@ public class UsersPageTest extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		waitUtil.implicitWait(driver, 5);
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		userpg = homepg.navigateToUsersPage();
 	}
 
 	@Test(priority = 36, enabled = true)
-	public void validateUsersPageHasElementsDisplayed() throws Exception {
+	public void validateAddUsersPageHasElementsDisplayed() {
 		userpg.clickOnAddUsers();
-		waitUtil.waitForElementTobeClickable(driver, userpg.userName, 20);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(userpg.isUserNameDisplayed(), "Failure Message: UserName not displayed");
@@ -57,10 +61,8 @@ public class UsersPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 37, enabled = true)
-	public void validateEnteredUserValues() throws Exception {
+	public void validateEnteredUserValues() {
 		userpg.clickOnAddUsers();
-		waitUtil.waitForElementTobeClickable(driver, userpg.userName, 15);
-		userpg.clickOnUserName();
 		userpg.enterValueToUserName("ABC");
 		userpg.enterValueToFirstName("ADMIN");
 		userpg.clickOnRadioButton();

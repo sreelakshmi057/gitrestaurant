@@ -28,9 +28,15 @@ public class CustomerPageTest extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -38,9 +44,8 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 15, enabled = true)
-	public void validateAddCustomerPageHasElementsDisplayed() throws Exception {
+	public void validateAddCustomerPageHasElementsDisplayed() {
 		customerpg.clickOnAddCustomerButton();
-		waitUtil.waitForElementTobeClickable(driver, customerpg.customerName, 15);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(customerpg.isCustomerNameDisplayed(), "Failure Message: CustomerName not displayed");
@@ -51,16 +56,15 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 16, enabled = true)
-	public void validateTheEnteredValuesInCustomersPage() throws Exception {
+	public void validateTheEnteredValuesInCustomersPage() {
 		customerpg.clickOnAddCustomerButton();
-		customerpg.clickOnAddCustomerName();
 		customerpg.enterValueToCustomerName("AAC");
 		customerpg.enterValueToCustomerPhone("1234567567");
 		customerpg.enterValueToCustomerEmail("aac@gmail.com");
 		customerpg.enterValueToCustomerDiscount("10");
 		customerpg.clickOnCustomerSubmitButton();
-		waitUtil.waitForElementTobeClickable(driver, customerpg.customerPhone_SearchResult, 20);
-		
+		customerpg.searchForCustomerValue("AAC");
+
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
 				"Failure Message: CustomerName not displayed");
@@ -73,7 +77,7 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 17, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	public void validateTheEditedCustomerValues() {
 		customerpg.searchForCustomerValue("AAC");
 		customerpg.clickOnCustomerEditIcon();
 		customerpg.enterValueToCustomerEmail("abby@gmail.com");
@@ -92,12 +96,11 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 18, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
+	public void validateTheDeleteIcon() {
 		customerpg.searchForCustomerValue("AAC");
 		customerpg.clickOnCustomerDeleteIcon();
 		customerpg.clickOnCustomerDeleteConfirmMessage();
 		customerpg.searchForCustomerValue("AAC");
-		waitUtil.waitForVisibilityOfElement(driver, customerpg.customerdelete_SearchResult, 15);
 
 		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), "No matching records found",
 				"Failure message:: failed to delete the store");

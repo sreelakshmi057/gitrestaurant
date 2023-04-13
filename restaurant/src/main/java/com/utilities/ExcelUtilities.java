@@ -42,7 +42,7 @@ public class ExcelUtilities {
 	}
 
 	public String readStringData(String sheetname, int rowNum, int colNum) throws IOException {
-		
+
 		workbook = new XSSFWorkbook(excelPath);
 		sheet = workbook.getSheet(sheetname);
 		Row row = sheet.getRow(rowNum);

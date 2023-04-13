@@ -19,15 +19,20 @@ public class LogoutPage {
 	}
 
 	@FindBy(xpath = "//a[@title='Logout']")
-	public WebElement logOut;
+	private WebElement logOut;
 	@FindBy(xpath = "//input[@class='login loginmodal-submit']")
-	public WebElement loginButton;
+	private WebElement loginButton;
 
 	public void clickOnLogout() {
 		actionUtil.clickElement(driver, logOut);
+		waitUtil.waitForElementTobeClickable(driver,loginButton, 15);
 	}
 
 	public Boolean isLoginButtonDisplayed() {
 		return actionUtil.isElementDisplayed(driver, loginButton);
+	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 }

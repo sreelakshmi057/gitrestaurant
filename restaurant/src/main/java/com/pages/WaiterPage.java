@@ -21,42 +21,43 @@ public class WaiterPage {
 	}
 
 	@FindBy(xpath = "//button[@data-toggle='modal']")
-	public WebElement addWaiterButton;
+	private WebElement addWaiterButton;
 	@FindBy(xpath = "//input[@id='WaiterName']")
-	public WebElement waiterName;
+	private WebElement waiterName;
 	@FindBy(xpath = "//input[@id='WaiterPhone']")
-	public WebElement waiterPhone;
+	private WebElement waiterPhone;
 	@FindBy(xpath = "//input[@id='WaiterEmail']")
-	public WebElement waiterEmail;
+	private WebElement waiterEmail;
 	@FindBy(id = "WaiterStore")
-	public WebElement waiterStore;
+	private WebElement waiterStore;
 	@FindBy(xpath = "//button[text()='Submit']")
-	public WebElement waiterSubmitButton;
+	private WebElement waiterSubmitButton;
 
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
-	public WebElement waiterSearch;
+	private WebElement waiterSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement waiterName_SearchResult;
+	private WebElement waiterName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement waiterPhone_SearchResult;
+	private WebElement waiterPhone_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement waiterEmail_SearchResult;
+	private WebElement waiterEmail_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement waiterStore_SearchResult;
+	private WebElement waiterStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement waiterdelete_SearchResult;
+	private WebElement waiterdelete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement waiterEditButton;
+	private WebElement waiterEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement waiterDeleteButton;
+	private WebElement waiterDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement waiterEditSubmitButton;
+	private WebElement waiterEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement waiterConfirmDeleteMsg;
+	private WebElement waiterConfirmDeleteMsg;
 
 	public void clickOnAddWaiterButton() {
 		actionUtil.clickElement(driver, addWaiterButton);
+		waitUtil.waitForElementTobeClickable(driver,waiterName, 25);
 	}
 
 	/**
@@ -99,6 +100,10 @@ public class WaiterPage {
 		actionUtil.clearText(driver, waiterEmail);
 		actionUtil.enterValue(driver, waiterEmail, value);
 	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
+	}
 
 	/**
 	 * This method is to select the dropdown value
@@ -111,8 +116,9 @@ public class WaiterPage {
 	}
 
 	public void clickOnwaiterSubmitButton() {
-		waitUtil.waitForElementTobeClickable(driver, waiterSubmitButton, 5);
+		waitUtil.waitForElementTobeClickable(driver, waiterSubmitButton, 15);
 		actionUtil.clickElement(driver, waiterSubmitButton);
+		waitUtil.waitForVisibilityOfElement(driver,waiterPhone_SearchResult, 15);
 	}
 
 	/**
@@ -127,6 +133,7 @@ public class WaiterPage {
 	}
 
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getWaiterNameFromSearchResult() {
@@ -144,8 +151,13 @@ public class WaiterPage {
 	public String getWaiterStoreFromSearchResult() {
 		return actionUtil.getElementText(driver, waiterStore_SearchResult);
 	}
+	
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, waiterdelete_SearchResult);
+	}
 
 	/**
+	 * 
 	 * Method for editing the waitervalues
 	 */
 
@@ -159,6 +171,7 @@ public class WaiterPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting waitervalues
 	 */
 	public void clickOnWaiterDeleteIcon() {
@@ -167,10 +180,6 @@ public class WaiterPage {
 
 	public void clickOnWaiterDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, waiterConfirmDeleteMsg);
-	}
-
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, waiterdelete_SearchResult);
 	}
 
 }

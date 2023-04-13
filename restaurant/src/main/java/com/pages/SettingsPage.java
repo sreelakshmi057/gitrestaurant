@@ -21,29 +21,30 @@ public class SettingsPage {
 	}
 
 	@FindBy(xpath = "//input[@id='companyName']")
-	public WebElement CompanyName;
+	private WebElement CompanyName;
 	@FindBy(id = "phone")
-	public WebElement companyPhone;
+	private WebElement companyPhone;
 	@FindBy(id = "currency")
-	public WebElement currencyCode;
+	private WebElement currencyCode;
 	@FindBy(id = "DefaultDiscount")
-	public WebElement defaultDiscount;
+	private WebElement defaultDiscount;
 	@FindBy(id = "DefualtTax")
-	public WebElement defaultTax;
+	private WebElement defaultTax;
 	@FindBy(id = "numberDecimal")
-	public WebElement rounding;
+	private WebElement rounding;
 	@FindBy(xpath = "(//div[@class='note-editable panel-body'])[1]")
-	public WebElement descriptionHeader;
+	private WebElement descriptionHeader;
 	@FindBy(xpath = "(//div[@class='note-editable panel-body'])[2]")
-	public WebElement descriptionFooter;
+	private WebElement descriptionFooter;
 	@FindBy(id = "stripe_secret_key")
-	public WebElement stripeKey;
+	private WebElement stripeKey;
 	@FindBy(id = "stripe_publishable_key")
-	public WebElement stripePublishableKey;
+	private WebElement stripePublishableKey;
 	@FindBy(xpath = "(//button[@class='btn btn-add btn-lg'])[1]")
-	public WebElement submitButton;
+	private WebElement submitButton;
 
 	public void clickOnCompanyName() {
+		waitUtil.waitForElementTobeClickable(driver,CompanyName, 15);
 		actionUtil.clickElement(driver, CompanyName);
 	}
 
@@ -84,6 +85,10 @@ public class SettingsPage {
 
 	public void clickOnSubmitButton() {
 		actionUtil.clickElement(driver, submitButton);
+	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**

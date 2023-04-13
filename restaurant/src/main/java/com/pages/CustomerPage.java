@@ -19,46 +19,52 @@ public class CustomerPage {
 	}
 
 	@FindBy(xpath = "//button[contains(text(),'Add Customer')]")
-	public WebElement addCustomerButton;
+	private WebElement addCustomerButton;
 	@FindBy(xpath = "//input[@id='CustomerName']")
-	public WebElement customerName;
+	private WebElement customerName;
 	@FindBy(xpath = "//input[@id='CustomerPhone']")
-	public WebElement customerPhone;
+	private WebElement customerPhone;
 	@FindBy(xpath = "//input[@id='CustomerEmail']")
-	public WebElement customerEmail;
+	private WebElement customerEmail;
 	@FindBy(xpath = "//input[@id='CustomerDiscount']")
-	public WebElement customerDiscount;
+	private WebElement customerDiscount;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement customerSubmitButton;
+	private WebElement customerSubmitButton;
 
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
-	public WebElement customerSearch;
+	private WebElement customerSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement customerName_SearchResult;
+	private WebElement customerName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement customerPhone_SearchResult;
+	private WebElement customerPhone_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement customerEmail_SearchResult;
+	private WebElement customerEmail_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement customerStore_SearchResult;
+	private WebElement customerStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement customerdelete_SearchResult;
+	private WebElement customerdelete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement customerEditButton;
+	private WebElement customerEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement customerDeleteButton;
+	private WebElement customerDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement customerEditSubmitButton;
+	private WebElement customerEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement customerConfirmDeleteMsg;
+	private WebElement customerConfirmDeleteMsg;
 
 	public void clickOnAddCustomerButton() {
 		actionUtil.clickElement(driver, addCustomerButton);
-	}
-	
-	public void clickOnAddCustomerName() {
+		waitUtil.waitForElementTobeClickable(driver,customerName, 15);
 		actionUtil.clickElement(driver, customerName);
+	}
+
+//	public void clickOnAddCustomerName() {
+//		actionUtil.clickElement(driver, customerName);
+//	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**
@@ -109,6 +115,7 @@ public class CustomerPage {
 
 	public void clickOnCustomerSubmitButton() {
 		actionUtil.clickElement(driver, customerSubmitButton);
+		waitUtil.waitForElementTobeClickable(driver,customerPhone_SearchResult, 20);
 	}
 
 	/**
@@ -120,6 +127,7 @@ public class CustomerPage {
 		waitUtil.waitForElementTobeClickable(driver, customerSearch, 5);
 		actionUtil.clickElement(driver, customerSearch);
 		actionUtil.enterValue(driver, customerSearch, value);
+		waitUtil.waitForVisibilityOfElement(driver,customerdelete_SearchResult, 15);
 	}
 
 	/**
@@ -137,7 +145,12 @@ public class CustomerPage {
 		return actionUtil.getElementText(driver, customerEmail_SearchResult);
 	}
 
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, customerdelete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the customer values
 	 */
 
@@ -151,6 +164,7 @@ public class CustomerPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting waitervalues
 	 */
 	public void clickOnCustomerDeleteIcon() {
@@ -159,10 +173,6 @@ public class CustomerPage {
 
 	public void clickOnCustomerDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, customerConfirmDeleteMsg);
-	}
-
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, customerdelete_SearchResult);
 	}
 
 }

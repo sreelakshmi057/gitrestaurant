@@ -1,6 +1,5 @@
 package com.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,7 @@ import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
 public class ExpenseInCategoriesPage {
-	
+
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
@@ -20,39 +19,40 @@ public class ExpenseInCategoriesPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(xpath = "//button[@class='btn btn-add btn-lg']")
-	public WebElement addExpenseCategoryButton;
+	private WebElement addExpenseCategoryButton;
 	@FindBy(id = "CategoryName")
-	public WebElement expenseCategoryName;
+	private WebElement expenseCategoryName;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement expenseSubmitButton;
-	
+	private WebElement expenseSubmitButton;
+
 	@FindBy(xpath = "//input[@type='search']")
-	public WebElement expenseSearch;
+	private WebElement expenseSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement categoryName_SearchResult;
+	private WebElement categoryName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement delete_SearchResult;
+	private WebElement delete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement expenseEditButton;
+	private WebElement expenseEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement expenseDeleteButton;
+	private WebElement expenseDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement expenseEditSubmitButton;
+	private WebElement expenseEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement expenseConfirmDeleteMsg;
-	
+	private WebElement expenseConfirmDeleteMsg;
+
 	public void clickOnAddExpenseCategoryButton() {
 		actionUtil.clickElement(driver, addExpenseCategoryButton);
-		waitUtil.waitForVisibilityOfElement(driver,expenseCategoryName, 10);
-	}
-
-	public void clickOnCategoryName() {
+		waitUtil.waitForElementTobeClickable(driver, expenseCategoryName, 15);
 		actionUtil.clickElement(driver, expenseCategoryName);
 	}
-	
+
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
+	}
+
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
@@ -62,24 +62,26 @@ public class ExpenseInCategoriesPage {
 		boolean flag = actionUtil.isElementDisplayed(driver, expenseCategoryName);
 		return flag;
 	}
-	
+
 	/**
 	 * This methods are to fill up the add category field
+	 * 
 	 * @param value
 	 */
-	
+
 	public void enterValueToCategoryName(String value) {
 		actionUtil.clearText(driver, expenseCategoryName);
 		actionUtil.enterValue(driver, expenseCategoryName, value);
 	}
-	
+
 	public void clickOnCategorySubmitButton() {
 		actionUtil.clickElement(driver, expenseSubmitButton);
 		actionUtil.clickElement(driver, expenseSubmitButton);
 	}
-	
+
 	/**
 	 * This method is to search for the added categoryvalues
+	 * 
 	 * @param value
 	 */
 
@@ -88,16 +90,23 @@ public class ExpenseInCategoriesPage {
 		actionUtil.clearText(driver, expenseSearch);
 		actionUtil.clickElement(driver, expenseSearch);
 		actionUtil.enterValue(driver, expenseSearch, value);
+		waitUtil.waitForVisibilityOfElement(driver, categoryName_SearchResult, 20);
 	}
-	
+
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getExpenseCategoryNameFromSearchResult() {
 		return actionUtil.getElementText(driver, categoryName_SearchResult);
 	}
-	
+
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, delete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the categoryproductvalues
 	 */
 
@@ -111,6 +120,7 @@ public class ExpenseInCategoriesPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting categoryproductvalues
 	 */
 	public void clickOnProductDeleteIcon() {
@@ -120,12 +130,5 @@ public class ExpenseInCategoriesPage {
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, expenseConfirmDeleteMsg);
 	}
-	
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, delete_SearchResult);
-	}
-	
+
 }
-
-
-

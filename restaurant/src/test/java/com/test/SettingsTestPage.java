@@ -26,9 +26,15 @@ public class SettingsTestPage extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun(){
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+			
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -36,8 +42,7 @@ public class SettingsTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 35, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() throws Exception {
-		waitUtil.waitForElementTobeClickable(driver, settingpg.CompanyName, 15);
+	public void validateAddStorePageHasElementsDisplayed() {
 		settingpg.clickOnCompanyName();
 
 		SoftAssert soft = new SoftAssert();

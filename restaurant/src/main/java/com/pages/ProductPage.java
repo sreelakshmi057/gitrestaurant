@@ -21,70 +21,72 @@ public class ProductPage {
 	}
 
 	@FindBy(xpath = "//button[contains(text(),'Add Product')]")
-	public WebElement addProductButton;
+	private WebElement addProductButton;
 	@FindBy(id = "Type")
-	public WebElement productType;
+	private WebElement productType;
 	@FindBy(id = "ProductCode")
-	public WebElement productCode;
+	private WebElement productCode;
 	@FindBy(id = "ProductName")
-	public WebElement productName;
+	private WebElement productName;
 	@FindBy(id = "Category")
-	public WebElement productCategory;
+	private WebElement productCategory;
 	@FindBy(id = "Supplier")
-	public WebElement productSupplier;
+	private WebElement productSupplier;
 	@FindBy(id = "PurchasePrice")
-	public WebElement productPurchasePrice;
+	private WebElement productPurchasePrice;
 	@FindBy(id = "Tax")
-	public WebElement productTax;
+	private WebElement productTax;
 	@FindBy(id = "taxType")
-	public WebElement productTaxMethod;
+	private WebElement productTaxMethod;
 	@FindBy(id = "Price")
-	public WebElement productPrice;
+	private WebElement productPrice;
 	@FindBy(id = "Unit")
-	public WebElement productUnit;
+	private WebElement productUnit;
 	@FindBy(id = "AlertQt")
-	public WebElement productAlertQuantity;
+	private WebElement productAlertQuantity;
 	@FindBy(id = "ProductOptions")
-	public WebElement productOptions;
+	private WebElement productOptions;
 	@FindBy(xpath = "//div[@class='note-editable panel-body']")
-	public WebElement productDescription;
+	private WebElement productDescription;
 	@FindBy(xpath = "//button[@class='btn btn-add']")
-	public WebElement productSubmitButton;
+	private WebElement productSubmitButton;
 	@FindBy(xpath = "//body/div[@id='stock']/div[@id='stockModal']/div[1]/div[3]/button[2]")
-	public WebElement productStockSubmitButton;
+	private WebElement productStockSubmitButton;
 
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement productCode_SearchResult;
+	private WebElement productCode_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement productName_SearchResult;
+	private WebElement productName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement productCategory_SearchResult;
+	private WebElement productCategory_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement productDescription_SearchResult;
+	private WebElement productDescription_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
-	public WebElement productTax_SearchResult;
+	private WebElement productTax_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[6]")
-	public WebElement productPrice_SearchResult;
+	private WebElement productPrice_SearchResult;
 	@FindBy(xpath = "//input[@type='search']")
-	public WebElement productSearchButton;
+	private WebElement productSearchButton;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement delete_SearchResult;
+	private WebElement delete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[3]")
-	public WebElement productEditButton;
+	private WebElement productEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement productDeleteButton;
+	private WebElement productDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement productEditSubmitButton;
+	private WebElement productEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement productConfirmDeleteMsg;
+	private WebElement productConfirmDeleteMsg;
 
 	public void clickOnAddProductButton() {
 		actionUtil.clickElement(driver, addProductButton);
-	}
-
-	public void clickOnProductType() {
+		waitUtil.waitForElementTobeClickable(driver, productType, 15);
 		actionUtil.clickElement(driver, productType);
+	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**
@@ -245,9 +247,11 @@ public class ProductPage {
 		actionUtil.clickElement(driver, productSearchButton);
 		waitUtil.waitForElementTobeClickable(driver, productSearchButton, 5);
 		actionUtil.enterValue(driver, productSearchButton, value);
+		waitUtil.waitForVisibilityOfElement(driver,productCode_SearchResult, 20);
 	}
 
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getProductCodeFromSearchResult() {
@@ -274,7 +278,12 @@ public class ProductPage {
 		return actionUtil.getElementText(driver, productPrice_SearchResult);
 	}
 
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, delete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the productvalues
 	 */
 
@@ -288,6 +297,7 @@ public class ProductPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting productvalues
 	 */
 	public void clickOnProductDeleteIcon() {
@@ -296,10 +306,6 @@ public class ProductPage {
 
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, productConfirmDeleteMsg);
-	}
-
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, delete_SearchResult);
 	}
 
 }

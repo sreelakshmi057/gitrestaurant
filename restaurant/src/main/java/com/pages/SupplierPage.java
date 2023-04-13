@@ -21,42 +21,47 @@ public class SupplierPage {
 	}
 
 	@FindBy(xpath = "//button[contains(text(),'Add Supplier')]")
-	public WebElement addSupplierButton;
+	private WebElement addSupplierButton;
 	@FindBy(xpath = "//input[@id='SupplierName']")
-	public WebElement supplierName;
+	private WebElement supplierName;
 	@FindBy(xpath = "//input[@id='SupplierPhone']")
-	public WebElement supplierPhone;
+	private WebElement supplierPhone;
 	@FindBy(xpath = "//input[@id='SupplierEmail']")
-	public WebElement supplierEmail;
+	private WebElement supplierEmail;
 	@FindBy(xpath = "//div[@class='note-editable panel-body']")
-	public WebElement supplierDescription;
+	private WebElement supplierDescription;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement supplierSubmitButton;
+	private WebElement supplierSubmitButton;
 
 	@FindBy(xpath = "//input[@class='form-control input-sm' and @type='search']")
-	public WebElement supplierSearchtab;
+	private WebElement supplierSearchtab;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement supplierName_SearchResult;
+	private WebElement supplierName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement supplierPhone_SearchResult;
+	private WebElement supplierPhone_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement supplierEmail_SearchResult;
+	private WebElement supplierEmail_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement supplierStore_SearchResult;
+	private WebElement supplierStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement supplierdelete_SearchResult;
+	private WebElement supplierdelete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement supplierEditButton;
+	private WebElement supplierEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement supplierDeleteButton;
+	private WebElement supplierDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement supplierEditSubmitButton;
+	private WebElement supplierEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement supplierConfirmDeleteMsg;
+	private WebElement supplierConfirmDeleteMsg;
 
 	public void clickOnAddSupplierButton() {
 		actionUtil.clickElement(driver, addSupplierButton);
+		waitUtil.waitForElementTobeClickable(driver,supplierName, 15);
+	}
+	
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**
@@ -122,6 +127,7 @@ public class SupplierPage {
 	}
 
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getSupplierNameFromSearchResult() {
@@ -136,7 +142,12 @@ public class SupplierPage {
 		return actionUtil.getElementText(driver, supplierEmail_SearchResult);
 	}
 
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, supplierdelete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the customer values
 	 */
 
@@ -150,6 +161,7 @@ public class SupplierPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting waitervalues
 	 */
 	public void clickOnSupplierDeleteIcon() {
@@ -158,10 +170,6 @@ public class SupplierPage {
 
 	public void clickOnSupplierDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, supplierConfirmDeleteMsg);
-	}
-
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, supplierdelete_SearchResult);
 	}
 
 }

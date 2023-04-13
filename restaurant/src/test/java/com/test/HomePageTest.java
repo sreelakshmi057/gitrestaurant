@@ -21,20 +21,25 @@ public class HomePageTest extends AutomationBase {
 
 	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		waitUtil.implicitWait(driver, 5);
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+
 	}
 
 	@Test(priority = 2, enabled = true, groups = { "smoke" })
-	public void validateTheLinkDisplayedOnTheHomePage() {
+	public void validateTheLinksDisplayedInHomePage() {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(homepg.isPosLinkDisplayed(), "Failure Message: poslink not displayed");
 		soft.assertTrue(homepg.isProductLinkDisplayed(), "Failure Message: productlink not displayed");

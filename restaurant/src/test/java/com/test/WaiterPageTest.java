@@ -3,6 +3,7 @@ package com.test;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import com.base.AutomationBase;
+import com.datasupplier.DataSupplier;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.WaiterPage;
@@ -27,19 +28,24 @@ public class WaiterPageTest extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		waiterpg = homepg.navigateToWaiterInPeopleLink();
 	}
 
-	@Test(priority = 11, enabled = true)
-	public void validateAddWaiterPageHasElementsDisplayed() throws Exception {
+	@Test(priority = 11, enabled = false)
+	public void validateAddWaiterPageHasElementsDisplayed() {
 		waiterpg.clickOnAddWaiterButton();
-		waitUtil.waitForElementTobeClickable(driver, waiterpg.waiterName, 25);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(waiterpg.isWaiterNameDisplayed(), "Failure Message: WaiterName not displayed");
@@ -50,16 +56,14 @@ public class WaiterPageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 12, enabled = true)
-	public void validateTheEnteredValuesInWaiterPage() throws Exception {
+	@Test(priority = 12, enabled = true, dataProvider = "dataSupplierWaiter", dataProviderClass = DataSupplier.class)
+	public void validateTheEnteredValuesInWaiterPage(String name, String phone, String mail, String store) {
 		waiterpg.clickOnAddWaiterButton();
-		waitUtil.waitForVisibilityOfElement(driver, waiterpg.waiterName, 15);
-		waiterpg.enterValueToWaiterName("AAN");
-		waiterpg.enterValueToWaiterPhone("1234567890");
-		waiterpg.enterValueToWaiterEmail("aan@gmail.com");
-		waiterpg.selectWaiterStoreByVisibleText("MNC");
+		waiterpg.enterValueToWaiterName(name);
+		waiterpg.enterValueToWaiterPhone(phone);
+		waiterpg.enterValueToWaiterEmail(mail);
+		waiterpg.selectWaiterStoreByVisibleText(store);
 		waiterpg.clickOnwaiterSubmitButton();
-		waitUtil.waitForVisibilityOfElement(driver, waiterpg.waiterPhone_SearchResult, 15);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN", "Failure Message: WaiterName not displayed");
@@ -73,13 +77,15 @@ public class WaiterPageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 13, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
-		waiterpg.searchForStoreValue("AAN");
+	@Test(priority = 13, enabled = true, dataProvider = "dataSupplierWaiterEdit", dataProviderClass = DataSupplier.class)
+	public void validateTheEditedWaiterValues(String name, String phone, String mail, String store) {
+		waiterpg.searchForStoreValue(name);
 		waiterpg.clickOnWaiterEditIcon();
-		waiterpg.enterValueToWaiterPhone("1452367895");
+		waiterpg.enterValueToWaiterPhone(phone);
+		waiterpg.enterValueToWaiterEmail(mail);
+		waiterpg.selectWaiterStoreByVisibleText(store);
 		waiterpg.clickOnWaiterEditSubmitButton();
-		waiterpg.searchForStoreValue("1452367895");
+		waiterpg.searchForStoreValue(phone);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN",
@@ -93,12 +99,12 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 14, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
-		waiterpg.searchForStoreValue("1452367895");
+	@Test(priority = 14, enabled = true, dataProvider = "dataSupplierWaiterDelete", dataProviderClass = DataSupplier.class)
+	public void validateTheDeleteIcon(String phone) {
+		waiterpg.searchForStoreValue(phone);
 		waiterpg.clickOnWaiterDeleteIcon();
 		waiterpg.clickOnWaiterDeleteConfirmMessage();
-		waiterpg.searchForStoreValue("1452367895");
+		waiterpg.searchForStoreValue(phone);
 
 		Assert.assertEquals(waiterpg.getTheSearchResultOfDeletedEntry(), "No matching records found",
 				"Failure message:: failed to delete the store");

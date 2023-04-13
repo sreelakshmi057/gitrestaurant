@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class WebbrowserUtilities {
 	WebDriver driver;
-	
+
 	/**
 	 * this method is to launch the given url
 	 * 

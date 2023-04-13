@@ -15,8 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 
-public class ExpensePageTest extends AutomationBase{
-	
+public class ExpensePageTest extends AutomationBase {
+
 	WebDriver driver;
 	LoginPage loginpg;
 	ExpensePage expensepg;
@@ -28,20 +28,25 @@ public class ExpensePageTest extends AutomationBase{
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
-		expensepg = homepg.navigateToExpensePage();	
-		
+		expensepg = homepg.navigateToExpensePage();
+
 	}
 
-	@Test(priority = 23, enabled = false)
-	public void validateAddExpensePageHasElementsDisplayed() throws Exception {
+	@Test(priority = 23, enabled = true)
+	public void validateAddExpensePageHasElementsDisplayed() {
 		expensepg.clickOnAddExpenseButton();
-		waitUtil.waitForElementTobeClickable(driver,expensepg.expenseDate, 20);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expensepg.isExpenseDateDisplayed(), "Failure Message: ExpenseDate not displayed");
@@ -55,10 +60,8 @@ public class ExpensePageTest extends AutomationBase{
 	}
 
 	@Test(priority = 24, enabled = true)
-	public void validateEnteredExpenseValues() throws Exception {
+	public void validateEnteredExpenseValues() {
 		expensepg.clickOnAddExpenseButton();
-		waitUtil.waitForElementTobeClickable(driver,expensepg.expenseDate ,20);
-		expensepg.clickOnExpenseDate();
 		expensepg.enterValueToExpenseDate("05/01/2023");
 		expensepg.enterValueToExpenseReference("referenceA");
 		expensepg.selectExpenseCategoryByVisibleText("Miscellaneous");
@@ -67,22 +70,24 @@ public class ExpensePageTest extends AutomationBase{
 		expensepg.enterValueToExpenseDescription("EXPENSE DESCRIPTION");
 		expensepg.clickOnExpenseSubmitButton();
 		expensepg.searchForExpenseValue("referenceA");
-		waitUtil.waitForPresenceOfElement(driver, expensepg.expenseDate_SearchResult, 15);
-		
+
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", "Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01",
+				"Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceA",
 				"Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
 				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC", "Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "2000", "Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC",
+				"Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "2000",
+				"Failure Message: No matching records found");
 		soft.assertAll();
 
 	}
-	
+
 	@Test(priority = 25, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	public void validateTheEditedStoreValues() {
 		expensepg.searchForExpenseValue("referenceA");
 		expensepg.clickOnExpenseEditIcon();
 		expensepg.enterValueToExpenseReference("referenceB");
@@ -91,26 +96,30 @@ public class ExpensePageTest extends AutomationBase{
 		expensepg.searchForExpenseValue("referenceB");
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", "Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01",
+				"Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceB",
 				"Failure Message: No matching records found");
 		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
 				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC", "Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "1250", "Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC",
+				"Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "1250",
+				"Failure Message: No matching records found");
 		soft.assertAll();
 
 	}
-	
+
 	@Test(priority = 26, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
+	public void validateTheDeleteIcon() {
 		expensepg.searchForExpenseValue("referenceB");
 		expensepg.clickOnExpenseDeleteIcon();
 		expensepg.clickOnExpenseDeleteConfirmMessage();
 		expensepg.clickOnExpenseDeleteOkConfirmMessage();
 		expensepg.searchForExpenseValue("referenceB");
 
-		Assert.assertEquals(expensepg.getTheSearchResultOfDeletedEntry(), "No matching records found","Failure message:: failed to delete the store" );
+		Assert.assertEquals(expensepg.getTheSearchResultOfDeletedEntry(), "No matching records found",
+				"Failure message:: failed to delete the store");
 
 	}
 

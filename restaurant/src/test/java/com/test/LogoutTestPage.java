@@ -26,9 +26,15 @@ public class LogoutTestPage extends AutomationBase {
 	WaitUtilities waitUtil = new WaitUtilities();
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -38,7 +44,6 @@ public class LogoutTestPage extends AutomationBase {
 	@Test(priority = 38, enabled = true, groups = { "smoke" })
 	public void validateLogoutPage() {
 		logoutpg.clickOnLogout();
-		waitUtil.waitForElementTobeClickable(driver, logoutpg.loginButton, 15);
 
 		Assert.assertTrue(logoutpg.isLoginButtonDisplayed(), "Failure Message:Logout failed");
 	}

@@ -9,7 +9,7 @@ import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
 public class UsersPage {
-	
+
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
@@ -20,37 +20,36 @@ public class UsersPage {
 	}
 
 	@FindBy(xpath = "(//a[@data-toggle='tab'])[2]")
-	public WebElement usersButton;
+	private WebElement usersButton;
 	@FindBy(xpath = "//button[contains(text(),'Add User')]")
-	public WebElement addUser;
+	private WebElement addUser;
 	@FindBy(xpath = "//input[@id='username']")
-	public WebElement userName;
+	private WebElement userName;
 	@FindBy(xpath = "//input[@id='firstname']")
-	public WebElement firstName;
+	private WebElement firstName;
 	@FindBy(xpath = "//input[@value='admin']")
-	public WebElement radioButtonAdmin;
+	private WebElement radioButtonAdmin;
 	@FindBy(xpath = "(//input[@id='email'])[1]")
-	public WebElement email;
+	private WebElement email;
 	@FindBy(xpath = "//input[@id='password']")
-	public WebElement password;
+	private WebElement password;
 	@FindBy(xpath = "//input[@id='confirm_password']")
-	public WebElement repeatPassword;
+	private WebElement repeatPassword;
 	@FindBy(xpath = "(//button[@class='btn btn-add'])[1]")
-	public WebElement submit;
-	
+	private WebElement submit;
+
 	@FindBy(xpath = "((//table[@class='table']//tr//td)[2]")
-	public WebElement firstName_searchResult;
+	private WebElement firstName_searchResult;
 	@FindBy(xpath = "(//table[@class='table']//tr//td)[4]")
-	public WebElement userName_searchResult;
+	private WebElement userName_searchResult;
 	@FindBy(xpath = "(//table[@class='table']//tr//td)[5]")
-	public WebElement role_searchResult;
-	
+	private WebElement role_searchResult;
+
 	public void clickOnAddUsers() {
+		actionUtil.clickElement(driver, usersButton);
+		waitUtil.waitForElementTobeClickable(driver, addUser, 20);
 		actionUtil.clickElement(driver, addUser);
-	}
-	
-	public void clickOnUserName() {
-		actionUtil.clickElement(driver, userName);
+		waitUtil.waitForElementTobeClickable(driver, userName, 20);
 	}
 
 	public void enterValueToUserName(String value) {
@@ -62,29 +61,34 @@ public class UsersPage {
 		actionUtil.clearText(driver, firstName);
 		actionUtil.enterValue(driver, firstName, value);
 	}
-	
+
 	public void clickOnRadioButton() {
 		actionUtil.clickElement(driver, radioButtonAdmin);
 	}
+
 	public void enterValueToEmail(String value) {
 		actionUtil.clearText(driver, email);
 		actionUtil.enterValue(driver, email, value);
 	}
-	
+
 	public void enterValueToPassword(String value) {
 		actionUtil.clearText(driver, password);
 		actionUtil.enterValue(driver, password, value);
 	}
-	
+
 	public void enterValueToConfirmPassword(String value) {
 		actionUtil.clearText(driver, repeatPassword);
 		actionUtil.enterValue(driver, repeatPassword, value);
 	}
-	
+
 	public void clickOnSubmit() {
 		actionUtil.clickElement(driver, submit);
 	}
-	
+
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
+	}
+
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
@@ -112,6 +116,7 @@ public class UsersPage {
 	}
 
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getUserNameFromSearchResult() {
@@ -125,12 +130,5 @@ public class UsersPage {
 	public String getRoleFromSearchResult() {
 		return actionUtil.getElementText(driver, role_searchResult);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

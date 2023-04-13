@@ -19,51 +19,49 @@ public class StorePage {
 	}
 
 	@FindBy(xpath = "//button[@data-toggle='modal'and@data-target='#AddStore']")
-	public WebElement addStoreButton;
+	private WebElement addStoreButton;
 	@FindBy(xpath = "//input[@id='StoreName']")
-	public WebElement storeName;
+	private WebElement storeName;
 	@FindBy(xpath = "//input[@id='email']")
-	public WebElement storeEmail;
+	private WebElement storeEmail;
 	@FindBy(xpath = "//input[@id='StorePhone']")
-	public WebElement storePhone;
+	private WebElement storePhone;
 	@FindBy(xpath = "//input[@id='Country']")
-	public WebElement storeCountry;
+	private WebElement storeCountry;
 	@FindBy(xpath = "//input[@id='City']")
-	public WebElement storeCity;
+	private WebElement storeCity;
 	@FindBy(xpath = "//input[@id='Adresse']")
-	public WebElement storeAddress;
+	private WebElement storeAddress;
 	@FindBy(xpath = "//input[@id='CustomeFooter']")
-	public WebElement storeCustomerFooter;
+	private WebElement storeCustomerFooter;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement storeSubmitButton;
+	private WebElement storeSubmitButton;
 
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
-	public WebElement storeSearch;
+	private WebElement storeSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement storeName_searchResult;
+	private WebElement storeName_searchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement storeEmail_searchResult;
+	private WebElement storeEmail_searchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement storePhone_searchResult;
+	private WebElement storePhone_searchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement storeCountry_searchResult;
+	private WebElement storeCountry_searchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
-	public WebElement storeCity_searchResult;
+	private WebElement storeCity_searchResult;
 
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement storedelete_searchResult;
+	private WebElement storedelete_searchResult;
 	@FindBy(xpath = "//a[@class='btn btn-default']")
-	public WebElement storeDeleteButton;
+	private WebElement storeDeleteButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement storeEditButton;
+	private WebElement storeEditButton;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement storeEditSubmitButton;
+	private WebElement storeEditSubmitButton;
 
 	public void clickOnAddStoreButton() {
 		actionUtil.clickElement(driver, addStoreButton);
-	}
-
-	public void clickOnStoreName() {
+		waitUtil.waitForElementTobeClickable(driver, storeName, 20);
 		actionUtil.clickElement(driver, storeName);
 	}
 
@@ -75,6 +73,7 @@ public class StorePage {
 	public void enterValueToStoreMail(String value) {
 		actionUtil.clearText(driver, storeEmail);
 		actionUtil.enterValue(driver, storeEmail, value);
+		waitUtil.waitForElementTobeClickable(driver, storeEditSubmitButton, 20);
 	}
 
 	public void enterValueToStoreNumber(String value) {
@@ -102,6 +101,10 @@ public class StorePage {
 
 	public void submit() {
 		actionUtil.clickElement(driver, storeSubmitButton);
+	}
+
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**
@@ -140,6 +143,7 @@ public class StorePage {
 		waitUtil.waitForElementTobeClickable(driver, storeSearch, 10);
 		actionUtil.clickElement(driver, storeSearch);
 		actionUtil.enterValue(driver, storeSearch, value);
+		waitUtil.waitForVisibilityOfElement(driver, storeName_searchResult, 20);
 	}
 
 	/**

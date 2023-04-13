@@ -26,11 +26,17 @@ public class SupplierPageTest extends AutomationBase {
 	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 	PropertyUtilities propUtil = new PropertyUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
-	
+
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -38,9 +44,8 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 19, enabled = true)
-	public void validateAddSupplierPageHasElementsDisplayed() throws Exception {
+	public void validateAddSupplierPageHasElementsDisplayed() {
 		supplierpg.clickOnAddSupplierButton();
-		waitUtil.waitForElementTobeClickable(driver,supplierpg.supplierName,15);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(supplierpg.isSupplierNameDisplayed(), "Failure Message: SupplierName not displayed");
@@ -49,11 +54,10 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertTrue(supplierpg.isSupplierDescriptionDisplayed(), "Failure Message: SupplierDiscount not displayed");
 		soft.assertAll();
 	}
-	
+
 	@Test(priority = 20, enabled = true)
-	public void validateTheEnteredValuesInCustomersPage() throws Exception {
+	public void validateTheEnteredValuesInSuppliersPage() {
 		supplierpg.clickOnAddSupplierButton();
-		waitUtil.waitForElementTobeClickable(driver,supplierpg.supplierName,15);
 		supplierpg.enterValueToSupplierName("AANNA");
 		supplierpg.enterValueToSupplierPhone("1478529631");
 		supplierpg.enterValueToSupplierEmail("anna@gmail.com");
@@ -61,7 +65,8 @@ public class SupplierPageTest extends AutomationBase {
 		supplierpg.clickOnSupplierSubmitButton();
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(supplierpg.getSupplierNameFromSearchResult(), "AANNA", "Failure Message: SupplierName not displayed");
+		soft.assertEquals(supplierpg.getSupplierNameFromSearchResult(), "AANNA",
+				"Failure Message: SupplierName not displayed");
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), "1478529631",
 				"Failure Message:CustomerPhone not displayed");
 		soft.assertEquals(supplierpg.getSupplierEmailFromSearchResult(), "anna@gmail.com",
@@ -69,9 +74,9 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertAll();
 
 	}
-	
+
 	@Test(priority = 21, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	public void validateTheEditedSupplierValues() {
 		supplierpg.searchForStoreValue("AANNA");
 		supplierpg.clickOnSupplierEditIcon();
 		supplierpg.enterValueToSupplierEmail("yy@gmail.com");
@@ -90,14 +95,14 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 22, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
+	public void validateTheDeleteIcon() {
 		supplierpg.searchForStoreValue("AANNA");
 		supplierpg.clickOnSupplierDeleteIcon();
 		supplierpg.clickOnSupplierDeleteConfirmMessage();
 		supplierpg.searchForStoreValue("AANNA");
 
-		Assert.assertEquals(supplierpg.getTheSearchResultOfDeletedEntry(), "No matching records found","Failure message:: failed to delete the store" );
-
+		Assert.assertEquals(supplierpg.getTheSearchResultOfDeletedEntry(), "No matching records found",
+				"Failure message:: failed to delete the store");
 
 	}
 

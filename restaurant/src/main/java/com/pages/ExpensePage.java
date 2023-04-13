@@ -9,7 +9,7 @@ import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
 public class ExpensePage {
-	
+
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
@@ -19,62 +19,63 @@ public class ExpensePage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(xpath = "//button[contains(text(),'Add Expence')]")
-	public WebElement addExpenseButton;
+	private WebElement addExpenseButton;
 	@FindBy(xpath = "//input[@id='Date']")
-	public WebElement expenseDate;
+	private WebElement expenseDate;
 	@FindBy(xpath = "//input[@id='Reference']")
-	public WebElement expenseReference;
+	private WebElement expenseReference;
 	@FindBy(xpath = "//select[@id='Category']")
-	public WebElement expenseCategory;
+	private WebElement expenseCategory;
 	@FindBy(xpath = "//select[@id='store_id']")
-	public WebElement expenseStore;
+	private WebElement expenseStore;
 	@FindBy(xpath = "//input[@id='Amount']")
-	public WebElement expenseAmount;
+	private WebElement expenseAmount;
 	@FindBy(xpath = "//div[@class='note-editable panel-body']")
-	public WebElement expenseDescription;
+	private WebElement expenseDescription;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement expenseSubmitButton;
-	
+	private WebElement expenseSubmitButton;
+
 	@FindBy(xpath = "//input[@type='search']")
-	public WebElement expenseSearch;
+	private WebElement expenseSearch;
 	@FindBy(xpath = "(//table[@id='table']//tr//td)[1]")
-	public WebElement expenseDate_SearchResult;
+	private WebElement expenseDate_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	public WebElement expenseReference_SearchResult;
+	private WebElement expenseReference_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	public WebElement expenseAmount_SearchResult;
+	private WebElement expenseAmount_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	public WebElement expenseCategory_SearchResult;
+	private WebElement expenseCategory_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
-	public WebElement expenseStore_SearchResult;
+	private WebElement expenseStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement expensedelete_SearchResult;
+	private WebElement expensedelete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement expenseEditButton;
+	private WebElement expenseEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement expenseDeleteButton;
+	private WebElement expenseDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement expenseEditSubmitButton;
+	private WebElement expenseEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement expenseConfirmDeleteMsg;
+	private WebElement expenseConfirmDeleteMsg;
 	@FindBy(xpath = "//button[@class='confirm']")
-	public WebElement expenseConfirmDeleteOkButton;
-	
-	
-	
+	private WebElement expenseConfirmDeleteOkButton;
+
 	public void clickOnAddExpenseButton() {
 		actionUtil.clickElement(driver, addExpenseButton);
+		waitUtil.waitForElementTobeClickable(driver, expenseDate, 20);
+		actionUtil.clickElement(driver, expenseDate);
 	}
-	
-	public void clickOnExpenseDate() {
-		actionUtil.clickElement(driver,expenseDate );
+
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
 	}
-	
+
 	/**
 	 * This method is to check whether the elements are displayed
+	 * 
 	 * @return
 	 */
 	public Boolean isExpenseDateDisplayed() {
@@ -100,7 +101,7 @@ public class ExpensePage {
 	public Boolean isExpenseDescriptionDisplayed() {
 		return actionUtil.isElementDisplayed(driver, expenseDescription);
 	}
-	
+
 	/**
 	 * This method is to search for added expense values
 	 * 
@@ -120,16 +121,16 @@ public class ExpensePage {
 		actionUtil.clearText(driver, expenseAmount);
 		actionUtil.enterValue(driver, expenseAmount, value);
 	}
-	
+
 	public void enterValueToExpenseDescription(String value) {
 		actionUtil.clearText(driver, expenseDescription);
 		actionUtil.enterValue(driver, expenseDescription, value);
 	}
-	
+
 	public void clickOnExpenseSubmitButton() {
 		actionUtil.clickElement(driver, expenseSubmitButton);
 	}
-	
+
 	/**
 	 * This method is to select the dropdown value
 	 * 
@@ -144,7 +145,7 @@ public class ExpensePage {
 		actionUtil.clearText(driver, expenseCategory);
 		genericUtil.SelectByVisibleText(driver, expenseCategory, value);
 	}
-	
+
 	/**
 	 * This method is to search for added expense values
 	 * 
@@ -154,10 +155,12 @@ public class ExpensePage {
 		actionUtil.clearText(driver, expenseSearch);
 		actionUtil.clickElement(driver, expenseSearch);
 		actionUtil.enterValue(driver, expenseSearch, value);
-		
+		waitUtil.waitForPresenceOfElement(driver, expenseDate_SearchResult, 15);
+
 	}
-	
+
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getExpenseDateFromSearchResult() {
@@ -175,12 +178,17 @@ public class ExpensePage {
 	public String getExpenseStoreFromSearchResult() {
 		return actionUtil.getElementText(driver, expenseStore_SearchResult);
 	}
-	
+
 	public String getExpenseCategoryFromSearchResult() {
 		return actionUtil.getElementText(driver, expenseCategory_SearchResult);
 	}
 
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, expensedelete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the expense values
 	 */
 
@@ -194,6 +202,7 @@ public class ExpensePage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting expense values
 	 */
 	public void clickOnExpenseDeleteIcon() {
@@ -204,18 +213,9 @@ public class ExpensePage {
 		actionUtil.clickElement(driver, expenseConfirmDeleteMsg);
 		actionUtil.clickElement(driver, expenseConfirmDeleteOkButton);
 	}
-	
+
 	public void clickOnExpenseDeleteOkConfirmMessage() {
 		actionUtil.clickElement(driver, expenseConfirmDeleteOkButton);
 	}
-
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, expensedelete_SearchResult);
-	}
-	
-	
-	
-	
-	
 
 }

@@ -20,37 +20,40 @@ public class ProductInCategoriesPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(xpath = "//button[contains(text(),'Add Category')]")
-	public WebElement addCategoryButton;
+	private WebElement addCategoryButton;
 	@FindBy(id = "CategoryName")
-	public WebElement categoryName;
+	private WebElement categoryName;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	public WebElement categorySubmitButton;
-	
+	private WebElement categorySubmitButton;
+
 	@FindBy(xpath = "//input[@type='search']")
-	public WebElement categorySearch;
+	private WebElement categorySearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement categoryName_SearchResult;
+	private WebElement categoryName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	public WebElement delete_SearchResult;
+	private WebElement delete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	public WebElement categoryEditButton;
+	private WebElement categoryEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	public WebElement categoryDeleteButton;
+	private WebElement categoryDeleteButton;
 	@FindBy(xpath = "//button[@type='submit']")
-	public WebElement categoryEditSubmitButton;
+	private WebElement categoryEditSubmitButton;
 	@FindBy(xpath = "//a[@class='btn btn-danger']")
-	public WebElement categoryConfirmDeleteMsg;
-	
+	private WebElement categoryConfirmDeleteMsg;
+
 	public void clickOnAddCategoryButton() {
 		actionUtil.clickElement(driver, addCategoryButton);
-	}
-
-	public void clickOnCategoryName() {
+		waitUtil.waitForElementTobeClickable(driver,categoryName, 15);
 		actionUtil.clickElement(driver, categoryName);
 	}
-	
+
+	public void implementImplicitWait() {
+		waitUtil.implicitWait(driver, 5);
+	}
+
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
@@ -60,25 +63,28 @@ public class ProductInCategoriesPage {
 		boolean flag = actionUtil.isElementDisplayed(driver, categoryName);
 		return flag;
 	}
-	
+
 	/**
 	 * This methods are to fill up the add category field
+	 * 
 	 * @param value
 	 */
-	
+
 	public void enterValueToCategoryName(String value) {
 		actionUtil.clearText(driver, categoryName);
 		actionUtil.enterValue(driver, categoryName, value);
+		waitUtil.waitForElementTobeClickable(driver, categorySubmitButton, 20);
 	}
-	
+
 	public void clickOnCategorySubmitButton() {
 		actionUtil.clickElement(driver, categorySubmitButton);
-		//waitUtil.waitForElementTobeClickable(driver, categorySubmitButton, 5);
+		// waitUtil.waitForElementTobeClickable(driver, categorySubmitButton, 5);
 		actionUtil.clickElement(driver, categorySubmitButton);
 	}
-	
+
 	/**
 	 * This method is to search for the added categoryvalues
+	 * 
 	 * @param value
 	 */
 
@@ -88,15 +94,21 @@ public class ProductInCategoriesPage {
 		actionUtil.clickElement(driver, categorySearch);
 		actionUtil.enterValue(driver, categorySearch, value);
 	}
-	
+
 	/**
+	 * 
 	 * This method is to get text of search result
 	 */
 	public String getCategoryProductNameFromSearchResult() {
 		return actionUtil.getElementText(driver, categoryName_SearchResult);
 	}
-	
+
+	public String getTheSearchResultOfDeletedEntry() {
+		return actionUtil.getElementText(driver, delete_SearchResult);
+	}
+
 	/**
+	 * 
 	 * Method for editing the categoryproductvalues
 	 */
 
@@ -110,6 +122,7 @@ public class ProductInCategoriesPage {
 	}
 
 	/**
+	 * 
 	 * Method for deleting categoryproductvalues
 	 */
 	public void clickOnProductDeleteIcon() {
@@ -119,9 +132,5 @@ public class ProductInCategoriesPage {
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, categoryConfirmDeleteMsg);
 	}
-	
-	public String getTheSearchResultOfDeletedEntry() {
-		return actionUtil.getElementText(driver, delete_SearchResult);
-	}
-	
+
 }
