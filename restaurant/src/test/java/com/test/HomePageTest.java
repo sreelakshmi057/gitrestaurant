@@ -1,39 +1,32 @@
 package com.test;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
-import com.utilities.WebbrowserUtilities;
-import java.io.IOException;
-import java.util.Properties;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 
 public class HomePageTest extends AutomationBase {
 	WebDriver driver;
 	LoginPage loginpg;
 	HomePage homepg;
 	Properties prop;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() {
+	public void prerun() throws IOException {
 		driver = getDriver();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
+		propUtil = new PropertyUtilities();
 		loginpg = new LoginPage(driver);
+		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 
 	}
@@ -41,17 +34,17 @@ public class HomePageTest extends AutomationBase {
 	@Test(priority = 2, enabled = true, groups = { "smoke" })
 	public void validateTheLinksDisplayedInHomePage() {
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(homepg.isPosLinkDisplayed(), "Failure Message: poslink not displayed");
-		soft.assertTrue(homepg.isProductLinkDisplayed(), "Failure Message: productlink not displayed");
-		soft.assertTrue(homepg.isStoreLinkDisplayed(), "Failure Message: storelink not displayed");
-		soft.assertTrue(homepg.isPeopleLinkDisplayed(), "Failure Message: peoplelink not displayed");
-		soft.assertTrue(homepg.isSalesLinkDisplayed(), "Failure Message: saleslink not displayed");
-		soft.assertTrue(homepg.isExpenseLinkDisplayed(), "Failure Message: expenselink not displayed");
-		soft.assertTrue(homepg.isCategoriesLinkDisplayed(), "Failure Message: categorieslink not displayed");
-		soft.assertTrue(homepg.isSettingsLinkDisplayed(), "Failure Message: settingslink not displayed");
-		soft.assertTrue(homepg.isReportLinkDisplayed(), "Failure Message: reportlink not displayed");
-		soft.assertTrue(homepg.isLanguageLinkDisplayed(), "Failure Message: languagelink not displayed");
-		soft.assertTrue(homepg.isLogoutDisplayed(), "Failure Message: logout not displayed");
+		soft.assertTrue(homepg.isPosLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isProductLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isStoreLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isPeopleLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isSalesLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isExpenseLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isCategoriesLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isSettingsLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isReportLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isLanguageLinkDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(homepg.isLogoutDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
 

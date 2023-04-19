@@ -1,22 +1,23 @@
 package com.test;
 
-import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import com.base.AutomationBase;
-import com.pages.HomePage;
-import com.pages.LoginPage;
-import com.pages.UsersPage;
-import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
-import com.utilities.WebbrowserUtilities;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.base.AutomationBase;
+import com.constants.AutomationConstants;
+import com.pages.HomePage;
+import com.pages.LoginPage;
+import com.pages.UsersPage;
+import com.utilities.PropertyUtilities;
 
 public class UsersPageTest extends AutomationBase {
 
@@ -25,23 +26,14 @@ public class UsersPageTest extends AutomationBase {
 	UsersPage userpg;
 	Properties prop;
 	HomePage homepg;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() {
+	public void prerun() throws IOException {
 		driver = getDriver();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		userpg = homepg.navigateToUsersPage();
 	}
@@ -51,11 +43,11 @@ public class UsersPageTest extends AutomationBase {
 		userpg.clickOnAddUsers();
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(userpg.isUserNameDisplayed(), "Failure Message: UserName not displayed");
-		soft.assertTrue(userpg.isFirstNameDisplayed(), "Failure Message: FirstName not displayed");
-		soft.assertTrue(userpg.isEmailDisplayed(), "Failure Message: Email not displayed");
-		soft.assertTrue(userpg.isPasswordDisplayed(), "Failure Message: Password not displayed");
-		soft.assertTrue(userpg.isConfirmPasswordDisplayed(), "Failure Message: ConfirmPassword not displayed");
+		soft.assertTrue(userpg.isUserNameDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(userpg.isFirstNameDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(userpg.isEmailDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(userpg.isPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(userpg.isConfirmPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 
 	}
@@ -80,7 +72,7 @@ public class UsersPageTest extends AutomationBase {
 				break;
 			}
 		}
-		Assert.assertTrue(status, "Record not found");
+		Assert.assertTrue(status, AutomationConstants.errorMessage);
 
 	}
 

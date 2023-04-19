@@ -1,42 +1,35 @@
 package com.test;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WebbrowserUtilities;
-import java.io.IOException;
-import java.util.Properties;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 
 public class LoginPageTest extends AutomationBase {
 	WebDriver driver;
 	LoginPage loginpg;
 	HomePage homepg;
 	Properties prop;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
-
-	@BeforeMethod
-	public void prerun() throws IOException {
-		driver = getDriver();
-		prop = PropertyUtilities.getProperty("config.properties");
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-		loginpg = new LoginPage(driver);
-		homepg = new HomePage(driver);
-	}
+	PropertyUtilities propUtil;
 
 	@Test(priority = 1, enabled = true, groups = { "smoke" })
-	public void validateLoginPage() {
-		loginpg.enterValueToUsername(prop.getProperty("username"));
-		loginpg.enterValueToPassword(prop.getProperty("password"));
-		loginpg.clickLoginButton();
+	public void validateLoginPage() throws IOException {
+		driver = getDriver();
+		loginpg = new LoginPage(driver);
+		homepg = new HomePage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		loginpg.performLogin(prop.getProperty("username"), prop.getProperty("password"));
 
-		Assert.assertTrue(homepg.isProductLinkDisplayed(), "Failure Message:Login failed");
+		Assert.assertTrue(homepg.isProductLinkDisplayed(), AutomationConstants.loginCheck);
 	}
 
 }

@@ -3,7 +3,6 @@
 <suite name="Suite">
 	<parameter name="browserName" value="chrome"></parameter>
 	<test thread-count="3" name="Test">
-		
 		<groups>
 			<run>
 				<include name="smoke" />
@@ -11,8 +10,9 @@
 		</groups>
 		<classes>
 			<class name="com.test.LoginPageTest" />
-			<!-- <class name="com.test.HomePageTest" />-->
-			<!--<class name="com.test.LogoutTestPage" />-->
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.LogoutTestPage" />
+			<class name="com.test.WaiterPageTest" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

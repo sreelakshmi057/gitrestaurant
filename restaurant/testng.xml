@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-	<!-- <listeners>
-		<listener class-name="com.obs.listeners.TestListeners" />
-	</listeners>-->
+	<listeners>
+		<listener class-name="com.listeners.TestListeners" />
+	</listeners>
 	<test thread-count="1" name="Test">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
 			<!--<class name="com.test.LoginPageTest" />-->
 			<!--<class name="com.test.HomePageTest" />-->
-			<!--<class name="com.test.ProductPageTest" /> -->
+			<!--<class name="com.test.ProductPageTest" />-->
 			<!--<class name="com.test.StorePageTest" />-->
 			<class name="com.test.WaiterPageTest" />
 			<!--<class name="com.test.CustomerPageTest" />-->

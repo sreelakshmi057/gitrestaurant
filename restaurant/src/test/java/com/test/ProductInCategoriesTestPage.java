@@ -1,19 +1,20 @@
 package com.test;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.ProductInCategoriesPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
-import com.utilities.WebbrowserUtilities;
-import java.io.IOException;
-import java.util.Properties;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 
 public class ProductInCategoriesTestPage extends AutomationBase {
 
@@ -22,23 +23,14 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	ProductInCategoriesPage categoriespg;
 	Properties prop;
 	HomePage homepg;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() {
+	public void prerun() throws IOException {
 		driver = getDriver();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		categoriespg = homepg.navigateToProductInCategoriesPage();
 
@@ -49,7 +41,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		categoriespg.clickOnAddCategoryButton();
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(categoriespg.isCategoryNameDisplayed(), "Failure Message: CategoryName not displayed");
+		soft.assertTrue(categoriespg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
 
@@ -76,7 +68,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), "APPLE1_SREE",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
 		soft.assertAll();
 
 	}
@@ -88,8 +80,8 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		categoriespg.clickOnProductDeleteConfirmMessage();
 		categoriespg.searchForCategoryProductValue("APPLE1_SREE");
 
-		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), "No matching records found",
-				"Failure message:: failed to delete the store");
+		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
+				AutomationConstants.deleteCheck);
 
 	}
 }

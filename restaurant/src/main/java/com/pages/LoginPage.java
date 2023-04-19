@@ -40,6 +40,12 @@ public class LoginPage {
 	public void implementImplicitWait() {
 		waitUtil.implicitWait(driver, 5);
 	}
+	
+	public void performLogin(String username, String password) {
+		enterValueToUsername(username);
+		enterValueToPassword(password);
+		clickLoginButton();
+	}
 
 	public HomePage login(String username, String password) {
 		enterValueToUsername(username);
@@ -47,4 +53,5 @@ public class LoginPage {
 		clickLoginButton();
 		return new HomePage(driver);
 	}
+	
 }

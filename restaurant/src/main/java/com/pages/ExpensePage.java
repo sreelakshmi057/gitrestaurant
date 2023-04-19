@@ -155,7 +155,7 @@ public class ExpensePage {
 		actionUtil.clearText(driver, expenseSearch);
 		actionUtil.clickElement(driver, expenseSearch);
 		actionUtil.enterValue(driver, expenseSearch, value);
-		waitUtil.waitForPresenceOfElement(driver, expenseDate_SearchResult, 15);
+		waitUtil.waitForElementTobeClickable(driver, expenseDate_SearchResult, 25);
 
 	}
 

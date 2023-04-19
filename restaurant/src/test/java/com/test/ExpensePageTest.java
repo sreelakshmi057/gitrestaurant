@@ -1,19 +1,20 @@
 package com.test;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.ExpensePage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
-import com.utilities.WebbrowserUtilities;
-import java.io.IOException;
-import java.util.Properties;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 
 public class ExpensePageTest extends AutomationBase {
 
@@ -22,23 +23,14 @@ public class ExpensePageTest extends AutomationBase {
 	ExpensePage expensepg;
 	Properties prop;
 	HomePage homepg;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() {
+	public void prerun() throws IOException {
 		driver = getDriver();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		expensepg = homepg.navigateToExpensePage();
 
@@ -49,12 +41,12 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.clickOnAddExpenseButton();
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(expensepg.isExpenseDateDisplayed(), "Failure Message: ExpenseDate not displayed");
-		soft.assertTrue(expensepg.isExpenseReferenceDisplayed(), "Failure Message: ExpenseReferencenot displayed");
-		soft.assertTrue(expensepg.isExpenseCategoryDisplayed(), "Failure Message: ExpenseCategorynot displayed");
-		soft.assertTrue(expensepg.isExpenseStoreDisplayed(), "Failure Message: ExpenseStore not displayed");
-		soft.assertTrue(expensepg.isExpenseAmountDisplayed(), "Failure Message: ExpenseAmount not displayed");
-		soft.assertTrue(expensepg.isExpenseDescriptionDisplayed(), "Failure Message: ExpenseDescription not displayed");
+		soft.assertTrue(expensepg.isExpenseDateDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(expensepg.isExpenseReferenceDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(expensepg.isExpenseCategoryDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(expensepg.isExpenseStoreDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(expensepg.isExpenseAmountDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(expensepg.isExpenseDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 
 	}
@@ -72,16 +64,13 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.searchForExpenseValue("referenceA");
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01",
-				"Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceA",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
-				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC",
-				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "2000",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
+		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC", AutomationConstants.errorMessage);
+		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "2000", AutomationConstants.errorMessage);
 		soft.assertAll();
 
 	}
@@ -96,16 +85,13 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.searchForExpenseValue("referenceB");
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01",
-				"Failure Message: No matching records found");
+		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceB",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
-				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC",
-				"Failure Message: No matching records found");
-		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "1250",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
+		soft.assertEquals(expensepg.getExpenseStoreFromSearchResult(), "MNC", AutomationConstants.errorMessage);
+		soft.assertEquals(expensepg.getExpenseAmountFromSearchResult(), "1250", AutomationConstants.errorMessage);
 		soft.assertAll();
 
 	}
@@ -118,8 +104,8 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.clickOnExpenseDeleteOkConfirmMessage();
 		expensepg.searchForExpenseValue("referenceB");
 
-		Assert.assertEquals(expensepg.getTheSearchResultOfDeletedEntry(), "No matching records found",
-				"Failure message:: failed to delete the store");
+		Assert.assertEquals(expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
+				AutomationConstants.deleteCheck);
 
 	}
 

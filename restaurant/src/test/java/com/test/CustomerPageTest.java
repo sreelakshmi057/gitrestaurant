@@ -1,19 +1,21 @@
 package com.test;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
+import com.datasupplier.DataSupplier;
 import com.pages.CustomerPage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
-import com.utilities.WaitUtilities;
-import com.utilities.WebbrowserUtilities;
-import java.io.IOException;
-import java.util.Properties;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 
 public class CustomerPageTest extends AutomationBase {
 
@@ -22,23 +24,14 @@ public class CustomerPageTest extends AutomationBase {
 	CustomerPage customerpg;
 	Properties prop;
 	HomePage homepg;
-
-	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
-	PropertyUtilities propUtil = new PropertyUtilities();
-	WaitUtilities waitUtil = new WaitUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() {
+	public void prerun() throws IOException {
 		driver = getDriver();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		customerpg = homepg.navigateToCustomersInPeopleLink();
 	}
@@ -48,62 +41,63 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.clickOnAddCustomerButton();
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(customerpg.isCustomerNameDisplayed(), "Failure Message: CustomerName not displayed");
-		soft.assertTrue(customerpg.isCustomerPhoneDisplayed(), "Failure Message: CustomerPhone not displayed");
-		soft.assertTrue(customerpg.isCustomerEmailDisplayed(), "Failure Message: CustomerEmail not displayed");
-		soft.assertTrue(customerpg.isCustomerDiscountDisplayed(), "Failure Message: CustomerDiscount not displayed");
+		soft.assertTrue(customerpg.isCustomerNameDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(customerpg.isCustomerPhoneDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(customerpg.isCustomerEmailDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertTrue(customerpg.isCustomerDiscountDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
 
-	@Test(priority = 16, enabled = true)
-	public void validateTheEnteredValuesInCustomersPage() {
+	@Test(priority = 16, enabled = true, dataProvider = "dataSupplierCustomer", dataProviderClass = DataSupplier.class)
+	public void validateTheEnteredValuesInCustomersPage(String name, String phone, String mail, String discount) {
 		customerpg.clickOnAddCustomerButton();
-		customerpg.enterValueToCustomerName("AAC");
-		customerpg.enterValueToCustomerPhone("1234567567");
-		customerpg.enterValueToCustomerEmail("aac@gmail.com");
-		customerpg.enterValueToCustomerDiscount("10");
+		customerpg.enterValueToCustomerName(name);
+		customerpg.enterValueToCustomerPhone(phone);
+		customerpg.enterValueToCustomerEmail(mail);
+		customerpg.enterValueToCustomerDiscount(discount);
 		customerpg.clickOnCustomerSubmitButton();
-		customerpg.searchForCustomerValue("AAC");
+		customerpg.searchForCustomerValue(name);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
-				"Failure Message: CustomerName not displayed");
+				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "1234567567",
-				"Failure Message:CustomerPhone not displayed");
+				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
-				"Failure Message: CustomerEmail not displayed");
+				AutomationConstants.errorMessage);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 17, enabled = true)
-	public void validateTheEditedCustomerValues() {
-		customerpg.searchForCustomerValue("AAC");
+	@Test(priority = 17, enabled = true, dataProvider = "dataSupplierCustomerEdit", dataProviderClass = DataSupplier.class)
+	public void validateTheEditedCustomerValues(String name, String phone, String mail, String discount) {
+		customerpg.searchForCustomerValue(name);
 		customerpg.clickOnCustomerEditIcon();
-		customerpg.enterValueToCustomerEmail("abby@gmail.com");
-		customerpg.enterValueToCustomerPhone("7894568888");
+		customerpg.enterValueToCustomerPhone(phone);
+		customerpg.enterValueToCustomerEmail(mail);	
+		customerpg.enterValueToCustomerDiscount(discount);
 		customerpg.clickOnCustomerEditSubmitButton();
-		customerpg.searchForCustomerValue("abby@gmail.com");
+		customerpg.searchForCustomerValue(phone);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
-				"Failure Message: No matching records found");
-		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "7894568888",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "7888888888",
+				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "abby@gmail.com",
-				"Failure Message: No matching records found");
+				AutomationConstants.errorMessage);
 		soft.assertAll();
 	}
 
-	@Test(priority = 18, enabled = true)
-	public void validateTheDeleteIcon() {
-		customerpg.searchForCustomerValue("AAC");
+	@Test(priority = 18, enabled = true, dataProvider = "dataSupplierCustomerDelete", dataProviderClass = DataSupplier.class)
+	public void validateTheDeleteIcon(String phone) {
+		customerpg.searchForCustomerValue(phone);
 		customerpg.clickOnCustomerDeleteIcon();
 		customerpg.clickOnCustomerDeleteConfirmMessage();
-		customerpg.searchForCustomerValue("AAC");
+		customerpg.searchForCustomerValue(phone);
 
-		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), "No matching records found",
-				"Failure message:: failed to delete the store");
+		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
+				AutomationConstants.deleteCheck);
 
 	}
 

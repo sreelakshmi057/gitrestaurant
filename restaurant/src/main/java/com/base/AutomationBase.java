@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
+import com.constants.AutomationConstants;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
 import com.utilities.WebbrowserUtilities;
@@ -19,19 +20,21 @@ public class AutomationBase {
 	static WebDriver driver;
 	LoginPage loginpg;
 	Properties prop;
-	WebbrowserUtilities brwsrUtil;
 	PropertyUtilities propUtil;
+	WebbrowserUtilities brwsrUtil;
 
 	@BeforeTest
-	public void preLaunch() throws IOException {
+	@Parameters("browserName")
+	public void preLaunch(String browserName) throws IOException {
+		launchBrowser(browserName);
 		loginpg = new LoginPage(driver);
 		brwsrUtil = new WebbrowserUtilities();
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
+
 	}
 
-	@Parameters("browserName")
 	public void launchBrowser(String browserName) {
 		switch (browserName) {
 		case "chrome":
@@ -66,7 +69,7 @@ public class AutomationBase {
 			break;
 
 		default:
-			System.out.println("Check the browser name entered");
+			System.out.println(AutomationConstants.browserNameCheck);
 			break;
 		}
 
