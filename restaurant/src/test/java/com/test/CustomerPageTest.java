@@ -84,7 +84,7 @@ public class CustomerPageTest extends AutomationBase {
 				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "7888888888",
 				AutomationConstants.errorMessage);
-		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "abby@gmail.com",
+		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
 	}

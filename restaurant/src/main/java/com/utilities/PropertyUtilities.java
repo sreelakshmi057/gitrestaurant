@@ -11,7 +11,6 @@ public class PropertyUtilities {
 	public static String filePath = currentDir + "/src/main/resources/";
 
 	public static Properties getProperty(String fileName) throws IOException {
-
 		FileInputStream fis = null;
 		Properties prop = null;
 
@@ -20,9 +19,12 @@ public class PropertyUtilities {
 			prop = new Properties();
 			prop.load(fis);
 		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
+			System.out.println(fnfe.getMessage());
+			System.out.println(fnfe.getCause());
+
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			System.out.println(ioe.getMessage());
+			System.out.println(ioe.getCause());
 		} finally {
 			fis.close();
 		}

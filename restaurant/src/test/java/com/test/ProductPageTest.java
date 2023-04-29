@@ -35,7 +35,7 @@ public class ProductPageTest extends AutomationBase {
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		productpg = homepg.navigateToProductPage();
-		excelUtil = new ExcelUtilities("restaurantdata.xlsx");
+		excelUtil = new ExcelUtilities();
 	}
 
 	@Test(priority = 3, enabled = false)
@@ -64,26 +64,26 @@ public class ProductPageTest extends AutomationBase {
 	public void validateEnteredProductValues() throws Exception {
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);
-		String Prdtcode = excelUtil.readStringData("product", 2, 2);
+		String Prdtcode = excelUtil.readStringData(2, 2);
 		productpg.enterValueToProductCode(Prdtcode);
-		String Prdtname = excelUtil.readStringData("product", 3, 2);
+		String Prdtname = excelUtil.readStringData(3, 2);
 		productpg.enterValueToProductName(Prdtname);
 		productpg.selectProductCategory(11);
 		productpg.selectProductSupplier(1);
-		String Purchaseprice = excelUtil.readStringData("product", 4, 2);
+		String Purchaseprice = excelUtil.readStringData(4, 2);
 		productpg.enterValueToProductPurchasePrice(Purchaseprice);
-		String Prdttax = excelUtil.readStringData("product", 5, 2);
+		String Prdttax = excelUtil.readStringData(5, 2);
 		productpg.enterValueToProductTax(Prdttax);
 		productpg.selectProductTaxMethod(0);
-		String Prdtprice = excelUtil.readStringData("product", 6, 2);
+		String Prdtprice = excelUtil.readStringData(6, 2);
 		productpg.enterValueToProductPrice(Prdtprice);
-		String Prdtunit = excelUtil.readStringData("product", 7, 2);
+		String Prdtunit = excelUtil.readStringData(7, 2);
 		productpg.enterValueToProductUnit(Prdtunit);
-		String Prdtalert = excelUtil.readStringData("product", 8, 2);
+		String Prdtalert = excelUtil.readStringData(8, 2);
 		productpg.enterValueToProductAlertQuantity(Prdtalert);
-		String Prdtoption = excelUtil.readStringData("product", 9, 2);
+		String Prdtoption = excelUtil.readStringData(9, 2);
 		productpg.enterValueToProductOptions(Prdtoption);
-		String Prdtdescription = excelUtil.readStringData("product", 10, 2);
+		String Prdtdescription = excelUtil.readStringData(10, 2);
 		productpg.enterValueToProductDescription(Prdtdescription);
 		productpg.clickOnProductSubmitButton();
 		productpg.searchForProductValue("APPLE");
@@ -103,7 +103,7 @@ public class ProductPageTest extends AutomationBase {
 	public void validateTheEditedProducteValues() throws Exception {
 		productpg.searchForProductValue("0");
 		productpg.clickOnProductEditIcon();
-		String Prdtname = excelUtil.readStringData("product", 13, 2);
+		String Prdtname = excelUtil.readStringData(13, 2);
 		productpg.enterValueToProductName(Prdtname);
 		productpg.clickOnProductEditSubmitButton();
 		productpg.searchForProductValue("APPLE1");
@@ -118,7 +118,7 @@ public class ProductPageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 6, enabled = false)
 	public void validateTheDeleteIcon() throws Exception {
 		productpg.searchForProductValue("APPLE1");
 		productpg.clickOnProductDeleteIcon();

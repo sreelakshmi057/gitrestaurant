@@ -21,18 +21,21 @@ public class AutomationBase {
 	LoginPage loginpg;
 	Properties prop;
 	PropertyUtilities propUtil;
-	WebbrowserUtilities brwsrUtil;
+	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();;
 
 	@BeforeTest
 	@Parameters("browserName")
-	public void preLaunch(String browserName) throws IOException {
+	public void preLaunch(String browserName){
 		launchBrowser(browserName);
 		loginpg = new LoginPage(driver);
-		brwsrUtil = new WebbrowserUtilities();
 		propUtil = new PropertyUtilities();
-		prop = PropertyUtilities.getProperty("config.properties");
+		try {
+			prop = PropertyUtilities.getProperty("config.properties");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
-
 	}
 
 	public void launchBrowser(String browserName) {
@@ -41,10 +44,8 @@ public class AutomationBase {
 			try {
 				launchChromeBrowser();
 			} catch (Exception e) {
-
 				System.out.println(e.getMessage());
 				System.out.println(e.getCause());
-
 			}
 			break;
 
@@ -52,7 +53,6 @@ public class AutomationBase {
 			try {
 				launchEdgeBrowser();
 			} catch (Exception e) {
-
 				System.out.println(e.getMessage());
 				System.out.println(e.getCause());
 			}
@@ -62,7 +62,6 @@ public class AutomationBase {
 			try {
 				launchFirefoxBrowser();
 			} catch (Exception e) {
-
 				System.out.println(e.getMessage());
 				System.out.println(e.getCause());
 			}
@@ -78,9 +77,8 @@ public class AutomationBase {
 	private void launchChromeBrowser() {
 
 		try {
-
 			driver = new ChromeDriver();
-			driver.manage().window().maximize();
+			brwsrUtil.browserMaximize(driver);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -92,7 +90,7 @@ public class AutomationBase {
 
 		try {
 			driver = new EdgeDriver();
-			driver.manage().window().maximize();
+			brwsrUtil.browserMaximize(driver);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -104,7 +102,7 @@ public class AutomationBase {
 
 		try {
 			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
+			brwsrUtil.browserMaximize(driver);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -113,7 +111,6 @@ public class AutomationBase {
 	}
 
 	public static WebDriver getDriver() {
-
 		return driver;
 	}
 

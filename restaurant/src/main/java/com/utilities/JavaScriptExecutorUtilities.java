@@ -18,7 +18,6 @@ public class JavaScriptExecutorUtilities {
 			js = (JavascriptExecutor) driver;
 			js.executeScript("argument[0].click();", element);
 		} catch (Exception e) {
-			
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -34,7 +33,6 @@ public class JavaScriptExecutorUtilities {
 			js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(true);", element);
 		} catch (Exception e) {
-			
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -51,7 +49,6 @@ public class JavaScriptExecutorUtilities {
 			js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(a,b)");
 		} catch (Exception e) {
-			
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -68,7 +65,6 @@ public class JavaScriptExecutorUtilities {
 			js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(a,b)");
 		} catch (Exception e) {
-			
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}

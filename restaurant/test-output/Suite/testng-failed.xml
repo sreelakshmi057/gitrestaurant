@@ -7,13 +7,19 @@
   <test thread-count="5" name="Test(failed)">
     <parameter name="browserName" value="chrome"/>
     <classes>
-      <class name="com.test.WaiterPageTest">
+      <class name="com.test.HomePageTest">
         <methods>
           <include name="preLaunch"/>
-          <include name="validateTheDeleteIcon" invocation-numbers="0"/>
+          <include name="validateTheLinksDisplayedInHomePage"/>
           <include name="prerun"/>
         </methods>
-      </class> <!-- com.test.WaiterPageTest -->
+      </class> <!-- com.test.HomePageTest -->
+      <class name="com.test.LoginPageTest">
+        <methods>
+          <include name="validateLoginPage"/>
+          <include name="preLaunch"/>
+        </methods>
+      </class> <!-- com.test.LoginPageTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

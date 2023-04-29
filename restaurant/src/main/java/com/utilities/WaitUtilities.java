@@ -2,6 +2,7 @@ package com.utilities;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtilities {
-
 	WebDriver driver;
 	public WebDriverWait wait;
 
@@ -23,11 +23,9 @@ public class WaitUtilities {
 	 */
 
 	public void implicitWait(WebDriver driver, int i) {
-
 		try {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(i));
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -45,7 +43,6 @@ public class WaitUtilities {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 			wait.until(ExpectedConditions.visibilityOfElementLocated((By) element));
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -63,7 +60,6 @@ public class WaitUtilities {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By) element));
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}

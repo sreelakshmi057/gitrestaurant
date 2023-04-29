@@ -16,7 +16,6 @@ public class WebActionUtilities {
 	 * @param name
 	 */
 	public void enterValue(WebDriver driver, WebElement element, String value) {
-
 		try {
 			element.sendKeys(value);
 		} catch (Exception e) {
@@ -32,7 +31,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public void clearText(WebDriver driver, WebElement element) {
-
 		try {
 			element.clear();
 		} catch (Exception e) {
@@ -48,7 +46,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public void clickElement(WebDriver driver, WebElement element) {
-
 		try {
 			element.click();
 		} catch (Exception e) {
@@ -64,7 +61,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public void submit(WebDriver driver, WebElement element) {
-
 		try {
 			element.submit();
 		} catch (Exception e) {
@@ -80,7 +76,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public boolean isElementSelected(WebDriver driver, WebElement element) {
-
 		boolean flag = false;
 		try {
 			flag = element.isSelected();
@@ -98,7 +93,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public boolean isElementEnabled(WebDriver driver, WebElement element) {
-
 		boolean flag = false;
 		try {
 			flag = element.isEnabled();
@@ -116,7 +110,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public boolean isElementDisplayed(WebDriver driver, WebElement element) {
-
 		Boolean flag = false;
 		try {
 			flag = element.isDisplayed();
@@ -135,7 +128,6 @@ public class WebActionUtilities {
 	 * @return
 	 */
 	public String getElementText(WebDriver driver, WebElement element) {
-
 		String text = null;
 		try {
 			text = element.getText();
@@ -153,7 +145,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public String getElementTagName(WebDriver driver, WebElement element) {
-
 		String text = null;
 		try {
 			text = element.getTagName();
@@ -171,7 +162,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public String getElementAttribute(WebDriver driver, WebElement element, String attribute) {
-
 		String text = null;
 		try {
 			element.getAttribute(attribute);
@@ -189,7 +179,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public String getElementCssValue(WebDriver driver, WebElement element) {
-
 		String text = null;
 		try {
 			text = element.getCssValue(null);
@@ -207,7 +196,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public Dimension getElementSize(WebDriver driver, WebElement element) {
-
 		Dimension size = null;
 		try {
 			size = element.getSize();
@@ -226,7 +214,6 @@ public class WebActionUtilities {
 	 * @param element
 	 */
 	public Point getElementLocation(WebDriver driver, WebElement element) {
-
 		Point location = null;
 		try {
 			location = element.getLocation();

@@ -19,7 +19,6 @@ public class ActionUtilities {
 		try {
 			action.moveToElement(element).click().build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -35,7 +34,6 @@ public class ActionUtilities {
 		try {
 			action.doubleClick(element).build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -52,7 +50,6 @@ public class ActionUtilities {
 		try {
 			action.clickAndHold(element).release().build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -69,7 +66,6 @@ public class ActionUtilities {
 		try {
 			action.click(element).sendKeys(value).build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -85,7 +81,6 @@ public class ActionUtilities {
 		try {
 			action.contextClick(element).build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -102,7 +97,6 @@ public class ActionUtilities {
 		try {
 			action.dragAndDrop(source, target).build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
@@ -118,10 +112,8 @@ public class ActionUtilities {
 		try {
 			action.moveToElement(element).contextClick().build().perform();
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-			;
+			System.out.println(e.getCause());		
 		}
 	}
 

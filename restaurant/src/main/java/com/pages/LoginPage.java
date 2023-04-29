@@ -37,10 +37,6 @@ public class LoginPage {
 		actionUtil.clickElement(driver, loginButton);
 	}
 
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
-	}
-	
 	public void performLogin(String username, String password) {
 		enterValueToUsername(username);
 		enterValueToPassword(password);
@@ -53,5 +49,5 @@ public class LoginPage {
 		clickLoginButton();
 		return new HomePage(driver);
 	}
-	
+
 }

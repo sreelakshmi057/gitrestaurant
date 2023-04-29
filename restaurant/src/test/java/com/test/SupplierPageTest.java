@@ -82,17 +82,17 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertEquals(supplierpg.getSupplierNameFromSearchResult(), "AANNA", AutomationConstants.errorMessage);
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), "8597461238",
 				AutomationConstants.errorMessage);
-		soft.assertEquals(supplierpg.getSupplierEmailFromSearchResult(), "yy@gmail.com",
+		soft.assertEquals(supplierpg.getSupplierEmailFromSearchResult(), "anna@gmail.com",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
 	}
 
 	@Test(priority = 22, enabled = true, dataProvider = "dataSupplierDelete", dataProviderClass = DataSupplier.class)
-	public void validateTheDeleteIcon(String mail) {
-		supplierpg.searchForStoreValue(mail);
+	public void validateTheDeleteIcon(String phone) {
+		supplierpg.searchForStoreValue(phone);
 		supplierpg.clickOnSupplierDeleteIcon();
 		supplierpg.clickOnSupplierDeleteConfirmMessage();
-		supplierpg.searchForStoreValue(mail);
+		supplierpg.searchForStoreValue(phone);
 
 		Assert.assertEquals(supplierpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);

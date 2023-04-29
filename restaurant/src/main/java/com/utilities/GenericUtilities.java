@@ -28,7 +28,6 @@ public class GenericUtilities {
 	 * 
 	 */
 	public void SelectElementByValue(WebDriver driver, WebElement element, String value) {
-
 		select = new Select(element);
 		try {
 			select.selectByValue(value);
@@ -46,7 +45,6 @@ public class GenericUtilities {
 	 * @param index
 	 */
 	public void SelectElementByIndex(WebDriver driver, WebElement element, int index) {
-
 		select = new Select(element);
 		try {
 			select.selectByIndex(index);
@@ -54,7 +52,6 @@ public class GenericUtilities {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
-
 	}
 
 	/**
@@ -66,7 +63,6 @@ public class GenericUtilities {
 	 *
 	 */
 	public void SelectByVisibleText(WebDriver driver, WebElement element, String text) {
-
 		select = new Select(element);
 		try {
 			select.selectByVisibleText(text);
@@ -84,7 +80,6 @@ public class GenericUtilities {
 	 * 
 	 */
 	public List<WebElement> GetOptionsOfElement(WebDriver driver, WebElement element) {
-
 		List<WebElement> option = null;
 		select = new Select(element);
 		try {
@@ -104,9 +99,7 @@ public class GenericUtilities {
 	 * @return
 	 */
 	public List<WebElement> GetAllSelectedOptionsOfElement(WebDriver driver, WebElement element) {
-
 		List<WebElement> option = null;
-
 		select = new Select(element);
 		try {
 			option = select.getAllSelectedOptions();
@@ -125,7 +118,6 @@ public class GenericUtilities {
 	 * 
 	 */
 	public String GetFirstSelectedOptionOfElement(WebDriver driver, WebElement element) {
-
 		String option = null;
 		select = new Select(element);
 		try {
@@ -146,7 +138,6 @@ public class GenericUtilities {
 	 * 
 	 */
 	public void deSelectElementByValue(WebDriver driver, WebElement element, String value) {
-
 		select = new Select(element);
 		try {
 			select.deselectByValue(value);
@@ -164,7 +155,6 @@ public class GenericUtilities {
 	 * @param index
 	 */
 	public void DeSelectElementByIndex(WebDriver driver, WebElement element, int index) {
-
 		select = new Select(element);
 		try {
 			select.deselectByIndex(index);
@@ -183,7 +173,6 @@ public class GenericUtilities {
 	 *
 	 */
 	public void deSelectElementByVisibleText(WebDriver driver, WebElement element, String text) {
-
 		select = new Select(element);
 		try {
 			select.deselectByVisibleText(text);
@@ -201,7 +190,6 @@ public class GenericUtilities {
 	 * 
 	 */
 	public void deSelectAllTheElement(WebDriver driver, WebElement element) {
-
 		select = new Select(element);
 		try {
 			select.deselectAll();
@@ -219,9 +207,7 @@ public class GenericUtilities {
 	 */
 
 	public void captureScreenShot(WebDriver driver) {
-
 		Date currentdate = new Date();
-
 		try {
 			String screenshotfilename = currentdate.toString().replace(" ", "-").replace(":", "-");
 			File SrcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -229,16 +215,12 @@ public class GenericUtilities {
 					+ screenshotfilename + ".png");
 			Files.copy(SrcFile, DestFile);
 		} catch (WebDriverException e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
-
 		} catch (IOException e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
-
 	}
 
 	/**
@@ -248,7 +230,6 @@ public class GenericUtilities {
 	 * @param text
 	 */
 	public void handleAlert(WebDriver driver, String value, String option) {
-
 		Alert obj = driver.switchTo().alert();
 		try {
 			obj.sendKeys(value);
@@ -261,7 +242,6 @@ public class GenericUtilities {
 				break;
 			}
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}

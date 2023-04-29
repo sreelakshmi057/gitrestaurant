@@ -3,7 +3,6 @@ package com.utilities;
 import org.openqa.selenium.WebDriver;
 
 public class WebbrowserUtilities {
-	WebDriver driver;
 
 	/**
 	 * this method is to launch the given url
@@ -12,7 +11,6 @@ public class WebbrowserUtilities {
 	 * @param Url
 	 */
 	public void launchUrl(WebDriver driver, String Url) {
-
 		try {
 			driver.get(Url);
 		} catch (Exception e) {
@@ -28,7 +26,6 @@ public class WebbrowserUtilities {
 	 * @return
 	 */
 	public String getWebPageTitle(WebDriver driver) {
-
 		String title = null;
 		try {
 			title = driver.getTitle();
@@ -46,7 +43,6 @@ public class WebbrowserUtilities {
 	 * @return
 	 */
 	public String getCurrentUrl(WebDriver driver) {
-
 		String current = null;
 		try {
 			current = driver.getCurrentUrl();
@@ -64,7 +60,6 @@ public class WebbrowserUtilities {
 	 * @return
 	 */
 	public String getPageSource(WebDriver driver) {
-
 		String page = null;
 		try {
 			page = driver.getPageSource();
@@ -81,7 +76,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void navigateToNextPage(WebDriver driver) {
-
 		try {
 			driver.navigate().forward();
 		} catch (Exception e) {
@@ -96,7 +90,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void navigateToPreviousPage(WebDriver driver) {
-
 		try {
 			driver.navigate().back();
 		} catch (Exception e) {
@@ -111,7 +104,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void navigateToRefreshPage(WebDriver driver) {
-
 		try {
 			driver.navigate().refresh();
 		} catch (Exception e) {
@@ -126,7 +118,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserMaximize(WebDriver driver) {
-
 		try {
 			driver.manage().window().maximize();
 		} catch (Exception e) {
@@ -141,7 +132,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserMinimize(WebDriver driver) {
-
 		try {
 			driver.manage().window().minimize();
 		} catch (Exception e) {
@@ -156,7 +146,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserFullScreen(WebDriver driver) {
-
 		try {
 			driver.manage().window().fullscreen();
 		} catch (Exception e) {
@@ -171,7 +160,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserClosePage(WebDriver driver) {
-
 		try {
 			driver.close();
 		} catch (Exception e) {
@@ -186,7 +174,6 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserQuitPage(WebDriver driver) {
-
 		try {
 			driver.quit();
 		} catch (Exception e) {

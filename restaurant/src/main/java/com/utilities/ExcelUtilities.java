@@ -1,66 +1,46 @@
 package com.utilities;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelUtilities {
 
-	public static final String currentDir = System.getProperty("user.dir");
-	public static String filePath = currentDir + "\\src\\test\\resources";
-	static String excelPath;
+public class ExcelUtilities {
+	final static String currentDir = System.getProperty("user.dir");
+	static String filePath = currentDir + ".//src/test//resources//restaurantdata.xlsx";
+
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;
+	static FileInputStream fs;
+	File file = new File(filePath);
+	
 
-	public ExcelUtilities(String fileName) throws IOException {
-		excelPath = filePath + fileName;
-		workbook = new XSSFWorkbook(excelPath);
-		sheet = (XSSFSheet) workbook.getSheetAt(0);
-
+	public void getNumberOfRows() throws IOException {
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheetAt(0);
+		int rowCount = sheet.getPhysicalNumberOfRows();
+		System.out.println(rowCount);
 	}
+	public String readStringData(int rowNum, int colNum) throws IOException {
 
-	public static int getRowCount() {
-		int rowCount = 0;
-		try {
-			rowCount = sheet.getPhysicalNumberOfRows();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rowCount;
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheetAt(0);
+		String cellValue = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
+		return cellValue;
 	}
+	public int readNumericData(int rowNum, int colNum) throws IOException {
 
-	public static int getColCount() {
-		int colCount = 0;
-		try {
-			colCount = sheet.getRow(0).getLastCellNum();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return colCount;
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheetAt(0);
+		int cellValue = (int) sheet.getRow(rowNum).getCell(colNum).getNumericCellValue();
+		return cellValue;
 	}
+	
 
-	public String readStringData(String sheetname, int rowNum, int colNum) throws IOException {
-
-		workbook = new XSSFWorkbook(excelPath);
-		sheet = workbook.getSheet(sheetname);
-		Row row = sheet.getRow(rowNum);
-		Cell c = row.getCell(colNum);
-
-		return c.getStringCellValue();
-	}
-
-	public static int readIntegerData(String fileName, int rowNum, int colNum, String sheetname) throws IOException {
-
-		String excelPath = filePath + fileName;
-		workbook = new XSSFWorkbook(excelPath);
-		sheet = workbook.getSheet(sheetname);
-		Row row = sheet.getRow(rowNum);
-		Cell c = row.getCell(colNum);
-		int a = (int) c.getNumericCellValue();
-
-		return a;
-
-	}
 }

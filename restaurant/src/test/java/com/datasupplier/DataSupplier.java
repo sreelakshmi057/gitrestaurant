@@ -62,11 +62,11 @@ public class DataSupplier {
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AAC";
 		data[0][1] = "7888888888";
-		data[0][2] = "abby@gmail.com";
+		data[0][2] = "aac@gmail.com";
 		data[0][3] = "10";
 		data[1][0] = "AAC";
 		data[1][1] = "7888888888";
-		data[1][2] = "abby@gmail.com";
+		data[1][2] = "aac@gmail.com";
 		data[1][3] = "10";
 		return data;
 	}
@@ -99,11 +99,11 @@ public class DataSupplier {
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AANNA";
 		data[0][1] = "8597461238";
-		data[0][2] = "yy@gmail.com";
+		data[0][2] = "anna@gmail.com";
 		data[0][3] = "FIRST SUPPLIER";
 		data[1][0] = "AANNA";
 		data[1][1] = "8597461238";
-		data[1][2] = "yy@gmail.com";
+		data[1][2] = "anna@gmail.com";
 		data[1][3] = "FIRST SUPPLIER";
 		return data;
 	}
@@ -111,7 +111,7 @@ public class DataSupplier {
 	@DataProvider
 	public Object[] dataSupplierDelete() {
 
-		Object[] data = new Object[] {"yy@gmail.com"};
+		Object[] data = new Object[] {"8597461238"};
 		return data;
 	}
 	
