@@ -33,7 +33,7 @@ public class LogoutTestPage extends AutomationBase {
 		logoutpg = homepg.navigateToLogoutPage();
 	}
 
-	@Test(priority = 38, enabled = true, groups = { "smoke" })
+	@Test(priority = 37, enabled = true)
 	public void validateLogoutPage() {
 		logoutpg.clickOnLogout();
 

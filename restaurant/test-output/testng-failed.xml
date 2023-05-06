@@ -7,19 +7,14 @@
   <test thread-count="5" name="Test(failed)">
     <parameter name="browserName" value="chrome"/>
     <classes>
-      <class name="com.test.HomePageTest">
+      <class name="com.test.StorePageTest">
         <methods>
+          <include name="validateTheEditedStoreValues"/>
           <include name="preLaunch"/>
-          <include name="validateTheLinksDisplayedInHomePage"/>
-          <include name="prerun"/>
+          <include name="preRun"/>
+          <include name="validateEnteredStoreValues"/>
         </methods>
-      </class> <!-- com.test.HomePageTest -->
-      <class name="com.test.LoginPageTest">
-        <methods>
-          <include name="validateLoginPage"/>
-          <include name="preLaunch"/>
-        </methods>
-      </class> <!-- com.test.LoginPageTest -->
+      </class> <!-- com.test.StorePageTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

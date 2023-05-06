@@ -11,12 +11,7 @@ public class WebbrowserUtilities {
 	 * @param Url
 	 */
 	public void launchUrl(WebDriver driver, String Url) {
-		try {
 			driver.get(Url);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
 	}
 
 	/**
@@ -118,12 +113,7 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserMaximize(WebDriver driver) {
-		try {
 			driver.manage().window().maximize();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
 	}
 
 	/**

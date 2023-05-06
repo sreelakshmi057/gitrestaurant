@@ -39,7 +39,6 @@ public class CustomerPageTest extends AutomationBase {
 	@Test(priority = 15, enabled = true)
 	public void validateAddCustomerPageHasElementsDisplayed() {
 		customerpg.clickOnAddCustomerButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(customerpg.isCustomerNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(customerpg.isCustomerPhoneDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -57,10 +56,8 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.enterValueToCustomerDiscount(discount);
 		customerpg.clickOnCustomerSubmitButton();
 		customerpg.searchForCustomerValue(name);
-
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC", AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "1234567567",
 				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
@@ -74,14 +71,12 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.searchForCustomerValue(name);
 		customerpg.clickOnCustomerEditIcon();
 		customerpg.enterValueToCustomerPhone(phone);
-		customerpg.enterValueToCustomerEmail(mail);	
+		customerpg.enterValueToCustomerEmail(mail);
 		customerpg.enterValueToCustomerDiscount(discount);
 		customerpg.clickOnCustomerEditSubmitButton();
 		customerpg.searchForCustomerValue(phone);
-
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC", AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "7888888888",
 				AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
@@ -95,7 +90,6 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.clickOnCustomerDeleteIcon();
 		customerpg.clickOnCustomerDeleteConfirmMessage();
 		customerpg.searchForCustomerValue(phone);
-
 		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 

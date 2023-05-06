@@ -38,7 +38,7 @@ public class UsersPageTest extends AutomationBase {
 		userpg = homepg.navigateToUsersPage();
 	}
 
-	@Test(priority = 36, enabled = true)
+	@Test(priority = 35, enabled = true)
 	public void validateAddUsersPageHasElementsDisplayed() {
 		userpg.clickOnAddUsers();
 
@@ -52,7 +52,7 @@ public class UsersPageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 37, enabled = true)
+	@Test(priority = 36, enabled = true)
 	public void validateEnteredUserValues() {
 		userpg.clickOnAddUsers();
 		userpg.enterValueToUserName("ABC");

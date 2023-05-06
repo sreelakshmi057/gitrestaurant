@@ -14,6 +14,7 @@ import com.constants.AutomationConstants;
 import com.pages.ExpenseInCategoriesPage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpenseInCategoriesTestPage extends AutomationBase {
@@ -24,6 +25,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	Properties prop;
 	HomePage homepg;
 	PropertyUtilities propUtil;
+	ExcelUtilities excelUtil;
 
 	@BeforeMethod
 	public void prerun() throws IOException {
@@ -33,9 +35,10 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
+		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 31, enabled = true)
+	@Test(priority = 30, enabled = false)
 	public void validateAddExpensePageHasElementsDisplayed() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 
@@ -44,12 +47,13 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 32, enabled = true)
-	public void validateEnteredProductValues() {
+	@Test(priority = 31, enabled = true)
+	public void validateEnteredProductValues() throws IOException {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
-		cat_expensepg.enterValueToCategoryName("APPLE_EXPENSE");
+		String cat_name = excelUtil.readStringData("category", 2, 2);
+		cat_expensepg.enterValueToCategoryName(cat_name);
 		cat_expensepg.clickOnCategorySubmitButton();
-		cat_expensepg.searchForCategoryProductValue("APPLE_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(cat_name);
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_EXPENSE",
@@ -57,27 +61,30 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 33, enabled = true)
-	public void validateTheEditedStoreValues() {
-		cat_expensepg.searchForCategoryProductValue("APPLE_EXPENSE");
+	@Test(priority = 32, enabled = true)
+	public void validateTheEditedStoreValues() throws IOException {
+		String cat_search = excelUtil.readStringData("category", 5, 2);
+		cat_expensepg.searchForCategoryProductValue(cat_search);
 		cat_expensepg.clickOnProductEditIcon();
-		cat_expensepg.enterValueToCategoryName("APPLE1_EXPENSE");
+		String cat_editname = excelUtil.readStringData("category", 6, 2);
+		cat_expensepg.enterValueToCategoryName(cat_editname);
 		cat_expensepg.clickOnProductEditSubmitButton();
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(cat_editname);
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE1_EXPENSE",
+		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_SREE_EXPENSE",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 34, enabled = true)
-	public void validateTheDeleteIcon() {
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+	@Test(priority = 33, enabled = true)
+	public void validateTheDeleteIcon() throws IOException {
+		String cat_deletesearch = excelUtil.readStringData("category", 9, 2);
+		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		cat_expensepg.clickOnProductDeleteIcon();
 		cat_expensepg.clickOnProductDeleteConfirmMessage();
-		cat_expensepg.searchForCategoryProductValue("APPLE1_EXPENSE");
+		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);

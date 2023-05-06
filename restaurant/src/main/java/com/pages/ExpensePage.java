@@ -41,15 +41,15 @@ public class ExpensePage {
 	private WebElement expenseSearch;
 	@FindBy(xpath = "(//table[@id='table']//tr//td)[1]")
 	private WebElement expenseDate_SearchResult;
-	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
+	@FindBy(xpath = "(//table[@id='table']//tr//td)[2]")
 	private WebElement expenseReference_SearchResult;
-	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
+	@FindBy(xpath = "(//table[@id='table']//tr//td)[3]")
 	private WebElement expenseAmount_SearchResult;
-	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
+	@FindBy(xpath = "(//table[@id='table']//tr//td)[4]")
 	private WebElement expenseCategory_SearchResult;
-	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
+	@FindBy(xpath = "(//table[@id='table']//tr//td)[5]")
 	private WebElement expenseStore_SearchResult;
-	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
+	@FindBy(xpath = "(//table[@id='table']//tr//td)[1]")
 	private WebElement expensedelete_SearchResult;
 
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
@@ -152,10 +152,10 @@ public class ExpensePage {
 	 * @param value
 	 */
 	public void searchForExpenseValue(String value) {
-		actionUtil.clearText(driver, expenseSearch);
+		waitUtil.waitForElementTobeClickable(driver,expenseSearch,5);
 		actionUtil.clickElement(driver, expenseSearch);
 		actionUtil.enterValue(driver, expenseSearch, value);
-		waitUtil.waitForElementTobeClickable(driver, expenseDate_SearchResult, 25);
+		waitUtil.waitForVisibilityOfElement(driver, expensedelete_SearchResult, 25);
 
 	}
 
@@ -176,7 +176,8 @@ public class ExpensePage {
 	}
 
 	public String getExpenseStoreFromSearchResult() {
-		return actionUtil.getElementText(driver, expenseStore_SearchResult);
+		waitUtil.waitForVisibilityOfElement(driver, expenseStore_SearchResult,25);
+		return actionUtil.getElementText(driver, expenseStore_SearchResult);		
 	}
 
 	public String getExpenseCategoryFromSearchResult() {
@@ -206,6 +207,7 @@ public class ExpensePage {
 	 * Method for deleting expense values
 	 */
 	public void clickOnExpenseDeleteIcon() {
+		waitUtil.waitForVisibilityOfElement(driver, expensedelete_SearchResult, 25);
 		actionUtil.clickElement(driver, expenseDeleteButton);
 	}
 
@@ -217,5 +219,4 @@ public class ExpensePage {
 	public void clickOnExpenseDeleteOkConfirmMessage() {
 		actionUtil.clickElement(driver, expenseConfirmDeleteOkButton);
 	}
-
 }

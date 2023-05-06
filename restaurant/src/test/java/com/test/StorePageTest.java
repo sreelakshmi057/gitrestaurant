@@ -14,31 +14,32 @@ import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.StorePage;
+import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class StorePageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	StorePage storepg;
 	Properties prop;
 	HomePage homepg;
+	ExcelUtilities excelUtil;
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void preRun() throws IOException {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		storepg = homepg.navigateToStorePage();
+		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 7, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() {
+	@Test(priority = 3, enabled = true)
+	public void validateAddStorePageHasElementsDisplayed() throws Exception {
 		storepg.clickOnAddStoreButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(storepg.isStoreNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStoreMailDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,59 +47,61 @@ public class StorePageTest extends AutomationBase {
 		soft.assertTrue(storepg.isStoreCountryDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStoreCityDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 8, enabled = true)
-	public void validateTheEnteredStoreValues() throws Exception {
+	@Test(priority = 4, enabled = true)
+	public void validateEnteredStoreValues() throws Exception {
 		storepg.clickOnAddStoreButton();
-		storepg.enterValueToStoreName("AAA");
-		storepg.enterValueToStoreMail("aaa@gmail.com");
-		storepg.enterValueToStoreNumber("9498571245");
-		storepg.enterValueToStoreCountryName("INDIA");
-		storepg.enterValueToStoreCityName("ADOOR");
-		storepg.enterValueToStoreAddress("Heaven ALAPPUZHA");
-		storepg.enterValueToStoreCustomerFooter("done by AKHIL");
+		String storeName = excelUtil.readStringData("store", 2, 2);
+		storepg.enterValueToStoreName(storeName);
+		String storeMail = excelUtil.readStringData("store", 3, 2);
+		storepg.enterValueToStoreMail(storeMail);
+		String storeNumber = excelUtil.readStringData("store", 4, 2);
+		storepg.enterValueToStoreNumber(storeNumber);
+		String storeCountry = excelUtil.readStringData("store", 5, 2);
+		storepg.enterValueToStoreCountryName(storeCountry);
+		String storeCity = excelUtil.readStringData("store", 6, 2);
+		storepg.enterValueToStoreCityName(storeCity);
+		String storeAddress = excelUtil.readStringData("store", 7, 2);
+		storepg.enterValueToStoreAddress(storeAddress);
+		String storeFooter = excelUtil.readStringData("store", 8, 2);
+		storepg.enterValueToStoreCustomerFooter(storeFooter);
 		storepg.submit();
-		storepg.searchForStoreValue("AAA");
-
+		storepg.searchForStoreValue(storeName);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreMailFromSearch(), "aaa@gmail.com", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.errorMessage);
+		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreMailFromSearch(), "aaa@gmail.com", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 9, enabled = true)
+	@Test(priority = 5, enabled = true)
 	public void validateTheEditedStoreValues() throws Exception {
-		storepg.searchForStoreValue("AAA");
+		String storeName = excelUtil.readStringData("store", 11, 2);
+		storepg.searchForStoreValue(storeName);
 		storepg.clickOnEditIcon();
-		storepg.enterValueToStoreMail("abcd@gmail.com");
+		String editMail = excelUtil.readStringData("store", 12, 2);
+		storepg.enterValueToStoreMail(editMail);
 		storepg.clickOnEditSubmitButton();
-		storepg.searchForStoreValue("AAA");
-
+		storepg.searchForStoreValue(storeName);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreMailFromSearch(), "abcd@gmail.com", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.errorMessage);
-		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.errorMessage);
+		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreMailFromSearch(), "abcd@gmail.com", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 10, enabled = true)
+	@Test(priority = 6, enabled = true)
 	public void validateTheDeleteIcon() throws Exception {
-		storepg.searchForStoreValue("AAA");
+		String storeName = excelUtil.readStringData("store", 15, 2);
+		storepg.searchForStoreValue(storeName);
 		storepg.clickOnDeleteIcon();
-		storepg.searchForStoreValue("AAA");
-
+		storepg.searchForStoreValue(storeName);
 		Assert.assertEquals(storepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
-
 }

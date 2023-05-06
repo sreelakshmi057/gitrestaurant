@@ -49,10 +49,6 @@ public class ExpenseInCategoriesPage {
 		actionUtil.clickElement(driver, expenseCategoryName);
 	}
 
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
-	}
-
 	/**
 	 * This method is to check whether elements are displayed
 	 * 

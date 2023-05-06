@@ -233,7 +233,7 @@ public class ProductPage {
 
 	public void clickOnProductSubmitButton() {
 		actionUtil.clickElement(driver, productSubmitButton);
-		waitUtil.waitForElementTobeClickable(driver, productStockSubmitButton, 5);
+		waitUtil.waitForElementTobeClickable(driver, productStockSubmitButton, 15);
 		actionUtil.clickElement(driver, productStockSubmitButton);
 	}
 

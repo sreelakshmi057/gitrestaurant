@@ -33,10 +33,9 @@ public class SettingsTestPage extends AutomationBase {
 		settingpg = homepg.navigateToSettingsPage();
 	}
 
-	@Test(priority = 35, enabled = true)
+	@Test(priority = 34, enabled = true)
 	public void validateAddStorePageHasElementsDisplayed() {
 		settingpg.clickOnCompanyName();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(settingpg.isCompanyNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isCompanyPhoneDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,6 +45,5 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertTrue(settingpg.isStripeSecretKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretPublishedKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 }

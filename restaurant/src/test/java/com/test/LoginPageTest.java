@@ -20,7 +20,7 @@ public class LoginPageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 1, enabled = true, groups = { "smoke" })
+	@Test(priority = 1, enabled = true)
 	public void validateLoginPage() throws IOException {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);

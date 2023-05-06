@@ -25,15 +25,14 @@ public class AutomationBase {
 
 	@BeforeTest
 	@Parameters("browserName")
-	public void preLaunch(String browserName){
+	public void preLaunch(String browserName) {
 		launchBrowser(browserName);
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		try {
 			prop = PropertyUtilities.getProperty("config.properties");
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Error during reading property file");
 		}
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 	}
@@ -41,73 +40,35 @@ public class AutomationBase {
 	public void launchBrowser(String browserName) {
 		switch (browserName) {
 		case "chrome":
-			try {
-				launchChromeBrowser();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println(e.getCause());
-			}
+			launchChromeBrowser();
 			break;
 
 		case "edge":
-			try {
-				launchEdgeBrowser();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println(e.getCause());
-			}
+			launchEdgeBrowser();
 			break;
 
 		case "firefox":
-			try {
-				launchFirefoxBrowser();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println(e.getCause());
-			}
+			launchFirefoxBrowser();
 			break;
 
 		default:
-			System.out.println(AutomationConstants.browserNameCheck);
-			break;
+			throw new RuntimeException(AutomationConstants.browserNameCheck);
 		}
-
 	}
 
 	private void launchChromeBrowser() {
-
-		try {
-			driver = new ChromeDriver();
-			brwsrUtil.browserMaximize(driver);
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+		driver = new ChromeDriver();
+		brwsrUtil.browserMaximize(driver);
 	}
 
 	private void launchEdgeBrowser() {
-
-		try {
-			driver = new EdgeDriver();
-			brwsrUtil.browserMaximize(driver);
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+		driver = new EdgeDriver();
+		brwsrUtil.browserMaximize(driver);
 	}
 
 	private void launchFirefoxBrowser() {
-
-		try {
-			driver = new FirefoxDriver();
-			brwsrUtil.browserMaximize(driver);
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+		driver = new FirefoxDriver();
+		brwsrUtil.browserMaximize(driver);
 	}
 
 	public static WebDriver getDriver() {

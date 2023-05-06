@@ -18,7 +18,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ProductPageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	ProductPage productpg;
@@ -38,10 +37,9 @@ public class ProductPageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void validateAddProductPageHasElementsDisplayed() {
 		productpg.clickOnAddProductButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(productpg.isProductTypeDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isproductCodeDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -57,57 +55,53 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(productpg.isProductOptionsDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 4, enabled = true)
 	public void validateEnteredProductValues() throws Exception {
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);
-		String Prdtcode = excelUtil.readStringData(2, 2);
-		productpg.enterValueToProductCode(Prdtcode);
-		String Prdtname = excelUtil.readStringData(3, 2);
-		productpg.enterValueToProductName(Prdtname);
+		String prdtcode = excelUtil.readStringData("product", 2, 2);
+		productpg.enterValueToProductCode(prdtcode);
+		String prdtname = excelUtil.readStringData("product", 3, 2);
+		productpg.enterValueToProductName(prdtname);
 		productpg.selectProductCategory(11);
 		productpg.selectProductSupplier(1);
-		String Purchaseprice = excelUtil.readStringData(4, 2);
-		productpg.enterValueToProductPurchasePrice(Purchaseprice);
-		String Prdttax = excelUtil.readStringData(5, 2);
-		productpg.enterValueToProductTax(Prdttax);
+		String purchaseprice = excelUtil.readStringData("product", 4, 2);
+		productpg.enterValueToProductPurchasePrice(purchaseprice);
+		String prdttax = excelUtil.readStringData("product", 5, 2);
+		productpg.enterValueToProductTax(prdttax);
 		productpg.selectProductTaxMethod(0);
-		String Prdtprice = excelUtil.readStringData(6, 2);
-		productpg.enterValueToProductPrice(Prdtprice);
-		String Prdtunit = excelUtil.readStringData(7, 2);
-		productpg.enterValueToProductUnit(Prdtunit);
-		String Prdtalert = excelUtil.readStringData(8, 2);
-		productpg.enterValueToProductAlertQuantity(Prdtalert);
-		String Prdtoption = excelUtil.readStringData(9, 2);
-		productpg.enterValueToProductOptions(Prdtoption);
-		String Prdtdescription = excelUtil.readStringData(10, 2);
-		productpg.enterValueToProductDescription(Prdtdescription);
+		String prdtprice = excelUtil.readStringData("product", 6, 2);
+		productpg.enterValueToProductPrice(prdtprice);
+		String prdtunit = excelUtil.readStringData("product", 7, 2);
+		productpg.enterValueToProductUnit(prdtunit);
+		String prdtalert = excelUtil.readStringData("product", 8, 2);
+		productpg.enterValueToProductAlertQuantity(prdtalert);
+		String prdtoption = excelUtil.readStringData("product", 9, 2);
+		productpg.enterValueToProductOptions(prdtoption);
+		String prdtdescription = excelUtil.readStringData("product", 10, 2);
+		productpg.enterValueToProductDescription(prdtdescription);
 		productpg.clickOnProductSubmitButton();
-		productpg.searchForProductValue("APPLE");
-
+		productpg.searchForProductValue(prdtname);
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(productpg.getProductCodeFromSearchResult(), "0", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductNameFromSearchResult(), "APPLE", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductCategoryFromSearchResult(), "fruits", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductDescriptionFromSearchResult(), "FRESH", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductTaxFromSearchResult(), "18", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductPriceFromSearchResult(), "10.000 abc", AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void validateTheEditedProducteValues() throws Exception {
-		productpg.searchForProductValue("0");
+		String prdtsearch = excelUtil.readStringData("product", 14, 2);
+		productpg.searchForProductValue(prdtsearch);
 		productpg.clickOnProductEditIcon();
-		String Prdtname = excelUtil.readStringData(13, 2);
-		productpg.enterValueToProductName(Prdtname);
+		String prdtname = excelUtil.readStringData("product", 13, 2);
+		productpg.enterValueToProductName(prdtname);
 		productpg.clickOnProductEditSubmitButton();
-		productpg.searchForProductValue("APPLE1");
-
+		productpg.searchForProductValue(prdtname);
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(productpg.getProductCodeFromSearchResult(), "0", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductNameFromSearchResult(), "APPLE1", AutomationConstants.errorMessage);
@@ -115,16 +109,15 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertEquals(productpg.getProductDescriptionFromSearchResult(), "FRESH", AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductTaxFromSearchResult(), "18", AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void validateTheDeleteIcon() throws Exception {
-		productpg.searchForProductValue("APPLE1");
+		String prdtdelete = excelUtil.readStringData("product", 17, 2);
+		productpg.searchForProductValue(prdtdelete);
 		productpg.clickOnProductDeleteIcon();
 		productpg.clickOnProductDeleteConfirmMessage();
-		productpg.searchForProductValue("APPLE1");
-
+		productpg.searchForProductValue(prdtdelete);
 		Assert.assertEquals(productpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 

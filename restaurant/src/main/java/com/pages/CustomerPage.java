@@ -8,7 +8,6 @@ import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
 public class CustomerPage {
-
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
@@ -55,14 +54,10 @@ public class CustomerPage {
 
 	public void clickOnAddCustomerButton() {
 		actionUtil.clickElement(driver, addCustomerButton);
-		waitUtil.waitForElementTobeClickable(driver,customerName, 15);
+		waitUtil.waitForElementTobeClickable(driver, customerName, 15);
 		actionUtil.clickElement(driver, customerName);
 	}
 
-//	public void clickOnAddCustomerName() {
-//		actionUtil.clickElement(driver, customerName);
-//	}
-	
 	public void implementImplicitWait() {
 		waitUtil.implicitWait(driver, 5);
 	}
@@ -115,7 +110,7 @@ public class CustomerPage {
 
 	public void clickOnCustomerSubmitButton() {
 		actionUtil.clickElement(driver, customerSubmitButton);
-		waitUtil.waitForElementTobeClickable(driver,customerPhone_SearchResult, 20);
+		waitUtil.waitForElementTobeClickable(driver, customerPhone_SearchResult, 20);
 	}
 
 	/**
@@ -127,7 +122,7 @@ public class CustomerPage {
 		waitUtil.waitForElementTobeClickable(driver, customerSearch, 5);
 		actionUtil.clickElement(driver, customerSearch);
 		actionUtil.enterValue(driver, customerSearch, value);
-		waitUtil.waitForVisibilityOfElement(driver,customerdelete_SearchResult, 15);
+		waitUtil.waitForVisibilityOfElement(driver, customerdelete_SearchResult, 15);
 	}
 
 	/**
