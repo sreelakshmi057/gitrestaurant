@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -84,7 +85,7 @@ public class ProductPage {
 		waitUtil.waitForElementTobeClickable(driver, productType, 15);
 		actionUtil.clickElement(driver, productType);
 	}
-	
+
 	public void implementImplicitWait() {
 		waitUtil.implicitWait(driver, 5);
 	}
@@ -247,12 +248,12 @@ public class ProductPage {
 		actionUtil.clickElement(driver, productSearchButton);
 		waitUtil.waitForElementTobeClickable(driver, productSearchButton, 5);
 		actionUtil.enterValue(driver, productSearchButton, value);
-		waitUtil.waitForVisibilityOfElement(driver,productCode_SearchResult, 20);
+		waitUtil.waitForVisibilityOfElement(driver, productCode_SearchResult, 20);
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getProductCodeFromSearchResult() {
 		return actionUtil.getElementText(driver, productCode_SearchResult);
@@ -283,8 +284,8 @@ public class ProductPage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the productvalues
+	 * 
 	 */
 
 	public void clickOnProductEditIcon() {
@@ -297,8 +298,8 @@ public class ProductPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting productvalues
+	 * 
 	 */
 	public void clickOnProductDeleteIcon() {
 		actionUtil.clickElement(driver, productDeleteButton);

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -138,12 +139,12 @@ public class ExpensePage {
 	 */
 	public void selectExpenseStoreByVisibleText(String value) {
 		actionUtil.clearText(driver, expenseStore);
-		genericUtil.SelectByVisibleText(driver, expenseStore, value);
+		genericUtil.SelectElementByVisibleText(driver, expenseStore, value);
 	}
 
 	public void selectExpenseCategoryByVisibleText(String value) {
 		actionUtil.clearText(driver, expenseCategory);
-		genericUtil.SelectByVisibleText(driver, expenseCategory, value);
+		genericUtil.SelectElementByVisibleText(driver, expenseCategory, value);
 	}
 
 	/**
@@ -152,7 +153,7 @@ public class ExpensePage {
 	 * @param value
 	 */
 	public void searchForExpenseValue(String value) {
-		waitUtil.waitForElementTobeClickable(driver,expenseSearch,5);
+		waitUtil.waitForElementTobeClickable(driver, expenseSearch, 5);
 		actionUtil.clickElement(driver, expenseSearch);
 		actionUtil.enterValue(driver, expenseSearch, value);
 		waitUtil.waitForVisibilityOfElement(driver, expensedelete_SearchResult, 25);
@@ -160,8 +161,8 @@ public class ExpensePage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getExpenseDateFromSearchResult() {
 		return actionUtil.getElementText(driver, expenseDate_SearchResult);
@@ -176,8 +177,8 @@ public class ExpensePage {
 	}
 
 	public String getExpenseStoreFromSearchResult() {
-		waitUtil.waitForVisibilityOfElement(driver, expenseStore_SearchResult,25);
-		return actionUtil.getElementText(driver, expenseStore_SearchResult);		
+		waitUtil.waitForVisibilityOfElement(driver, expenseStore_SearchResult, 25);
+		return actionUtil.getElementText(driver, expenseStore_SearchResult);
 	}
 
 	public String getExpenseCategoryFromSearchResult() {
@@ -189,8 +190,8 @@ public class ExpensePage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the expense values
+	 * 
 	 */
 
 	public void clickOnExpenseEditIcon() {
@@ -203,8 +204,8 @@ public class ExpensePage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting expense values
+	 * 
 	 */
 	public void clickOnExpenseDeleteIcon() {
 		waitUtil.waitForVisibilityOfElement(driver, expensedelete_SearchResult, 25);

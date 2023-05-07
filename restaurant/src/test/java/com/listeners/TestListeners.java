@@ -27,7 +27,6 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.base.AutomationBase;
 
 public class TestListeners implements ITestListener {
-
 	ExtentReports extent;
 	static ExtentTest test;
 	String testName;
@@ -42,7 +41,6 @@ public class TestListeners implements ITestListener {
 		spark.config().setReportName(" AUTOMATION REPORT");
 		spark.config().setTheme(Theme.STANDARD);
 		spark.config().setTimeStampFormat("MMM dd, yyyy HH:mm:ss");
-
 	}
 
 	public void onTestStart(ITestResult result) {
@@ -53,7 +51,6 @@ public class TestListeners implements ITestListener {
 			// Extent Report
 			extent.setSystemInfo("Browser", cap.getBrowserName());
 			extent.setSystemInfo("BrowserVersion", cap.getBrowserVersion());
-
 			testName = result.getMethod().getMethodName();
 			test = extent.createTest(testName);
 			test.assignCategory(result.getTestClass().getRealClass().getSimpleName());
@@ -76,17 +73,14 @@ public class TestListeners implements ITestListener {
 		System.out.println(
 				"=============================TEST CASE : " + testName + ":FAILED==============================");
 		test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED!!", ExtentColor.RED));
-
 		String path = System.getProperty("user.dir") + "/test-output/" + System.currentTimeMillis() + ".png";
 		File scrFile = ((TakesScreenshot) ((AutomationBase) result.getInstance()).getDriver())
 				.getScreenshotAs(OutputType.FILE);
-
 		try {
 			FileUtils.copyFile(scrFile, new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		test.fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
 
@@ -107,13 +101,11 @@ public class TestListeners implements ITestListener {
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void onFinish(ITestContext context) {
 
 		try {
-
 			extent.flush();
 			DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy_HH-mm-ss");
 			Date date = new Date();
@@ -124,17 +116,14 @@ public class TestListeners implements ITestListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void stepLog(String log) {
 		test.log(Status.INFO, log);
-
 	}
 
 	public void warningLog(String log) {
 		test.log(Status.WARNING, MarkupHelper.createLabel(log, ExtentColor.PURPLE));
-
 	}
 
 }

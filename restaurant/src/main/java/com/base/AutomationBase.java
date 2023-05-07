@@ -16,7 +16,6 @@ import com.utilities.PropertyUtilities;
 import com.utilities.WebbrowserUtilities;
 
 public class AutomationBase {
-
 	static WebDriver driver;
 	LoginPage loginpg;
 	Properties prop;
@@ -29,11 +28,7 @@ public class AutomationBase {
 		launchBrowser(browserName);
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
-		try {
-			prop = PropertyUtilities.getProperty("config.properties");
-		} catch (IOException e) {
-			throw new RuntimeException("Error during reading property file");
-		}
+		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
 	}
 
@@ -74,5 +69,4 @@ public class AutomationBase {
 	public static WebDriver getDriver() {
 		return driver;
 	}
-
 }

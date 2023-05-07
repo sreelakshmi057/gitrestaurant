@@ -26,8 +26,7 @@ public class WaitUtilities {
 		try {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(i));
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while implementing implicit wait");
 		}
 	}
 
@@ -77,7 +76,6 @@ public class WaitUtilities {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}

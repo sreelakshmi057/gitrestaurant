@@ -13,14 +13,9 @@ public class JavaScriptExecutorUtilities {
 	 * 
 	 * @param element
 	 */
-	public void elementClick(WebElement element) {
-		try {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("argument[0].click();", element);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+	public void elementClickUsingJavaScriptExecutor(WebElement element) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("argument[0].click();", element);
 	}
 
 	/**
@@ -28,14 +23,9 @@ public class JavaScriptExecutorUtilities {
 	 * 
 	 * @param element
 	 */
-	public void scrolltoElement(WebElement element) {
-		try {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView(true);", element);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+	public void scrollToElementUsingJavaScriptExecutor(WebElement element) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 	/**
@@ -44,14 +34,9 @@ public class JavaScriptExecutorUtilities {
 	 * @param a
 	 * @param b
 	 */
-	public void scrollFromTopToBottom(int a, int b) {
-		try {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(a,b)");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+	public void scrollFromTopToBottomUsingJavaScriptExecutor(int a, int b) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(a,b)");
 	}
 
 	/**
@@ -60,13 +45,8 @@ public class JavaScriptExecutorUtilities {
 	 * @param a
 	 * @param b
 	 */
-	public void scrollFromBottomToTop(int a, int b) {
-		try {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(a,b)");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
+	public void scrollFromBottomToTopUsingJavaScriptExecutor(int a, int b) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(a,b)");
 	}
 }

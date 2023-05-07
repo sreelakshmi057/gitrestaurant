@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,7 +19,6 @@ import com.pages.UsersPage;
 import com.utilities.PropertyUtilities;
 
 public class UsersPageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	UsersPage userpg;
@@ -29,7 +27,7 @@ public class UsersPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -41,7 +39,6 @@ public class UsersPageTest extends AutomationBase {
 	@Test(priority = 35, enabled = true)
 	public void validateAddUsersPageHasElementsDisplayed() {
 		userpg.clickOnAddUsers();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(userpg.isUserNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(userpg.isFirstNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -49,7 +46,6 @@ public class UsersPageTest extends AutomationBase {
 		soft.assertTrue(userpg.isPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(userpg.isConfirmPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 36, enabled = true)
@@ -62,7 +58,6 @@ public class UsersPageTest extends AutomationBase {
 		userpg.enterValueToPassword("123456");
 		userpg.enterValueToConfirmPassword("123456");
 		userpg.clickOnSubmit();
-
 		List<WebElement> username = driver.findElements(By.xpath("//table[@class='table']//tr//td"));
 		boolean status = false;
 		for (WebElement element : username) {
@@ -73,7 +68,6 @@ public class UsersPageTest extends AutomationBase {
 			}
 		}
 		Assert.assertTrue(status, AutomationConstants.errorMessage);
-
 	}
 
 }

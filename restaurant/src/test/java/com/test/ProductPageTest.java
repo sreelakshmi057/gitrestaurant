@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,7 @@ public class ProductPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -58,7 +57,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEnteredProductValues() throws Exception {
+	public void validateEnteredProductValues() {
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);
 		String prdtcode = excelUtil.readStringData("product", 2, 2);
@@ -94,7 +93,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 5, enabled = true)
-	public void validateTheEditedProducteValues() throws Exception {
+	public void validateTheEditedProducteValues() {
 		String prdtsearch = excelUtil.readStringData("product", 14, 2);
 		productpg.searchForProductValue(prdtsearch);
 		productpg.clickOnProductEditIcon();
@@ -112,7 +111,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 6, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
+	public void validateTheDeleteIcon() {
 		String prdtdelete = excelUtil.readStringData("product", 17, 2);
 		productpg.searchForProductValue(prdtdelete);
 		productpg.clickOnProductDeleteIcon();
@@ -120,6 +119,5 @@ public class ProductPageTest extends AutomationBase {
 		productpg.searchForProductValue(prdtdelete);
 		Assert.assertEquals(productpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 }

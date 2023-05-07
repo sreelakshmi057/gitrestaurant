@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
@@ -58,12 +59,8 @@ public class CustomerPage {
 		actionUtil.clickElement(driver, customerName);
 	}
 
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
-	}
-
 	/**
-	 * This method is to check whether the elements are displayed
+	 * These methods are to check whether the elements are displayed
 	 * 
 	 * @return
 	 */
@@ -119,7 +116,7 @@ public class CustomerPage {
 	 * @param value
 	 */
 	public void searchForCustomerValue(String value) {
-		waitUtil.waitForElementTobeClickable(driver, customerSearch, 5);
+		waitUtil.waitForElementTobeClickable(driver, customerSearch, 15);
 		actionUtil.clickElement(driver, customerSearch);
 		actionUtil.enterValue(driver, customerSearch, value);
 		waitUtil.waitForVisibilityOfElement(driver, customerdelete_SearchResult, 15);
@@ -127,6 +124,7 @@ public class CustomerPage {
 
 	/**
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getCustomerNameFromSearchResult() {
 		return actionUtil.getElementText(driver, customerName_SearchResult);
@@ -145,8 +143,8 @@ public class CustomerPage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the customer values
+	 * 
 	 */
 
 	public void clickOnCustomerEditIcon() {
@@ -159,8 +157,8 @@ public class CustomerPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting waitervalues
+	 * 
 	 */
 	public void clickOnCustomerDeleteIcon() {
 		actionUtil.clickElement(driver, customerDeleteButton);

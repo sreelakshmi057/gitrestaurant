@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -57,7 +58,7 @@ public class WaiterPage {
 
 	public void clickOnAddWaiterButton() {
 		actionUtil.clickElement(driver, addWaiterButton);
-		waitUtil.waitForElementTobeClickable(driver,waiterName, 25);
+		waitUtil.waitForElementTobeClickable(driver, waiterName, 25);
 	}
 
 	/**
@@ -100,10 +101,6 @@ public class WaiterPage {
 		actionUtil.clearText(driver, waiterEmail);
 		actionUtil.enterValue(driver, waiterEmail, value);
 	}
-	
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
-	}
 
 	/**
 	 * This method is to select the dropdown value
@@ -112,13 +109,13 @@ public class WaiterPage {
 	 */
 	public void selectWaiterStoreByVisibleText(String value) {
 		actionUtil.clearText(driver, waiterStore);
-		genericUtil.SelectByVisibleText(driver, waiterStore, value);
+		genericUtil.SelectElementByVisibleText(driver, waiterStore, value);
 	}
 
 	public void clickOnwaiterSubmitButton() {
 		waitUtil.waitForElementTobeClickable(driver, waiterSubmitButton, 15);
 		actionUtil.clickElement(driver, waiterSubmitButton);
-		waitUtil.waitForVisibilityOfElement(driver,waiterPhone_SearchResult, 15);
+		waitUtil.waitForVisibilityOfElement(driver, waiterPhone_SearchResult, 15);
 	}
 
 	/**
@@ -133,8 +130,8 @@ public class WaiterPage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getWaiterNameFromSearchResult() {
 		return actionUtil.getElementText(driver, waiterName_SearchResult);
@@ -151,14 +148,14 @@ public class WaiterPage {
 	public String getWaiterStoreFromSearchResult() {
 		return actionUtil.getElementText(driver, waiterStore_SearchResult);
 	}
-	
+
 	public String getTheSearchResultOfDeletedEntry() {
 		return actionUtil.getElementText(driver, waiterdelete_SearchResult);
 	}
 
 	/**
-	 * 
 	 * Method for editing the waitervalues
+	 * 
 	 */
 
 	public void clickOnWaiterEditIcon() {
@@ -171,8 +168,8 @@ public class WaiterPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting waitervalues
+	 * 
 	 */
 	public void clickOnWaiterDeleteIcon() {
 		actionUtil.clickElement(driver, waiterDeleteButton);

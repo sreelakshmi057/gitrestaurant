@@ -7,53 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class WebActionUtilities {
 	WebDriver driver;
-
-	/**
-	 * this method is used to send inputs
-	 * 
-	 * @param driver
-	 * @param element
-	 * @param name
-	 */
-	public void enterValue(WebDriver driver, WebElement element, String value) {
-		try {
-			element.sendKeys(value);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-	}
-
-	/**
-	 * this method is used to clear the text
-	 * 
-	 * @param driver
-	 * @param element
-	 */
-	public void clearText(WebDriver driver, WebElement element) {
-		try {
-			element.clear();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-	}
-
-	/**
-	 * this method is used to click checkboxes and radio buttons
-	 * 
-	 * @param driver
-	 * @param element
-	 */
-	public void clickElement(WebDriver driver, WebElement element) {
-		try {
-			element.click();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-	}
-
+	
 	/**
 	 * this method is used to submit the form
 	 * 
@@ -64,11 +18,10 @@ public class WebActionUtilities {
 		try {
 			element.submit();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while submitting");
 		}
 	}
-
+	
 	/**
 	 * this method is used to verify that the element is selected
 	 * 
@@ -80,29 +33,11 @@ public class WebActionUtilities {
 		try {
 			flag = element.isSelected();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while checking the element is selected");
 		}
 		return flag;
 	}
-
-	/**
-	 * this method is used to verify that the element is enabled
-	 * 
-	 * @param driver
-	 * @param element
-	 */
-	public boolean isElementEnabled(WebDriver driver, WebElement element) {
-		boolean flag = false;
-		try {
-			flag = element.isEnabled();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		return flag;
-	}
-
+	
 	/**
 	 * this method is used to verify that the element is displayed
 	 * 
@@ -114,12 +49,27 @@ public class WebActionUtilities {
 		try {
 			flag = element.isDisplayed();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while checking the element is displayed");
 		}
 		return flag;
 	}
-
+	
+	/**
+	 * this method is used to verify that the element is enabled
+	 * 
+	 * @param driver
+	 * @param element
+	 */
+	public boolean isElementEnabled(WebDriver driver, WebElement element) {
+		boolean flag = false;
+		try {
+			flag = element.isEnabled();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while checking the element is enabled");
+		}
+		return flag;
+	}
+	
 	/**
 	 * this method returns the text
 	 * 
@@ -139,6 +89,53 @@ public class WebActionUtilities {
 	}
 
 	/**
+	 * this method is used to send inputs
+	 * 
+	 * @param driver
+	 * @param element
+	 * @param name
+	 */
+	public void enterValue(WebDriver driver, WebElement element, String value) {
+		try {
+			element.sendKeys(value);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
+	}
+	
+	/**
+	 * this method is used to return the width and height of the element
+	 * 
+	 * @param driver
+	 * @param element
+	 */
+	public Dimension getElementSize(WebDriver driver, WebElement element) {
+		Dimension size = null;
+		try {
+			size = element.getSize();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while getting element size");
+		}
+		return size;
+	}
+
+	/**
+	 * this method is used to clear the text
+	 * 
+	 * @param driver
+	 * @param element
+	 */
+	public void clearText(WebDriver driver, WebElement element) {
+		try {
+			element.clear();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
+	}
+	
+	/**
 	 * this method is used to return the tag name
 	 * 
 	 * @param driver
@@ -149,10 +146,24 @@ public class WebActionUtilities {
 		try {
 			text = element.getTagName();
 		} catch (Exception e) {
+			throw new RuntimeException("Exception while getting the tagname");
+		}
+		return text;
+	}
+
+	/**
+	 * this method is used to click checkboxes and radio buttons
+	 * 
+	 * @param driver
+	 * @param element
+	 */
+	public void clickElement(WebDriver driver, WebElement element) {
+		try {
+			element.click();
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 		}
-		return text;
 	}
 
 	/**
@@ -166,8 +177,7 @@ public class WebActionUtilities {
 		try {
 			element.getAttribute(attribute);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting attribute");
 		}
 		return text;
 	}
@@ -183,27 +193,9 @@ public class WebActionUtilities {
 		try {
 			text = element.getCssValue(null);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting css value");
 		}
 		return text;
-	}
-
-	/**
-	 * this method is used to return the width and height of the element
-	 * 
-	 * @param driver
-	 * @param element
-	 */
-	public Dimension getElementSize(WebDriver driver, WebElement element) {
-		Dimension size = null;
-		try {
-			size = element.getSize();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-		return size;
 	}
 
 	/**
@@ -218,8 +210,7 @@ public class WebActionUtilities {
 		try {
 			location = element.getLocation();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting element location");
 		}
 		return location;
 	}

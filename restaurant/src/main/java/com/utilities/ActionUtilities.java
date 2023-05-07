@@ -19,8 +19,7 @@ public class ActionUtilities {
 		try {
 			action.moveToElement(element).click().build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing movetoelement and click");
 		}
 	}
 
@@ -34,8 +33,7 @@ public class ActionUtilities {
 		try {
 			action.doubleClick(element).build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing doubleclick");
 		}
 	}
 
@@ -50,8 +48,7 @@ public class ActionUtilities {
 		try {
 			action.clickAndHold(element).release().build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing click and hold");
 		}
 	}
 
@@ -66,8 +63,7 @@ public class ActionUtilities {
 		try {
 			action.click(element).sendKeys(value).build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing click and sendkeys");
 		}
 	}
 
@@ -81,8 +77,7 @@ public class ActionUtilities {
 		try {
 			action.contextClick(element).build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing contextclick");
 		}
 	}
 
@@ -97,8 +92,7 @@ public class ActionUtilities {
 		try {
 			action.dragAndDrop(source, target).build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while performing ddraganddrop");
 		}
 	}
 
@@ -112,8 +106,7 @@ public class ActionUtilities {
 		try {
 			action.moveToElement(element).contextClick().build().perform();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());		
+			throw new RuntimeException("Exception while performing movetoelement and contextclick");
 		}
 	}
 

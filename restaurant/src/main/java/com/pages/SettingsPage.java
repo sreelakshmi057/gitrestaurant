@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -44,7 +45,7 @@ public class SettingsPage {
 	private WebElement submitButton;
 
 	public void clickOnCompanyName() {
-		waitUtil.waitForElementTobeClickable(driver,CompanyName, 15);
+		waitUtil.waitForElementTobeClickable(driver, CompanyName, 15);
 		actionUtil.clickElement(driver, CompanyName);
 	}
 
@@ -86,17 +87,12 @@ public class SettingsPage {
 	public void clickOnSubmitButton() {
 		actionUtil.clickElement(driver, submitButton);
 	}
-	
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
-	}
 
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
 	 * @return
 	 */
-
 	public boolean isCompanyNameDisplayed() {
 		return actionUtil.isElementDisplayed(driver, CompanyName);
 	}

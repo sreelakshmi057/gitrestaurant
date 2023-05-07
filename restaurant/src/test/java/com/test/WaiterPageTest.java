@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -23,10 +22,10 @@ public class WaiterPageTest extends AutomationBase {
 	WaiterPage waiterpg;
 	Properties prop;
 	HomePage homepg;
-	PropertyUtilities propUtil = new PropertyUtilities();
+	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -38,7 +37,6 @@ public class WaiterPageTest extends AutomationBase {
 	@Test(priority = 11, enabled = true, groups = { "smoke" })
 	public void validateAddWaiterPageHasElementsDisplayed() {
 		waiterpg.clickOnAddWaiterButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(waiterpg.isWaiterNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(waiterpg.isWaiterPhoneDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -57,17 +55,12 @@ public class WaiterPageTest extends AutomationBase {
 		waiterpg.selectWaiterStoreByVisibleText(store);
 		waiterpg.clickOnwaiterSubmitButton();
 		waiterpg.searchForStoreValue(name);
-
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN", "Failure Message: WaiterName not displayed");
-		soft.assertEquals(waiterpg.getWaiterPhoneFromSearchResult(), "1234567890",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), "aan@gmail.com",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(waiterpg.getWaiterStoreFromSearchResult(), "MNC",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterPhoneFromSearchResult(), "1234567890", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), "aan@gmail.com", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterStoreFromSearchResult(), "MNC", AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 13, enabled = true, dataProvider = "dataSupplierWaiterEdit", dataProviderClass = DataSupplier.class)
@@ -79,16 +72,11 @@ public class WaiterPageTest extends AutomationBase {
 		waiterpg.selectWaiterStoreByVisibleText(store);
 		waiterpg.clickOnWaiterEditSubmitButton();
 		waiterpg.searchForStoreValue(phone);
-
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(waiterpg.getWaiterPhoneFromSearchResult(), "1452367895",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), "aan@gmail.com",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(waiterpg.getWaiterStoreFromSearchResult(), "MNC",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterNameFromSearchResult(), "AAN", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterPhoneFromSearchResult(), "1452367895", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), "aan@gmail.com", AutomationConstants.errorMessage);
+		soft.assertEquals(waiterpg.getWaiterStoreFromSearchResult(), "MNC", AutomationConstants.errorMessage);
 		soft.assertAll();
 	}
 
@@ -98,10 +86,8 @@ public class WaiterPageTest extends AutomationBase {
 		waiterpg.clickOnWaiterDeleteIcon();
 		waiterpg.clickOnWaiterDeleteConfirmMessage();
 		waiterpg.searchForStoreValue(phone);
-
-		Assert.assertEquals(waiterpg.getTheSearchResultOfDeletedEntry(),  AutomationConstants.errorMessage,
+		Assert.assertEquals(waiterpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 
 }

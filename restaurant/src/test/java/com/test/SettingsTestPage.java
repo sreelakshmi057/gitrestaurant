@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -24,7 +23,7 @@ public class SettingsTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun(){
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();

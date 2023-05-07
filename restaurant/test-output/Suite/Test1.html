@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu May 04 19:08:12 IST 2023</td>
+<td>Started on:</td><td>Sun May 07 12:35:43 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>7 seconds (7175 ms)</td>
+<tr><td>Total time:</td><td>8 seconds (8328 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,19 +77,20 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='com.test.LoginPageTest.validateLoginPage()'><b>validateLoginPage</b><br>Test class: com.test.LoginPageTest</td>
-<td><div><pre>java.lang.AssertionError: Failure Message:Login failed expected [true] but found [false]
-	at com.test.LoginPageTest.validateLoginPage(LoginPageTest.java:32)
+<td><div><pre>java.lang.RuntimeException: Exception while checking the element is displayed
+	at com.utilities.WebActionUtilities.isElementDisplayed(WebActionUtilities.java:52)
+	at com.pages.HomePage.isProductLinkDisplayed(HomePage.java:70)
+	at com.test.LoginPageTest.validateLoginPage(LoginPageTest.java:30)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-... Removed 20 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace593906989", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace593906989'><pre>java.lang.AssertionError: Failure Message:Login failed expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:110)
-	at org.testng.Assert.failNotEquals(Assert.java:1577)
-	at org.testng.Assert.assertTrue(Assert.java:56)
-	at com.test.LoginPageTest.validateLoginPage(LoginPageTest.java:32)
+... Removed 17 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace604922961", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace604922961'><pre>java.lang.RuntimeException: Exception while checking the element is displayed
+	at com.utilities.WebActionUtilities.isElementDisplayed(WebActionUtilities.java:52)
+	at com.pages.HomePage.isProductLinkDisplayed(HomePage.java:70)
+	at com.test.LoginPageTest.validateLoginPage(LoginPageTest.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -114,7 +115,7 @@ function toggleAllBoxes() {
 	at java.base/java.lang.Thread.run(Thread.java:833)
 </pre></div></td>
 <td>0</td>
-<td>com.test.LoginPageTest@55a147cc</td></tr>
+<td>com.test.LoginPageTest@1a942c18</td></tr>
 </table><p>
 </body>
 </html>

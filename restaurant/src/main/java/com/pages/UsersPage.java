@@ -116,8 +116,8 @@ public class UsersPage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getUserNameFromSearchResult() {
 		return actionUtil.getElementText(driver, userName_searchResult);

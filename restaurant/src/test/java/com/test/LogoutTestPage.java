@@ -36,7 +36,6 @@ public class LogoutTestPage extends AutomationBase {
 	@Test(priority = 37, enabled = true)
 	public void validateLogoutPage() {
 		logoutpg.clickOnLogout();
-
 		Assert.assertTrue(logoutpg.isLoginButtonDisplayed(), AutomationConstants.logoutCheck);
 	}
 

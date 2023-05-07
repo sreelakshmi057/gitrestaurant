@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="1" total="4" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-05-06T12:13:40 IST" name="Suite" finished-at="2023-05-06T12:14:02 IST" duration-ms="22322">
+  <suite started-at="2023-05-07T12:38:10 IST" name="Suite" finished-at="2023-05-07T12:38:33 IST" duration-ms="23148">
     <groups>
     </groups>
-    <test started-at="2023-05-06T12:13:40 IST" name="Test" finished-at="2023-05-06T12:14:02 IST" duration-ms="22322">
-      <class name="com.test.StorePageTest">
-        <test-method is-config="true" signature="preLaunch(java.lang.String)[pri:0, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:40 IST" name="preLaunch" finished-at="2023-05-06T12:13:44 IST" duration-ms="4634" status="PASS">
+    <test started-at="2023-05-07T12:38:10 IST" name="Test" finished-at="2023-05-07T12:38:33 IST" duration-ms="23148">
+      <class name="com.test.ExpensePageTest">
+        <test-method is-config="true" signature="preLaunch(java.lang.String)[pri:0, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:10 IST" name="preLaunch" finished-at="2023-05-07T12:38:18 IST" duration-ms="7164" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -18,31 +18,31 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- preLaunch -->
-        <test-method is-config="true" signature="preRun()[pri:0, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:44 IST" name="preRun" finished-at="2023-05-06T12:13:50 IST" duration-ms="5093" status="PASS">
+        <test-method is-config="true" signature="prerun()[pri:0, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:18 IST" name="prerun" finished-at="2023-05-07T12:38:23 IST" duration-ms="5282" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- preRun -->
-        <test-method signature="validateEnteredStoreValues()[pri:4, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:50 IST" name="validateEnteredStoreValues" finished-at="2023-05-06T12:13:54 IST" duration-ms="4453" status="PASS">
+        </test-method> <!-- prerun -->
+        <test-method signature="validateAddExpensePageHasElementsDisplayed()[pri:23, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:23 IST" name="validateAddExpensePageHasElementsDisplayed" finished-at="2023-05-07T12:38:24 IST" duration-ms="972" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateEnteredStoreValues -->
-        <test-method is-config="true" signature="preRun()[pri:0, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:54 IST" name="preRun" finished-at="2023-05-06T12:13:55 IST" duration-ms="986" status="PASS">
+        </test-method> <!-- validateAddExpensePageHasElementsDisplayed -->
+        <test-method is-config="true" signature="prerun()[pri:0, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:24 IST" name="prerun" finished-at="2023-05-07T12:38:25 IST" duration-ms="1155" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- preRun -->
-        <test-method signature="validateTheEditedStoreValues()[pri:5, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:55 IST" name="validateTheEditedStoreValues" finished-at="2023-05-06T12:13:58 IST" duration-ms="3264" status="PASS">
+        </test-method> <!-- prerun -->
+        <test-method signature="validateEnteredExpenseValues()[pri:24, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:25 IST" name="validateEnteredExpenseValues" finished-at="2023-05-07T12:38:29 IST" duration-ms="4024" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEnteredExpenseValues -->
+        <test-method is-config="true" signature="prerun()[pri:0, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:29 IST" name="prerun" finished-at="2023-05-07T12:38:30 IST" duration-ms="749" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- prerun -->
+        <test-method signature="validateTheEditedStoreValues()[pri:25, instance:com.test.ExpensePageTest@d86a6f]" started-at="2023-05-07T12:38:30 IST" name="validateTheEditedStoreValues" finished-at="2023-05-07T12:38:33 IST" duration-ms="3468" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateTheEditedStoreValues -->
-        <test-method is-config="true" signature="preRun()[pri:0, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:58 IST" name="preRun" finished-at="2023-05-06T12:13:59 IST" duration-ms="1020" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- preRun -->
-        <test-method signature="validateTheDeleteIcon()[pri:6, instance:com.test.StorePageTest@5ab956d7]" started-at="2023-05-06T12:13:59 IST" name="validateTheDeleteIcon" finished-at="2023-05-06T12:14:02 IST" duration-ms="2575" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateTheDeleteIcon -->
-      </class> <!-- com.test.StorePageTest -->
+      </class> <!-- com.test.ExpensePageTest -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

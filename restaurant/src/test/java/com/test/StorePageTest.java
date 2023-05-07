@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,7 @@ public class StorePageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void preRun() throws IOException {
+	public void preRun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -37,8 +36,8 @@ public class StorePageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 3, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() throws Exception {
+	@Test(priority = 7, enabled = true)
+	public void validateAddStorePageHasElementsDisplayed() {
 		storepg.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(storepg.isStoreNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -49,8 +48,8 @@ public class StorePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 4, enabled = true)
-	public void validateEnteredStoreValues() throws Exception {
+	@Test(priority = 8, enabled = true)
+	public void validateEnteredStoreValues() {
 		storepg.clickOnAddStoreButton();
 		String storeName = excelUtil.readStringData("store", 2, 2);
 		storepg.enterValueToStoreName(storeName);
@@ -77,8 +76,8 @@ public class StorePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 5, enabled = true)
-	public void validateTheEditedStoreValues() throws Exception {
+	@Test(priority = 9, enabled = true)
+	public void validateTheEditedStoreValues() {
 		String storeName = excelUtil.readStringData("store", 11, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnEditIcon();
@@ -95,8 +94,8 @@ public class StorePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 6, enabled = true)
-	public void validateTheDeleteIcon() throws Exception {
+	@Test(priority = 10, enabled = true)
+	public void validateTheDeleteIcon() {
 		String storeName = excelUtil.readStringData("store", 15, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnDeleteIcon();

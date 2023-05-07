@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
@@ -112,7 +113,6 @@ public class StorePage {
 	 * 
 	 * @return
 	 */
-
 	public boolean isStoreNameDisplayed() {
 		return actionUtil.isElementDisplayed(driver, storeName);
 	}
@@ -138,7 +138,6 @@ public class StorePage {
 	 * 
 	 * @param value
 	 */
-
 	public void searchForStoreValue(String value) {
 		waitUtil.waitForElementTobeClickable(driver, storeSearch, 10);
 		actionUtil.clickElement(driver, storeSearch);
@@ -152,7 +151,6 @@ public class StorePage {
 	 * @param value
 	 * @return
 	 */
-
 	public String getStoreNameFromSearch() {
 		return actionUtil.getElementText(driver, storeName_searchResult);
 	}
@@ -179,6 +177,7 @@ public class StorePage {
 
 	/**
 	 * Method for editing the storevalues
+	 * 
 	 */
 
 	public void clickOnEditIcon() {
@@ -191,6 +190,7 @@ public class StorePage {
 
 	/**
 	 * Method for deleting storevalues
+	 * 
 	 */
 	public void clickOnDeleteIcon() {
 		actionUtil.clickElement(driver, storeDeleteButton);

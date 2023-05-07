@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -57,11 +58,7 @@ public class SupplierPage {
 
 	public void clickOnAddSupplierButton() {
 		actionUtil.clickElement(driver, addSupplierButton);
-		waitUtil.waitForElementTobeClickable(driver,supplierName, 15);
-	}
-	
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
+		waitUtil.waitForElementTobeClickable(driver, supplierName, 15);
 	}
 
 	/**
@@ -127,8 +124,8 @@ public class SupplierPage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getSupplierNameFromSearchResult() {
 		return actionUtil.getElementText(driver, supplierName_SearchResult);
@@ -147,10 +144,9 @@ public class SupplierPage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the customer values
+	 * 
 	 */
-
 	public void clickOnSupplierEditIcon() {
 		actionUtil.clickElement(driver, supplierEditButton);
 	}
@@ -161,8 +157,8 @@ public class SupplierPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting waitervalues
+	 * 
 	 */
 	public void clickOnSupplierDeleteIcon() {
 		actionUtil.clickElement(driver, supplierDeleteButton);

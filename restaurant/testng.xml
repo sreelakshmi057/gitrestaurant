@@ -7,19 +7,19 @@
 	<test thread-count="1" name="Test">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<!--<class name="com.test.LoginPageTest" />-->
-			<!--<class name="com.test.HomePageTest" />-->
-			<!--<class name="com.test.ProductPageTest" />-->
+			<!--<class name="com.test.LoginPageTest" />
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.ProductPageTest" />
 			<class name="com.test.StorePageTest" />
-			<!--<class name="com.test.WaiterPageTest" />-->
-			<!--<class name="com.test.CustomerPageTest" />-->
-			<!--<class name="com.test.SupplierPageTest" />-->
-			<!--<class name="com.test.ExpensePageTest" />-->
-			<!--<class name="com.test.ProductInCategoriesTestPage" />-->
-			<!--<class name="com.test.ExpenseInCategoriesTestPage" />-->
-			<!--<class name="com.test.SettingsTestPage" />-->
-			<!--<class name="com.test.UsersPageTest" />-->
-			<!--<class name="com.test.LogoutTestPage" />-->
+			<class name="com.test.WaiterPageTest" />
+			<class name="com.test.CustomerPageTest" />
+			<class name="com.test.SupplierPageTest" />-->
+			<class name="com.test.ExpensePageTest" />
+			<!--<class name="com.test.ProductInCategoriesTestPage" />
+			<class name="com.test.ExpenseInCategoriesTestPage" />
+			<class name="com.test.SettingsTestPage" />
+			<class name="com.test.UsersPageTest" />
+			<class name="com.test.LogoutTestPage" />-->
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

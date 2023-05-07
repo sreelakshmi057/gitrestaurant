@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -21,14 +20,13 @@ public class LoginPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@Test(priority = 1, enabled = true)
-	public void validateLoginPage() throws IOException {
+	public void validateLoginPage() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		homepg = new HomePage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		loginpg.performLogin(prop.getProperty("username"), prop.getProperty("password"));
-
 		Assert.assertTrue(homepg.isProductLinkDisplayed(), AutomationConstants.loginCheck);
 	}
 

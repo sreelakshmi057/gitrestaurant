@@ -18,6 +18,54 @@ import com.google.common.io.Files;
 public class GenericUtilities {
 	WebDriver driver;
 	Select select;
+	
+	/**
+	 * this method is used to deselect the drop down element by its value
+	 * 
+	 * @param driver
+	 * @param element
+	 * @param value
+	 */
+	public void deSelectElementByValue(WebDriver driver, WebElement element, String value) {
+		select = new Select(element);
+		try {
+			select.deselectByValue(value);
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while deselecting element by value");
+		}
+	}
+	
+	/**
+	 * this method is used to deselect the drop down element by its index
+	 * 
+	 * @param driver
+	 * @param element
+	 * @param index
+	 */
+	public void DeSelectElementByIndex(WebDriver driver, WebElement element, int index) {
+		select = new Select(element);
+		try {
+			select.deselectByIndex(index);
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while deselecting element by index");
+		}
+	}
+	
+	/**
+	 * this method is used to deselect the option by visible text
+	 * 
+	 * @param driver
+	 * @param element
+	 * @param text
+	 */
+	public void deSelectElementByVisibleText(WebDriver driver, WebElement element, String text) {
+		select = new Select(element);
+		try {
+			select.deselectByVisibleText(text);
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while deselecting element by visibletext");
+		}
+	}
 
 	/**
 	 * this method is to select the element by its value
@@ -25,7 +73,6 @@ public class GenericUtilities {
 	 * @param driver
 	 * @param element
 	 * @param value
-	 * 
 	 */
 	public void SelectElementByValue(WebDriver driver, WebElement element, String value) {
 		select = new Select(element);
@@ -60,9 +107,8 @@ public class GenericUtilities {
 	 * @param driver
 	 * @param element
 	 * @param text
-	 *
 	 */
-	public void SelectByVisibleText(WebDriver driver, WebElement element, String text) {
+	public void SelectElementByVisibleText(WebDriver driver, WebElement element, String text) {
 		select = new Select(element);
 		try {
 			select.selectByVisibleText(text);
@@ -77,7 +123,6 @@ public class GenericUtilities {
 	 * 
 	 * @param driver
 	 * @param element
-	 * 
 	 */
 	public List<WebElement> GetOptionsOfElement(WebDriver driver, WebElement element) {
 		List<WebElement> option = null;
@@ -85,8 +130,7 @@ public class GenericUtilities {
 		try {
 			option = select.getOptions();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting options");
 		}
 		return option;
 	}
@@ -104,8 +148,7 @@ public class GenericUtilities {
 		try {
 			option = select.getAllSelectedOptions();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting all selected options");
 		}
 		return option;
 	}
@@ -115,7 +158,6 @@ public class GenericUtilities {
 	 * 
 	 * @param driver
 	 * @param element
-	 * 
 	 */
 	public String GetFirstSelectedOptionOfElement(WebDriver driver, WebElement element) {
 		String option = null;
@@ -123,79 +165,23 @@ public class GenericUtilities {
 		try {
 			option = select.getFirstSelectedOption().getText();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting first selected option");
 		}
 		return option;
-	}
-
-	/**
-	 * this method is used to deselect the drop down element by its value
-	 * 
-	 * @param driver
-	 * @param element
-	 * @param value
-	 * 
-	 */
-	public void deSelectElementByValue(WebDriver driver, WebElement element, String value) {
-		select = new Select(element);
-		try {
-			select.deselectByValue(value);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-	}
-
-	/**
-	 * this method is used to deselect the drop down element by its index
-	 * 
-	 * @param driver
-	 * @param element
-	 * @param index
-	 */
-	public void DeSelectElementByIndex(WebDriver driver, WebElement element, int index) {
-		select = new Select(element);
-		try {
-			select.deselectByIndex(index);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
-	}
-
-	/**
-	 * this method is used to deselect the option by visible text
-	 * 
-	 * @param driver
-	 * @param element
-	 * @param text
-	 *
-	 */
-	public void deSelectElementByVisibleText(WebDriver driver, WebElement element, String text) {
-		select = new Select(element);
-		try {
-			select.deselectByVisibleText(text);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		}
 	}
 
 	/**
 	 * this method is used to deselect all the options in the drop down
 	 * 
 	 * @param driver
-	 * @param element
-	 * 
+	 * @param element 
 	 */
 	public void deSelectAllTheElement(WebDriver driver, WebElement element) {
 		select = new Select(element);
 		try {
 			select.deselectAll();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while deselecting all elements");
 		}
 	}
 
@@ -203,7 +189,6 @@ public class GenericUtilities {
 	 * this method is used to capture screenshot
 	 * 
 	 * @param driver
-	 * 
 	 */
 
 	public void captureScreenShot(WebDriver driver) {
@@ -214,12 +199,8 @@ public class GenericUtilities {
 			File DestFile = new File("C:\\Users\\HP\\eclipse-workspace\\restaurant\\src\\test\\resources\\screenshot\\"
 					+ screenshotfilename + ".png");
 			Files.copy(SrcFile, DestFile);
-		} catch (WebDriverException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+		} catch (WebDriverException|IOException e) {
+			throw new RuntimeException("Exception while capturing screenshot");
 		}
 	}
 
@@ -242,8 +223,7 @@ public class GenericUtilities {
 				break;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while handling alert");
 		}
 	}
 }

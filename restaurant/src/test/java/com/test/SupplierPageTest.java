@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +17,6 @@ import com.pages.SupplierPage;
 import com.utilities.PropertyUtilities;
 
 public class SupplierPageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	SupplierPage supplierpg;
@@ -27,7 +25,7 @@ public class SupplierPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -39,7 +37,6 @@ public class SupplierPageTest extends AutomationBase {
 	@Test(priority = 19, enabled = true)
 	public void validateAddSupplierPageHasElementsDisplayed() {
 		supplierpg.clickOnAddSupplierButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(supplierpg.isSupplierNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(supplierpg.isSupplierPhoneDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -57,7 +54,6 @@ public class SupplierPageTest extends AutomationBase {
 		supplierpg.enterValueToSupplierDescription(description);
 		supplierpg.clickOnSupplierSubmitButton();
 		supplierpg.searchForStoreValue(name);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(supplierpg.getSupplierNameFromSearchResult(), "AANNA", AutomationConstants.errorMessage);
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), "1478529631",
@@ -77,7 +73,6 @@ public class SupplierPageTest extends AutomationBase {
 		supplierpg.enterValueToSupplierDescription(description);
 		supplierpg.clickOnSupplierEditSubmitButton();
 		supplierpg.searchForStoreValue(mail);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(supplierpg.getSupplierNameFromSearchResult(), "AANNA", AutomationConstants.errorMessage);
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), "8597461238",
@@ -93,10 +88,8 @@ public class SupplierPageTest extends AutomationBase {
 		supplierpg.clickOnSupplierDeleteIcon();
 		supplierpg.clickOnSupplierDeleteConfirmMessage();
 		supplierpg.searchForStoreValue(phone);
-
 		Assert.assertEquals(supplierpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 
 }

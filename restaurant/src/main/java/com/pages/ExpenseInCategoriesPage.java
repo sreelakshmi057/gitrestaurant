@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
@@ -90,8 +91,8 @@ public class ExpenseInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getExpenseCategoryNameFromSearchResult() {
 		return actionUtil.getElementText(driver, categoryName_SearchResult);
@@ -102,8 +103,8 @@ public class ExpenseInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the categoryproductvalues
+	 * 
 	 */
 
 	public void clickOnProductEditIcon() {
@@ -116,8 +117,8 @@ public class ExpenseInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting categoryproductvalues
+	 * 
 	 */
 	public void clickOnProductDeleteIcon() {
 		actionUtil.clickElement(driver, expenseDeleteButton);

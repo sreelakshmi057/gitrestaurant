@@ -11,7 +11,11 @@ public class WebbrowserUtilities {
 	 * @param Url
 	 */
 	public void launchUrl(WebDriver driver, String Url) {
+		try {
 			driver.get(Url);
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while launching url");
+		}
 	}
 
 	/**
@@ -25,8 +29,7 @@ public class WebbrowserUtilities {
 		try {
 			title = driver.getTitle();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting the page title");
 		}
 		return title;
 	}
@@ -42,8 +45,7 @@ public class WebbrowserUtilities {
 		try {
 			current = driver.getCurrentUrl();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting the current url");
 		}
 		return current;
 	}
@@ -59,8 +61,7 @@ public class WebbrowserUtilities {
 		try {
 			page = driver.getPageSource();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting the page source");
 		}
 		return page;
 	}
@@ -74,8 +75,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.navigate().forward();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while navigating to the next page");
 		}
 	}
 
@@ -88,8 +88,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.navigate().back();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while navigating to the previous page");
 		}
 	}
 
@@ -102,8 +101,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.navigate().refresh();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while refreshing the page");
 		}
 	}
 
@@ -113,7 +111,11 @@ public class WebbrowserUtilities {
 	 * @param driver
 	 */
 	public void browserMaximize(WebDriver driver) {
+		try {
 			driver.manage().window().maximize();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while maximizing the page");
+		}
 	}
 
 	/**
@@ -125,8 +127,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.manage().window().minimize();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while minimizing the page");
 		}
 	}
 
@@ -139,8 +140,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.manage().window().fullscreen();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while getting fullscreen");
 		}
 	}
 
@@ -153,8 +153,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.close();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while closing the page");
 		}
 	}
 
@@ -167,8 +166,7 @@ public class WebbrowserUtilities {
 		try {
 			driver.quit();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
+			throw new RuntimeException("Exception while quiting the page");
 		}
 	}
 }

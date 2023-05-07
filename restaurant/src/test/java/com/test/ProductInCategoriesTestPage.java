@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +17,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ProductInCategoriesTestPage extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	ProductInCategoriesPage categoriespg;
@@ -28,7 +26,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	ExcelUtilities excelUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -41,20 +39,18 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	@Test(priority = 26, enabled = true)
 	public void validateAddProductInCategoryPageHasElementsDisplayed() {
 		categoriespg.clickOnAddCategoryButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(categoriespg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
 
 	@Test(priority = 27, enabled = true)
-	public void validateEnteredProductValues() throws IOException {
+	public void validateEnteredProductValues() {
 		categoriespg.clickOnAddCategoryButton();
 		String exp_name = excelUtil.readStringData("prdt_category", 2, 2);
 		categoriespg.enterValueToCategoryName(exp_name);
 		categoriespg.clickOnCategorySubmitButton();
 		categoriespg.searchForCategoryProductValue(exp_name);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), "APPLE_SREE",
 				"Failure Message: No matching records found");
@@ -62,7 +58,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 28, enabled = true)
-	public void validateTheEditedProductValues() throws IOException {
+	public void validateTheEditedProductValues() {
 		String exp_searchname = excelUtil.readStringData("prdt_category", 5, 2);
 		categoriespg.searchForCategoryProductValue(exp_searchname);
 		categoriespg.clickOnProductEditIcon();
@@ -70,24 +66,20 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		categoriespg.enterValueToCategoryName(exp_editname);
 		categoriespg.clickOnProductEditSubmitButton();
 		categoriespg.searchForCategoryProductValue(exp_editname);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), "APPLE1_SREE",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 29, enabled = true)
-	public void validateTheDeleteIcon() throws IOException {
+	public void validateTheDeleteIcon() {
 		String exp_searchname = excelUtil.readStringData("prdt_category", 9, 2);
 		categoriespg.searchForCategoryProductValue(exp_searchname);
 		categoriespg.clickOnProductDeleteIcon();
 		categoriespg.clickOnProductDeleteConfirmMessage();
 		categoriespg.searchForCategoryProductValue(exp_searchname);
-
 		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 }

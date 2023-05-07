@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +17,6 @@ import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
 
 public class CustomerPageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	CustomerPage customerpg;
@@ -27,7 +25,7 @@ public class CustomerPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -63,7 +61,6 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 17, enabled = true, dataProvider = "dataSupplierCustomerEdit", dataProviderClass = DataSupplier.class)
@@ -92,7 +89,6 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.searchForCustomerValue(phone);
 		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 
 }

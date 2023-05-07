@@ -17,7 +17,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpensePageTest extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	ExpensePage expensepg;
@@ -27,7 +26,7 @@ public class ExpensePageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun(){
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -37,10 +36,9 @@ public class ExpensePageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 23, enabled = false)
+	@Test(priority = 23, enabled = true)
 	public void validateAddExpensePageHasElementsDisplayed() {
 		expensepg.clickOnAddExpenseButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expensepg.isExpenseDateDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(expensepg.isExpenseReferenceDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -52,7 +50,7 @@ public class ExpensePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 24, enabled = true)
-	public void validateEnteredExpenseValues() throws IOException {
+	public void validateEnteredExpenseValues(){
 		expensepg.clickOnAddExpenseButton();
 		String exp_date = excelUtil.readStringData("expense", 2, 2);
 		expensepg.enterValueToExpenseDate(exp_date);
@@ -68,7 +66,6 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.enterValueToExpenseDescription(exp_description);
 		expensepg.clickOnExpenseSubmitButton();
 		expensepg.searchForExpenseValue(exp_ref);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceA",
@@ -79,7 +76,7 @@ public class ExpensePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 25, enabled = true)
-	public void validateTheEditedStoreValues() throws IOException {
+	public void validateTheEditedStoreValues(){
 		String exp_searchref = excelUtil.readStringData("expense", 10, 2);
 		expensepg.searchForExpenseValue(exp_searchref);
 		expensepg.clickOnExpenseEditIcon();
@@ -89,7 +86,6 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.enterValueToExpenseAmount(exp_editamt);
 		expensepg.clickOnExpenseEditSubmitButton();
 		expensepg.searchForExpenseValue(exp_editref);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceB",

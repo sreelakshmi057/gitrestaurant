@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +17,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpenseInCategoriesTestPage extends AutomationBase {
-
 	WebDriver driver;
 	LoginPage loginpg;
 	ExpenseInCategoriesPage cat_expensepg;
@@ -28,7 +26,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	ExcelUtilities excelUtil;
 
 	@BeforeMethod
-	public void prerun() throws IOException {
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -38,23 +36,21 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 30, enabled = false)
+	@Test(priority = 30, enabled = true)
 	public void validateAddExpensePageHasElementsDisplayed() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(cat_expensepg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
 
 	@Test(priority = 31, enabled = true)
-	public void validateEnteredProductValues() throws IOException {
+	public void validateEnteredProductValues() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		String cat_name = excelUtil.readStringData("category", 2, 2);
 		cat_expensepg.enterValueToCategoryName(cat_name);
 		cat_expensepg.clickOnCategorySubmitButton();
 		cat_expensepg.searchForCategoryProductValue(cat_name);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_EXPENSE",
 				"Failure Message: No matching records found");
@@ -62,7 +58,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 32, enabled = true)
-	public void validateTheEditedStoreValues() throws IOException {
+	public void validateTheEditedStoreValues() {
 		String cat_search = excelUtil.readStringData("category", 5, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_search);
 		cat_expensepg.clickOnProductEditIcon();
@@ -70,25 +66,21 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg.enterValueToCategoryName(cat_editname);
 		cat_expensepg.clickOnProductEditSubmitButton();
 		cat_expensepg.searchForCategoryProductValue(cat_editname);
-
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_SREE_EXPENSE",
 				AutomationConstants.errorMessage);
 		soft.assertAll();
-
 	}
 
 	@Test(priority = 33, enabled = true)
-	public void validateTheDeleteIcon() throws IOException {
+	public void validateTheDeleteIcon() {
 		String cat_deletesearch = excelUtil.readStringData("category", 9, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		cat_expensepg.clickOnProductDeleteIcon();
 		cat_expensepg.clickOnProductDeleteConfirmMessage();
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
-
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-
 	}
 
 }

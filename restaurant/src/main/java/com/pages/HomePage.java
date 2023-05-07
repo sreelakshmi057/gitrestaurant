@@ -115,7 +115,7 @@ public class HomePage {
 		boolean flag = actionUtil.isElementDisplayed(driver, logout);
 		return flag;
 	}
-	
+
 	public void implementImplicitWait() {
 		waitUtil.implicitWait(driver, 5);
 	}

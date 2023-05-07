@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
 
@@ -25,14 +26,10 @@ public class LogoutPage {
 
 	public void clickOnLogout() {
 		actionUtil.clickElement(driver, logOut);
-		waitUtil.waitForElementTobeClickable(driver,loginButton, 15);
+		waitUtil.waitForElementTobeClickable(driver, loginButton, 15);
 	}
 
 	public Boolean isLoginButtonDisplayed() {
 		return actionUtil.isElementDisplayed(driver, loginButton);
-	}
-	
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
 	}
 }

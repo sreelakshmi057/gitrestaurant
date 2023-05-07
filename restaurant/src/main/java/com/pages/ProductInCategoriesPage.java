@@ -46,12 +46,8 @@ public class ProductInCategoriesPage {
 
 	public void clickOnAddCategoryButton() {
 		actionUtil.clickElement(driver, addCategoryButton);
-		waitUtil.waitForElementTobeClickable(driver,categoryName, 15);
+		waitUtil.waitForElementTobeClickable(driver, categoryName, 15);
 		actionUtil.clickElement(driver, categoryName);
-	}
-
-	public void implementImplicitWait() {
-		waitUtil.implicitWait(driver, 5);
 	}
 
 	/**
@@ -96,8 +92,8 @@ public class ProductInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * This method is to get text of search result
+	 * 
 	 */
 	public String getCategoryProductNameFromSearchResult() {
 		return actionUtil.getElementText(driver, categoryName_SearchResult);
@@ -108,8 +104,8 @@ public class ProductInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * Method for editing the categoryproductvalues
+	 * 
 	 */
 
 	public void clickOnProductEditIcon() {
@@ -122,8 +118,8 @@ public class ProductInCategoriesPage {
 	}
 
 	/**
-	 * 
 	 * Method for deleting categoryproductvalues
+	 * 
 	 */
 	public void clickOnProductDeleteIcon() {
 		actionUtil.clickElement(driver, categoryDeleteButton);
