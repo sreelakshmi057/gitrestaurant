@@ -45,7 +45,7 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 16, enabled = true, dataProvider = "dataSupplierCustomer", dataProviderClass = DataSupplier.class)
+	@Test(priority = 16, enabled = true, dataProvider = "customer", dataProviderClass = DataSupplier.class)
 	public void validateTheEnteredValuesInCustomersPage(String name, String phone, String mail, String discount) {
 		customerpg.clickOnAddCustomerButton();
 		customerpg.enterValueToCustomerName(name);
@@ -63,7 +63,7 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 17, enabled = true, dataProvider = "dataSupplierCustomerEdit", dataProviderClass = DataSupplier.class)
+	@Test(priority = 17, enabled = true, dataProvider = "customeredit", dataProviderClass = DataSupplier.class)
 	public void validateTheEditedCustomerValues(String name, String phone, String mail, String discount) {
 		customerpg.searchForCustomerValue(name);
 		customerpg.clickOnCustomerEditIcon();
@@ -81,7 +81,7 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 18, enabled = true, dataProvider = "dataSupplierCustomerDelete", dataProviderClass = DataSupplier.class)
+	@Test(priority = 18, enabled = true, dataProvider = "customerdelete", dataProviderClass = DataSupplier.class)
 	public void validateTheDeleteIcon(String phone) {
 		customerpg.searchForCustomerValue(phone);
 		customerpg.clickOnCustomerDeleteIcon();

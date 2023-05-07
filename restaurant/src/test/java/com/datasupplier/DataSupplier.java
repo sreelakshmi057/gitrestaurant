@@ -4,9 +4,8 @@ import org.testng.annotations.DataProvider;
 
 public class DataSupplier {
 
-	@DataProvider
+	@DataProvider(name="waiter")
 	public Object[][] dataSupplierWaiter() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AAN";
 		data[0][1] = "1234567890";
@@ -19,9 +18,8 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="waiteredit")
 	public Object[][] dataSupplierWaiterEdit() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AAN";
 		data[0][1] = "1452367895";
@@ -34,16 +32,14 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="waiterdelete")
 	public Object[] dataSupplierWaiterDelete() {
-
 		Object[] data = new Object[] {"1452367895"};
 		return data;
 	}
 	
-	@DataProvider
+	@DataProvider(name="customer")
 	public Object[][] dataSupplierCustomer() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AAC";
 		data[0][1] = "1234567567";
@@ -56,9 +52,8 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="customeredit")
 	public Object[][] dataSupplierCustomerEdit() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AAC";
 		data[0][1] = "7888888888";
@@ -71,16 +66,14 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="customerdelete")
 	public Object[] dataSupplierCustomerDelete() {
-
 		Object[] data = new Object[] {"7888888888"};
 		return data;
 	}
 	
-	@DataProvider
+	@DataProvider(name="supplier")
 	public Object[][] dataSupplier() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AANNA";
 		data[0][1] = "1478529631";
@@ -93,9 +86,8 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="supplieredit")
 	public Object[][] dataSupplierEdit() {
-
 		Object[][] data = new Object[2][4];
 		data[0][0] = "AANNA";
 		data[0][1] = "8597461238";
@@ -108,9 +100,8 @@ public class DataSupplier {
 		return data;
 	}
 
-	@DataProvider
+	@DataProvider(name="supplierdelete")
 	public Object[] dataSupplierDelete() {
-
 		Object[] data = new Object[] {"8597461238"};
 		return data;
 	}

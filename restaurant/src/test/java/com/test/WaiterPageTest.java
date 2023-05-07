@@ -46,7 +46,7 @@ public class WaiterPageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 12, enabled = true, dataProvider = "dataSupplierWaiter", dataProviderClass = DataSupplier.class)
+	@Test(priority = 12, enabled = true, dataProvider = "waiter", dataProviderClass = DataSupplier.class)
 	public void validateTheEnteredValuesInWaiterPage(String name, String phone, String mail, String store) {
 		waiterpg.clickOnAddWaiterButton();
 		waiterpg.enterValueToWaiterName(name);
@@ -63,7 +63,7 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 13, enabled = true, dataProvider = "dataSupplierWaiterEdit", dataProviderClass = DataSupplier.class)
+	@Test(priority = 13, enabled = true, dataProvider = "waiteredit", dataProviderClass = DataSupplier.class)
 	public void validateTheEditedWaiterValues(String name, String phone, String mail, String store) {
 		waiterpg.searchForStoreValue(name);
 		waiterpg.clickOnWaiterEditIcon();
@@ -80,7 +80,7 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 14, enabled = true, dataProvider = "dataSupplierWaiterDelete", dataProviderClass = DataSupplier.class)
+	@Test(priority = 14, enabled = true, dataProvider = "waiterdelete", dataProviderClass = DataSupplier.class)
 	public void validateTheDeleteIcon(String phone) {
 		waiterpg.searchForStoreValue(phone);
 		waiterpg.clickOnWaiterDeleteIcon();
