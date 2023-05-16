@@ -99,9 +99,6 @@ public class TestListeners implements ITestListener {
 		}
 	}
 
-	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		// TODO Auto-generated method stub
-	}
 
 	public void onFinish(ITestContext context) {
 

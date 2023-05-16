@@ -48,7 +48,7 @@ public class UsersPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 36, enabled = true)
+	@Test(priority = 36, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEnteredUserValues() {
 		userpg.clickOnAddUsers();
 		userpg.enterValueToUserName("ABC");

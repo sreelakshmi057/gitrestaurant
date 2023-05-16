@@ -83,6 +83,7 @@ public class UsersPage {
 
 	public void clickOnSubmit() {
 		actionUtil.clickElement(driver, submit);
+		waitUtil.waitForVisibilityOfElement(driver, userName, 10);
 	}
 
 	public void implementImplicitWait() {

@@ -148,7 +148,6 @@ public class StorePage {
 	/**
 	 * This method is to get text of search result
 	 * 
-	 * @param value
 	 * @return
 	 */
 	public String getStoreNameFromSearch() {

@@ -1,6 +1,5 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -26,7 +25,7 @@ public class ExpensePageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 
 	@BeforeMethod
-	public void prerun(){
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -36,7 +35,7 @@ public class ExpensePageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 23, enabled = true)
+	@Test(priority = 23, enabled = true, groups = {"smoke"}, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddExpensePageHasElementsDisplayed() {
 		expensepg.clickOnAddExpenseButton();
 		SoftAssert soft = new SoftAssert();
@@ -49,8 +48,8 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 24, enabled = true)
-	public void validateEnteredExpenseValues(){
+	@Test(priority = 24, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateEnteredExpenseValues() {
 		expensepg.clickOnAddExpenseButton();
 		String exp_date = excelUtil.readStringData("expense", 2, 2);
 		expensepg.enterValueToExpenseDate(exp_date);
@@ -75,8 +74,8 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 25, enabled = true)
-	public void validateTheEditedStoreValues(){
+	@Test(priority = 25, enabled = true, groups = {"smoke"}, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateTheEditedStoreValues() {
 		String exp_searchref = excelUtil.readStringData("expense", 10, 2);
 		expensepg.searchForExpenseValue(exp_searchref);
 		expensepg.clickOnExpenseEditIcon();

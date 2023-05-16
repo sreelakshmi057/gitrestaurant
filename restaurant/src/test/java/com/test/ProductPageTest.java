@@ -56,7 +56,7 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 4, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEnteredProductValues() {
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);

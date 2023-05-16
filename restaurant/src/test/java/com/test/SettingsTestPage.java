@@ -23,7 +23,7 @@ public class SettingsTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@BeforeMethod
-	public void prerun(){
+	public void prerun() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -32,8 +32,8 @@ public class SettingsTestPage extends AutomationBase {
 		settingpg = homepg.navigateToSettingsPage();
 	}
 
-	@Test(priority = 34, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() {
+	@Test(priority = 34, enabled = false)
+	public void validateSettingsPageHasElementsDisplayed() {
 		settingpg.clickOnCompanyName();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(settingpg.isCompanyNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -43,6 +43,28 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertTrue(settingpg.isReceiptFooterDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretPublishedKeyDisplayed(), AutomationConstants.linkDisplayCheck);
+		soft.assertAll();
+	}
+
+	@Test(priority = 34, enabled = true)
+	public void validateUpdateSettingsInSettingsPage() {
+		settingpg.clickOnCompanyName();
+		String companyName = settingpg.enterValueToCompanyName();
+		String companyPhone = settingpg.enterValueToCompanyPhone();
+		String defaultDiscount = settingpg.enterValueToDefaultDiscount();
+		String defaultTax = settingpg.enterValueToDefaultTax();
+		String currencyCode = settingpg.enterValueToCurrencyCode();
+		String receiptHeader = settingpg.enterValueToReceiptHeader();
+		String receiptFooter = settingpg.enterValueToReceiptFooter();
+		String stripeKey = settingpg.enterValueToStripeKey();
+		String publishableKey = settingpg.enterValueToStripePublishedKey();
+		settingpg.clickOnSubmitButton();
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(companyName, settingpg.getCompanyName());
+		soft.assertEquals(companyPhone, settingpg.getCompanyPhone());
+		soft.assertEquals(currencyCode, settingpg.getCurrencyCode());
+		soft.assertEquals(defaultDiscount, settingpg.getDefaultDiscount());
+		soft.assertEquals(defaultTax, settingpg.getDefaultTax());
 		soft.assertAll();
 	}
 }

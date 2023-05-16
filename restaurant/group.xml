@@ -9,9 +9,10 @@
 	<test thread-count="5" name="Test">
 		<classes>
 			<parameter name="browser" value="chrome">
-				<class name="com.test.StorePageTest">
+				<class name="com.test.ExpensePageTest.java">
 					<methods>
-						<include name="validateTheEnteredStoreValues" />
+						<include name="validateAddExpensePageHasElementsDisplayed" />
+						<include name="validateTheEditedStoreValues"/>
 					</methods>
 				</class>
 			</parameter>

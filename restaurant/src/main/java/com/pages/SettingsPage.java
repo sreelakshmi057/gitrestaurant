@@ -49,43 +49,98 @@ public class SettingsPage {
 		actionUtil.clickElement(driver, CompanyName);
 	}
 
-	public void enterValueToCompanyName(String value) {
+	public String enterValueToCompanyName() {
 		actionUtil.clearText(driver, CompanyName);
-		actionUtil.enterValue(driver, CompanyName, value);
+		String name = genericUtil.generateAlphabeticData(8);
+		actionUtil.enterValue(driver, CompanyName, name);
+		return name;
 	}
 
-	public void enterValueToCompanyPhone(String value) {
+	public String enterValueToCompanyPhone() {
 		actionUtil.clearText(driver, companyPhone);
-		actionUtil.enterValue(driver, companyPhone, value);
+		String phone = genericUtil.generateNumericData(10);
+		actionUtil.enterValue(driver, companyPhone, phone);
+		return phone;
 	}
 
-	public void enterValueToDefaultDiscount(String value) {
+	public String enterValueToDefaultDiscount() {
 		actionUtil.clearText(driver, defaultDiscount);
-		actionUtil.enterValue(driver, defaultDiscount, value);
+		String discount = genericUtil.generateNumericData(2);
+		actionUtil.enterValue(driver, defaultDiscount, discount);
+		return discount;
 	}
 
-	public void enterValueToReceiptHeader(String value) {
+	public String enterValueToDefaultTax() {
+		actionUtil.clearText(driver, defaultTax);
+		String tax = genericUtil.generateNumericData(2);
+		actionUtil.enterValue(driver, defaultTax, tax);
+		return tax;
+	}
+
+	public String enterValueToCurrencyCode() {
+		actionUtil.clearText(driver, currencyCode);
+		String code = genericUtil.generateAlphaNumericData(5);
+		actionUtil.enterValue(driver, currencyCode, code);
+		return code;
+	}
+
+	public String enterValueToReceiptHeader() {
 		actionUtil.clearText(driver, descriptionHeader);
-		actionUtil.enterValue(driver, descriptionHeader, value);
+		String header = genericUtil.generateAlphabeticData(7);
+		actionUtil.enterValue(driver, descriptionHeader, header);
+		return header;
 	}
 
-	public void enterValueToReceiptFooter(String value) {
+	public String enterValueToReceiptFooter() {
 		actionUtil.clearText(driver, descriptionFooter);
-		actionUtil.enterValue(driver, descriptionFooter, value);
+		String footer = genericUtil.generateAlphabeticData(8);
+		actionUtil.enterValue(driver, descriptionFooter, footer);
+		return footer;
 	}
 
-	public void enterValueToStripeKey(String value) {
+	public String enterValueToStripeKey() {
 		actionUtil.clearText(driver, stripeKey);
-		actionUtil.enterValue(driver, stripeKey, value);
+		String key = genericUtil.generateAlphaNumericData(5);
+		actionUtil.enterValue(driver, stripeKey, key);
+		return key;
 	}
 
-	public void enterValueToStripePublishedKey(String value) {
+	public String enterValueToStripePublishedKey() {
 		actionUtil.clearText(driver, stripePublishableKey);
-		actionUtil.enterValue(driver, stripePublishableKey, value);
+		String publishedKey = genericUtil.generateAlphaNumericData(5);
+		actionUtil.enterValue(driver, stripePublishableKey, publishedKey);
+		return publishedKey;
 	}
 
 	public void clickOnSubmitButton() {
+		waitUtil.waitForElementTobeClickable(driver, submitButton, 15);
 		actionUtil.clickElement(driver, submitButton);
+	}
+
+	/**
+	 * This method is to get text of search result
+	 * 
+	 * @return
+	 */
+	public String getCompanyName() {
+		waitUtil.waitForVisibilityOfElement(driver, CompanyName, 10);
+		return actionUtil.getElementText(driver, CompanyName);
+	}
+
+	public String getCompanyPhone() {
+		return actionUtil.getElementText(driver, companyPhone);
+	}
+
+	public String getCurrencyCode() {
+		return actionUtil.getElementText(driver, currencyCode);
+	}
+
+	public String getDefaultDiscount() {
+		return actionUtil.getElementText(driver, defaultDiscount);
+	}
+
+	public String getDefaultTax() {
+		return actionUtil.getElementText(driver, defaultTax);
 	}
 
 	/**

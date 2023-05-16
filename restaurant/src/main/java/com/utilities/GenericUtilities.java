@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang.RandomStringUtils;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.OutputType;
@@ -225,5 +226,20 @@ public class GenericUtilities {
 		} catch (Exception e) {
 			throw new RuntimeException("Exception while handling alert");
 		}
+	}
+	/*
+	 * These methods are for random data generation
+	 */
+	public String generateAlphaNumericData(int limit) {
+		String random = RandomStringUtils.randomAlphanumeric(limit);   
+		return random; 
+	}
+	public String generateNumericData(int limit) {
+		String random = RandomStringUtils.randomNumeric(limit);   
+		return random; 
+	}
+	public String generateAlphabeticData(int limit) {
+		String random = RandomStringUtils.randomAlphabetic(limit);   
+		return random;
 	}
 }
