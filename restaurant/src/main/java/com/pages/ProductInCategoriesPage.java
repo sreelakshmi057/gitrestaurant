@@ -27,14 +27,12 @@ public class ProductInCategoriesPage {
 	private WebElement categoryName;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement categorySubmitButton;
-
 	@FindBy(xpath = "//input[@type='search']")
 	private WebElement categorySearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement categoryName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement delete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement categoryEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

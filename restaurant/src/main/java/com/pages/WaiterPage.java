@@ -33,7 +33,6 @@ public class WaiterPage {
 	private WebElement waiterStore;
 	@FindBy(xpath = "//button[text()='Submit']")
 	private WebElement waiterSubmitButton;
-
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
 	private WebElement waiterSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
@@ -46,7 +45,6 @@ public class WaiterPage {
 	private WebElement waiterStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement waiterdelete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement waiterEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

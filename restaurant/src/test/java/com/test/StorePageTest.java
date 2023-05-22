@@ -36,8 +36,8 @@ public class StorePageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 7, enabled = true)
-	public void validateAddStorePageHasElementsDisplayed() {
+	@Test(priority = 7, enabled = true,groups = { "smoke" })
+	public void validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked() {
 		storepg.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(storepg.isStoreNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -49,7 +49,7 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 8, enabled = true)
-	public void validateEnteredStoreValues() {
+	public void validateTheEnteredStoreValues_AfterClickingAddStoreButtonInStorePage() {
 		storepg.clickOnAddStoreButton();
 		String storeName = excelUtil.readStringData("store", 2, 2);
 		storepg.enterValueToStoreName(storeName);
@@ -77,7 +77,7 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 9, enabled = true)
-	public void validateTheEditedStoreValues() {
+	public void validateTheEditedStoreValues_AfterClickingEditButtonInStorePage() {
 		String storeName = excelUtil.readStringData("store", 11, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnEditIcon();
@@ -95,7 +95,7 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 10, enabled = true)
-	public void validateTheDeleteIcon() {
+	public void validateTheDeleteIcon_AfterClickingDeleteButtonInStorePage() {
 		String storeName = excelUtil.readStringData("store", 15, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnDeleteIcon();

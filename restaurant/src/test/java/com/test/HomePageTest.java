@@ -29,8 +29,8 @@ public class HomePageTest extends AutomationBase {
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
-	@Test(priority = 2, enabled = true, groups = { "smoke" })
-	public void validateTheLinksDisplayedInHomePage() {
+	@Test(priority = 2, enabled = true)
+	public void validateTheLinksDisplayedInHomePage_AfterLogin() {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(homepg.isPosLinkDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(homepg.isProductLinkDisplayed(), AutomationConstants.linkDisplayCheck);

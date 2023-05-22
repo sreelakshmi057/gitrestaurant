@@ -35,7 +35,7 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 15, enabled = true)
-	public void validateAddCustomerPageHasElementsDisplayed() {
+	public void validateAddCustomersPageInPeopleLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		customerpg.clickOnAddCustomerButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(customerpg.isCustomerNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,7 +46,8 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 16, enabled = true, dataProvider = "customer", dataProviderClass = DataSupplier.class)
-	public void validateTheEnteredValuesInCustomersPage(String name, String phone, String mail, String discount) {
+	public void validateTheEnteredValues_AfterClickingAddCustomerButtonInCustomersPageInPeopleLink(String name,
+			String phone, String mail, String discount) {
 		customerpg.clickOnAddCustomerButton();
 		customerpg.enterValueToCustomerName(name);
 		customerpg.enterValueToCustomerPhone(phone);
@@ -64,7 +65,8 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 17, enabled = true, dataProvider = "customeredit", dataProviderClass = DataSupplier.class)
-	public void validateTheEditedCustomerValues(String name, String phone, String mail, String discount) {
+	public void validateTheEditedCustomerValues_AfterClickingAddEditButtonInCustomersPageInPeopleLink(String name,
+			String phone, String mail, String discount) {
 		customerpg.searchForCustomerValue(name);
 		customerpg.clickOnCustomerEditIcon();
 		customerpg.enterValueToCustomerPhone(phone);
@@ -82,7 +84,7 @@ public class CustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 18, enabled = true, dataProvider = "customerdelete", dataProviderClass = DataSupplier.class)
-	public void validateTheDeleteIcon(String phone) {
+	public void validateTheDeleteIcon_AfterClickingDeleteButtonInCustomersPageInPeopleLink(String phone) {
 		customerpg.searchForCustomerValue(phone);
 		customerpg.clickOnCustomerDeleteIcon();
 		customerpg.clickOnCustomerDeleteConfirmMessage();

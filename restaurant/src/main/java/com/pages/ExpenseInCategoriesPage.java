@@ -27,14 +27,12 @@ public class ExpenseInCategoriesPage {
 	private WebElement expenseCategoryName;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement expenseSubmitButton;
-
 	@FindBy(xpath = "//input[@type='search']")
 	private WebElement expenseSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement categoryName_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement delete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement expenseEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

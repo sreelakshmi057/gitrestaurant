@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Suite" class="navigator-link ">
-                    <span>C:\Users\HP\git\gitrestaurant\restaurant\testng.xml</span>
+                    <span>C:\Users\HP\git\gitrestaurant\restaurant\testng_group.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -60,7 +60,7 @@
                 </li>
                 <li>
                   <a href="#" panel-name="group-Suite" class="navigator-link ">
-                    <span>0 groups</span>
+                    <span>1 group</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -103,7 +103,7 @@
                     <div class="method-list-content failed suite-Suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="com.test.SettingsTestPage" class="method navigator-link" hash-for-method="validateUpdateSettingsInSettingsPage">validateUpdateSettingsInSettingsPage</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="com.test.StorePageTest" class="method navigator-link" hash-for-method="validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked">validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -121,23 +121,18 @@
           <div class="suite-Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">com.test.SettingsTestPage</span>
+              <span class="class-name">com.test.StorePageTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="validateUpdateSettingsInSettingsPage">
-                  </a> <!-- validateUpdateSettingsInSettingsPage -->
-                  <span class="method-name">validateUpdateSettingsInSettingsPage</span>
-                  <div class="stack-trace">java.lang.AssertionError: The following asserts failed:
-	expected [] but found [RZFdmqyt],
-	expected [] but found [4407184647],
-	expected [] but found [EYejF],
-	expected [] but found [00],
-	expected [] but found [04]
-	at com.test.SettingsTestPage.validateUpdateSettingsInSettingsPage(SettingsTestPage.java:69)
+                  <a name="validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked">
+                  </a> <!-- validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked -->
+                  <span class="method-name">validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;com.pages.StorePage.clickOnAddStoreButton()&quot; because &quot;this.storepg&quot; is null
+	at com.test.StorePageTest.validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked(StorePageTest.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 29 stack frames
+... Removed 27 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -146,20 +141,22 @@
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\HP\git\gitrestaurant\restaurant\testng.xml</span>
+            <span class="header-content">C:\Users\HP\git\gitrestaurant\restaurant\testng_group.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
-  &lt;listeners&gt;
-    &lt;listener class-name=&quot;com.listeners.TestListeners&quot;/&gt;
-  &lt;/listeners&gt;
-  &lt;test thread-count=&quot;1&quot; name=&quot;Test&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Test&quot;&gt;
     &lt;parameter name=&quot;browserName&quot; value=&quot;chrome&quot;/&gt;
+    &lt;groups&gt;
+      &lt;run&gt;
+        &lt;include name=&quot;smoke&quot;/&gt;
+      &lt;/run&gt;
+    &lt;/groups&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.test.SettingsTestPage&quot;/&gt;
+      &lt;class name=&quot;com.test.StorePageTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -183,6 +180,14 @@
             <span class="header-content">Groups for Suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">smoke</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="times-Suite" class="panel">
@@ -201,14 +206,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'validateUpdateSettingsInSettingsPage')
-data.setCell(0, 2, 'com.test.SettingsTestPage')
-data.setCell(0, 3, 2186);
+data.setCell(0, 1, 'validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked')
+data.setCell(0, 2, 'com.test.StorePageTest')
+data.setCell(0, 3, 11);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 2 seconds</span>
+              <span class="suite-total-time">Total running time: 11 ms</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -223,13 +228,17 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">3 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">com.test.SettingsTestPage</span>
+              <span class="ignored-class-name">com.test.StorePageTest</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">validateSettingsPageHasElementsDisplayed</span>
+                <span class="ignored-method-name">validateTheDeleteIcon_AfterClickingDeleteButtonInStorePage</span>
+                <br/>
+                <span class="ignored-method-name">validateTheEnteredStoreValues_AfterClickingAddStoreButtonInStorePage</span>
+                <br/>
+                <span class="ignored-method-name">validateTheEditedStoreValues_AfterClickingEditButtonInStorePage</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -241,20 +250,12 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.test.SettingsTestPage</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">preLaunch(chrome)</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
-              <div class="configuration-method before">
-                <span class="method-name">prerun</span>
-                <span class="method-start">3552 ms</span>
-              </div> <!-- configuration-method before -->
+              <div class="chronological-class-name">com.test.StorePageTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">validateUpdateSettingsInSettingsPage</span>
-                <span class="method-start">5534 ms</span>
+                <span class="method-name">validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked</span>
+                <span class="method-start">0 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

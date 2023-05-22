@@ -30,7 +30,6 @@ public class CustomerPage {
 	private WebElement customerDiscount;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement customerSubmitButton;
-
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
 	private WebElement customerSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
@@ -43,7 +42,6 @@ public class CustomerPage {
 	private WebElement customerStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement customerdelete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement customerEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

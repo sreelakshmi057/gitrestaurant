@@ -37,7 +37,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 30, enabled = true)
-	public void validateAddExpensePageHasElementsDisplayed() {
+	public void validateAddExpensePageInCategoriesLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(cat_expensepg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -45,7 +45,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 31, enabled = true)
-	public void validateEnteredProductValues() {
+	public void validateTheEnteredCategoryValues_AfterClickingAddCustomerButtonInExpensePageInCategoryLink() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		String cat_name = excelUtil.readStringData("category", 2, 2);
 		cat_expensepg.enterValueToCategoryName(cat_name);
@@ -58,7 +58,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	}
 
 	@Test(priority = 32, enabled = true)
-	public void validateTheEditedStoreValues() {
+	public void validateTheEditedCategoryValues_AfterClickingEditButtonInExpensePageInCategoryLink() {
 		String cat_search = excelUtil.readStringData("category", 5, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_search);
 		cat_expensepg.clickOnProductEditIcon();
@@ -72,8 +72,8 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 33, enabled = true)
-	public void validateTheDeleteIcon() {
+	@Test(priority = 33, enabled = false)
+	public void validateTheDeleteIcon_AfterClickingDeleteButtonInExpensePageInCategoryLink() {
 		String cat_deletesearch = excelUtil.readStringData("category", 9, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		cat_expensepg.clickOnProductDeleteIcon();

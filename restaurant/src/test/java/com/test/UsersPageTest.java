@@ -16,6 +16,7 @@ import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.UsersPage;
+import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class UsersPageTest extends AutomationBase {
@@ -25,6 +26,7 @@ public class UsersPageTest extends AutomationBase {
 	Properties prop;
 	HomePage homepg;
 	PropertyUtilities propUtil;
+	ExcelUtilities excelUtil;
 
 	@BeforeMethod
 	public void prerun() {
@@ -34,10 +36,11 @@ public class UsersPageTest extends AutomationBase {
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		userpg = homepg.navigateToUsersPage();
+		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 35, enabled = true)
-	public void validateAddUsersPageHasElementsDisplayed() {
+	@Test(priority = 36, enabled = true)
+	public void validateAddUsersPageInSettingsPageHasElementsDisplayed() {
 		userpg.clickOnAddUsers();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(userpg.isUserNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -48,26 +51,21 @@ public class UsersPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 36, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateEnteredUserValues() {
+	@Test(priority = 37, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateTheEnteredUserValuesInUsersPage_InTheCorrespondingFields() {
 		userpg.clickOnAddUsers();
-		userpg.enterValueToUserName("ABC");
-		userpg.enterValueToFirstName("ADMIN");
+		String user_name = excelUtil.readStringData("users", 2, 2);
+		userpg.enterValueToUserName(user_name);
+		String user_FirstName = excelUtil.readStringData("users", 3, 2);
+		userpg.enterValueToFirstName(user_FirstName);
 		userpg.clickOnRadioButton();
-		userpg.enterValueToEmail("admin@gmail.com");
-		userpg.enterValueToPassword("123456");
-		userpg.enterValueToConfirmPassword("123456");
+		String user_email = excelUtil.readStringData("users", 4, 2);
+		userpg.enterValueToEmail(user_email);
+		String user_password = excelUtil.readStringData("users", 5, 2);
+		userpg.enterValueToPassword(user_password);
+		userpg.enterValueToConfirmPassword(user_password);
 		userpg.clickOnSubmit();
-		List<WebElement> username = driver.findElements(By.xpath("//table[@class='table']//tr//td"));
-		boolean status = false;
-		for (WebElement element : username) {
-			String value = element.getText();
-			if (value.contains("ABC")) {
-				status = true;
-				break;
-			}
-		}
-		Assert.assertTrue(status, AutomationConstants.errorMessage);
+		Assert.assertTrue(userpg.getSearchResultOfTheAddedUserValues(), AutomationConstants.errorMessage);
 	}
 
 }

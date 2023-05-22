@@ -35,7 +35,7 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 19, enabled = true)
-	public void validateAddSupplierPageHasElementsDisplayed() {
+	public void validateAddSupplierPageInPeopleLinkHasElementsDisplayed_WhenAddSupplierButtonIsClicked() {
 		supplierpg.clickOnAddSupplierButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(supplierpg.isSupplierNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,7 +46,7 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 20, enabled = true, dataProvider = "supplier", dataProviderClass = DataSupplier.class)
-	public void validateTheEnteredValuesInSuppliersPage(String name, String phone, String mail, String description) {
+	public void validateTheEnteredSupplierValues_AfterClickingAddSupplierButtonInSupplierPageInPeopleLink(String name, String phone, String mail, String description) {
 		supplierpg.clickOnAddSupplierButton();
 		supplierpg.enterValueToSupplierName(name);
 		supplierpg.enterValueToSupplierPhone(phone);
@@ -65,7 +65,7 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 21, enabled = true, dataProvider = "supplieredit", dataProviderClass = DataSupplier.class)
-	public void validateTheEditedSupplierValues(String name, String phone, String mail, String description) {
+	public void validateTheEditedSupplierValues_AfterClickingEditButtonInSupplierPageInPeopleLink(String name, String phone, String mail, String description) {
 		supplierpg.searchForStoreValue(name);
 		supplierpg.clickOnSupplierEditIcon();
 		supplierpg.enterValueToSupplierPhone(phone);
@@ -83,7 +83,7 @@ public class SupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 22, enabled = true, dataProvider = "supplierdelete", dataProviderClass = DataSupplier.class)
-	public void validateTheDeleteIcon(String phone) {
+	public void validateTheDeleteIcon_AfterClickingDeleteButtonInSupplierPageInPeopleLink(String phone) {
 		supplierpg.searchForStoreValue(phone);
 		supplierpg.clickOnSupplierDeleteIcon();
 		supplierpg.clickOnSupplierDeleteConfirmMessage();

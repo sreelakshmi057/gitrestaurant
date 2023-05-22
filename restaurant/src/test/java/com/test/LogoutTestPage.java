@@ -33,8 +33,8 @@ public class LogoutTestPage extends AutomationBase {
 		logoutpg = homepg.navigateToLogoutPage();
 	}
 
-	@Test(priority = 37, enabled = true)
-	public void validateLogoutPage() {
+	@Test(priority = 38, enabled = true)
+	public void validateLogoutPage_ByClickingLogoutLink() {
 		logoutpg.clickOnLogout();
 		Assert.assertTrue(logoutpg.isLoginButtonDisplayed(), AutomationConstants.logoutCheck);
 	}

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class SettingsPage {
 
@@ -15,6 +16,7 @@ public class SettingsPage {
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
+	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 
 	public SettingsPage(WebDriver driver) {
 		this.driver = driver;
@@ -23,6 +25,8 @@ public class SettingsPage {
 
 	@FindBy(xpath = "//input[@id='companyName']")
 	private WebElement CompanyName;
+	@FindBy(xpath = "//input[@value='TfNmCvUM']")
+	private WebElement Company_getName;
 	@FindBy(id = "phone")
 	private WebElement companyPhone;
 	@FindBy(id = "currency")
@@ -49,39 +53,29 @@ public class SettingsPage {
 		actionUtil.clickElement(driver, CompanyName);
 	}
 
-	public String enterValueToCompanyName() {
+	public void enterValueToCompanyName(String company_Name) {
 		actionUtil.clearText(driver, CompanyName);
-		String name = genericUtil.generateAlphabeticData(8);
-		actionUtil.enterValue(driver, CompanyName, name);
-		return name;
+		actionUtil.enterValue(driver, CompanyName, company_Name);
 	}
 
-	public String enterValueToCompanyPhone() {
+	public void enterValueToCompanyPhone(String company_Phone) {
 		actionUtil.clearText(driver, companyPhone);
-		String phone = genericUtil.generateNumericData(10);
-		actionUtil.enterValue(driver, companyPhone, phone);
-		return phone;
+		actionUtil.enterValue(driver, companyPhone, company_Phone);
 	}
 
-	public String enterValueToDefaultDiscount() {
+	public void enterValueToDefaultDiscount(String discount) {
 		actionUtil.clearText(driver, defaultDiscount);
-		String discount = genericUtil.generateNumericData(2);
 		actionUtil.enterValue(driver, defaultDiscount, discount);
-		return discount;
 	}
 
-	public String enterValueToDefaultTax() {
+	public void enterValueToDefaultTax(String tax) {
 		actionUtil.clearText(driver, defaultTax);
-		String tax = genericUtil.generateNumericData(2);
 		actionUtil.enterValue(driver, defaultTax, tax);
-		return tax;
 	}
 
-	public String enterValueToCurrencyCode() {
+	public void enterValueToCurrencyCode(String code) {
 		actionUtil.clearText(driver, currencyCode);
-		String code = genericUtil.generateAlphaNumericData(5);
 		actionUtil.enterValue(driver, currencyCode, code);
-		return code;
 	}
 
 	public String enterValueToReceiptHeader() {
@@ -95,7 +89,7 @@ public class SettingsPage {
 		actionUtil.clearText(driver, descriptionFooter);
 		String footer = genericUtil.generateAlphabeticData(8);
 		actionUtil.enterValue(driver, descriptionFooter, footer);
-		return footer;
+	    return footer;
 	}
 
 	public String enterValueToStripeKey() {
@@ -123,8 +117,9 @@ public class SettingsPage {
 	 * @return
 	 */
 	public String getCompanyName() {
-		waitUtil.waitForVisibilityOfElement(driver, CompanyName, 10);
-		return actionUtil.getElementText(driver, CompanyName);
+		brwsrUtil.navigateToRefreshPage(driver);
+		waitUtil.waitForVisibilityOfElement(driver, Company_getName, 10);
+		return actionUtil.getElementText(driver,Company_getName );
 	}
 
 	public String getCompanyPhone() {

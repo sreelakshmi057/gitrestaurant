@@ -37,7 +37,6 @@ public class StorePage {
 	private WebElement storeCustomerFooter;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement storeSubmitButton;
-
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
 	private WebElement storeSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
@@ -50,7 +49,6 @@ public class StorePage {
 	private WebElement storeCountry_searchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
 	private WebElement storeCity_searchResult;
-
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement storedelete_searchResult;
 	@FindBy(xpath = "//a[@class='btn btn-default']")

@@ -33,7 +33,6 @@ public class SupplierPage {
 	private WebElement supplierDescription;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement supplierSubmitButton;
-
 	@FindBy(xpath = "//input[@class='form-control input-sm' and @type='search']")
 	private WebElement supplierSearchtab;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
@@ -46,7 +45,6 @@ public class SupplierPage {
 	private WebElement supplierStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement supplierdelete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement supplierEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

@@ -53,7 +53,6 @@ public class ProductPage {
 	private WebElement productSubmitButton;
 	@FindBy(xpath = "//body/div[@id='stock']/div[@id='stockModal']/div[1]/div[3]/button[2]")
 	private WebElement productStockSubmitButton;
-
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement productCode_SearchResult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
@@ -70,7 +69,6 @@ public class ProductPage {
 	private WebElement productSearchButton;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement delete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[3]")
 	private WebElement productEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

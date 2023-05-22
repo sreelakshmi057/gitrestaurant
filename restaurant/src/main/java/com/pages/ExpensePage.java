@@ -37,7 +37,6 @@ public class ExpensePage {
 	private WebElement expenseDescription;
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement expenseSubmitButton;
-
 	@FindBy(xpath = "//input[@type='search']")
 	private WebElement expenseSearch;
 	@FindBy(xpath = "(//table[@id='table']//tr//td)[1]")
@@ -52,7 +51,6 @@ public class ExpensePage {
 	private WebElement expenseStore_SearchResult;
 	@FindBy(xpath = "(//table[@id='table']//tr//td)[1]")
 	private WebElement expensedelete_SearchResult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	private WebElement expenseEditButton;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")

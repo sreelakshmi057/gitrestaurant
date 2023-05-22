@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.test.StorePageTest">
+      <class name="com.test.ExpenseInCategoriesTestPage">
         <methods>
-          <include name="validateTheEditedStoreValues"/>
-          <include name="validateAddStorePageHasElementsDisplayed"/>
-          <include name="validateTheDeleteIcon"/>
+          <include name="preLaunch"/>
+          <include name="validateEnteredProductValues"/>
           <include name="prerun"/>
-          <include name="launchBrowser"/>
-          <include name="validateTheEnteredStoreValues"/>
         </methods>
-      </class> <!-- com.test.StorePageTest -->
+      </class> <!-- com.test.ExpenseInCategoriesTestPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

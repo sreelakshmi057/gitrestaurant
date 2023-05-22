@@ -20,7 +20,7 @@ public class LoginPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 
 	@Test(priority = 1, enabled = true)
-	public void validateLoginPage() {
+	public void validateLoginPage_ByEnteringUsernameAndPassword() {
 		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		homepg = new HomePage(driver);

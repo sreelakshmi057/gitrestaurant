@@ -1,5 +1,8 @@
 package com.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,7 +40,6 @@ public class UsersPage {
 	private WebElement repeatPassword;
 	@FindBy(xpath = "(//button[@class='btn btn-add'])[1]")
 	private WebElement submit;
-
 	@FindBy(xpath = "((//table[@class='table']//tr//td)[2]")
 	private WebElement firstName_searchResult;
 	@FindBy(xpath = "(//table[@class='table']//tr//td)[4]")
@@ -130,6 +132,19 @@ public class UsersPage {
 
 	public String getRoleFromSearchResult() {
 		return actionUtil.getElementText(driver, role_searchResult);
+	}
+	
+	public boolean getSearchResultOfTheAddedUserValues() {
+		List<WebElement> username = driver.findElements(By.xpath("//table[@class='table']//tr//td"));
+		boolean status = false;
+		for (WebElement element : username) {
+			String value = element.getText();
+			if (value.contains("ABC")) {
+				status = true;
+				break;
+			}
+	}
+		return status;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.test;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -35,8 +36,8 @@ public class ExpensePageTest extends AutomationBase {
 		excelUtil = new ExcelUtilities();
 	}
 
-	@Test(priority = 23, enabled = true, groups = {"smoke"}, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateAddExpensePageHasElementsDisplayed() {
+	@Test(priority = 23, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddExpensePageHasElementsDisplayed_WhenAddExpenseButtonIsClicked() {
 		expensepg.clickOnAddExpenseButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expensepg.isExpenseDateDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -48,8 +49,8 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 24, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateEnteredExpenseValues() {
+	@Test(priority = 24, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateTheEnteredExpenseValues_AfterClickingAddExpenseButtonInExpensePage() {
 		expensepg.clickOnAddExpenseButton();
 		String exp_date = excelUtil.readStringData("expense", 2, 2);
 		expensepg.enterValueToExpenseDate(exp_date);
@@ -74,8 +75,8 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 25, enabled = true, groups = {"smoke"}, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateTheEditedStoreValues() {
+	@Test(priority = 25, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateTheEditedExpenseValues_AfterClickingEditButtonInExpensePage() {
 		String exp_searchref = excelUtil.readStringData("expense", 10, 2);
 		expensepg.searchForExpenseValue(exp_searchref);
 		expensepg.clickOnExpenseEditIcon();

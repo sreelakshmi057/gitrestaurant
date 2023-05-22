@@ -16,9 +16,9 @@
 			<class name="com.test.SupplierPageTest" />
 			<class name="com.test.ExpensePageTest" />
 			<class name="com.test.ProductInCategoriesTestPage" />
-			<class name="com.test.ExpenseInCategoriesTestPage" />-->
-			<!--<class name="com.test.SettingsTestPage" />-->
-			<class name="com.test.UsersPageTest" />
+			<class name="com.test.ExpenseInCategoriesTestPage" /> -->
+			<class name="com.test.SettingsTestPage" />
+			<class name="com.test.UsersPageTest" /> 
 			<!-- <class name="com.test.LogoutTestPage" />-->
 		</classes>
 	</test> <!-- Test -->

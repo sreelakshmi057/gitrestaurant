@@ -57,11 +57,11 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue May 16 20:29:36 IST 2023</td>
+<td>Started on:</td><td>Mon May 22 20:07:56 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>8 seconds (8228 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (66 ms)</td>
 </tr><tr>
-<td>Included groups:</td><td></td>
+<td>Included groups:</td><td>smoke </td>
 </tr><tr>
 <td>Excluded groups:</td><td></td>
 </tr>
@@ -76,25 +76,13 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.test.SettingsTestPage.validateUpdateSettingsInSettingsPage()'><b>validateUpdateSettingsInSettingsPage</b><br>Test class: com.test.SettingsTestPage</td>
-<td><div><pre>java.lang.AssertionError: The following asserts failed:
-	expected [] but found [RZFdmqyt],
-	expected [] but found [4407184647],
-	expected [] but found [EYejF],
-	expected [] but found [00],
-	expected [] but found [04]
-	at com.test.SettingsTestPage.validateUpdateSettingsInSettingsPage(SettingsTestPage.java:69)
+<td title='com.test.StorePageTest.validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked()'><b>validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked</b><br>Test class: com.test.StorePageTest</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.pages.StorePage.clickOnAddStoreButton()&quot; because &quot;this.storepg&quot; is null
+	at com.test.StorePageTest.validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked(StorePageTest.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace383403884", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace383403884'><pre>java.lang.AssertionError: The following asserts failed:
-	expected [] but found [RZFdmqyt],
-	expected [] but found [4407184647],
-	expected [] but found [EYejF],
-	expected [] but found [00],
-	expected [] but found [04]
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
-	at com.test.SettingsTestPage.validateUpdateSettingsInSettingsPage(SettingsTestPage.java:69)
+... Removed 27 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace508512860", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace508512860'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.pages.StorePage.clickOnAddStoreButton()&quot; because &quot;this.storepg&quot; is null
+	at com.test.StorePageTest.validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked(StorePageTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -124,8 +112,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>2</td>
-<td>com.test.SettingsTestPage@2892d68</td></tr>
+<td>0</td>
+<td>com.test.StorePageTest@537f60bf</td></tr>
 </table><p>
 </body>
 </html>

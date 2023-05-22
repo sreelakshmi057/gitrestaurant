@@ -34,7 +34,7 @@ public class WaiterPageTest extends AutomationBase {
 		waiterpg = homepg.navigateToWaiterInPeopleLink();
 	}
 
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 11, enabled = true)
 	public void validateAddWaiterPageHasElementsDisplayed() {
 		waiterpg.clickOnAddWaiterButton();
 		SoftAssert soft = new SoftAssert();

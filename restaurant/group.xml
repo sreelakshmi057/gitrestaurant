@@ -7,15 +7,9 @@
 		</run>
 	</groups>
 	<test thread-count="5" name="Test">
+		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<parameter name="browser" value="chrome">
-				<class name="com.test.ExpensePageTest.java">
-					<methods>
-						<include name="validateAddExpensePageHasElementsDisplayed" />
-						<include name="validateTheEditedStoreValues"/>
-					</methods>
-				</class>
-			</parameter>
+				<class name="com.test.StorePageTest"/>				
 		</classes>
-	</test> <!-- Test -->
+	</test>
 </suite> <!-- Suite -->

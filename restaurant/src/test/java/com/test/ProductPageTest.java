@@ -37,7 +37,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateAddProductPageHasElementsDisplayed() {
+	public void validateAddProductPageHasElementsDisplayed_WhenAddProductButtonIsClicked() {
 		productpg.clickOnAddProductButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(productpg.isProductTypeDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -57,7 +57,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateEnteredProductValues() {
+	public void validateTheEnteredProductValues_AfterClickingAddProductButtonInProductPage() {
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);
 		String prdtcode = excelUtil.readStringData("product", 2, 2);
@@ -93,7 +93,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 5, enabled = true)
-	public void validateTheEditedProducteValues() {
+	public void validateTheEditedProducteValues_AfterClickingEdittButtonInProductPage() {
 		String prdtsearch = excelUtil.readStringData("product", 14, 2);
 		productpg.searchForProductValue(prdtsearch);
 		productpg.clickOnProductEditIcon();
@@ -111,7 +111,7 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 6, enabled = true)
-	public void validateTheDeleteIcon() {
+	public void validateTheDeleteIcon_AfterClickingDeleteButtonInProductPage() {
 		String prdtdelete = excelUtil.readStringData("product", 17, 2);
 		productpg.searchForProductValue(prdtdelete);
 		productpg.clickOnProductDeleteIcon();
