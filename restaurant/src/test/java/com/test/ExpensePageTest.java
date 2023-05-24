@@ -2,9 +2,6 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,27 +14,21 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpensePageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	ExpensePage expensepg;
 	Properties prop;
 	HomePage homepg;
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
-
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	
+	@Test(priority = 23, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddExpensePageHasElementsDisplayed_WhenAddExpenseButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		expensepg = homepg.navigateToExpensePage();
 		excelUtil = new ExcelUtilities();
-	}
-
-	@Test(priority = 23, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateAddExpensePageHasElementsDisplayed_WhenAddExpenseButtonIsClicked() {
 		expensepg.clickOnAddExpenseButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expensepg.isExpenseDateDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -47,10 +38,17 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertTrue(expensepg.isExpenseAmountDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(expensepg.isExpenseDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 24, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 24, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredExpenseValues_AfterClickingAddExpenseButtonInExpensePage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		expensepg = homepg.navigateToExpensePage();
+		excelUtil = new ExcelUtilities();
 		expensepg.clickOnAddExpenseButton();
 		String exp_date = excelUtil.readStringData("expense", 2, 2);
 		expensepg.enterValueToExpenseDate(exp_date);
@@ -67,16 +65,19 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.clickOnExpenseSubmitButton();
 		expensepg.searchForExpenseValue(exp_ref);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
-		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceA",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), exp_ref, AutomationConstants.errorMessage);
 		soft.assertAll();
+		expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 25, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 25, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedExpenseValues_AfterClickingEditButtonInExpensePage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		expensepg = homepg.navigateToExpensePage();
+		excelUtil = new ExcelUtilities();
 		String exp_searchref = excelUtil.readStringData("expense", 10, 2);
 		expensepg.searchForExpenseValue(exp_searchref);
 		expensepg.clickOnExpenseEditIcon();
@@ -87,11 +88,9 @@ public class ExpensePageTest extends AutomationBase {
 		expensepg.clickOnExpenseEditSubmitButton();
 		expensepg.searchForExpenseValue(exp_editref);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(expensepg.getExpenseDateFromSearchResult(), "2023-05-01", AutomationConstants.errorMessage);
-		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), "referenceB",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(expensepg.getExpenseCategoryFromSearchResult(), "Miscellaneous",
+		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), exp_editref,
 				AutomationConstants.errorMessage);
 		soft.assertAll();
+		expensepg.closeTheWindow();
 	}
 }

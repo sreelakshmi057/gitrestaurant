@@ -2,9 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +15,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class StorePageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	StorePage storepg;
 	Properties prop;
@@ -25,19 +22,14 @@ public class StorePageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 	PropertyUtilities propUtil;
 
-	@BeforeMethod
-	public void preRun() {
-		driver = getDriver();
+	@Test(priority = 7, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		storepg = homepg.navigateToStorePage();
 		excelUtil = new ExcelUtilities();
-	}
-
-	@Test(priority = 7, enabled = true,groups = { "smoke" })
-	public void validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked() {
 		storepg.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(storepg.isStoreNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,10 +38,17 @@ public class StorePageTest extends AutomationBase {
 		soft.assertTrue(storepg.isStoreCountryDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStoreCityDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		storepg.closeTheWindow();
 	}
 
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 8, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredStoreValues_AfterClickingAddStoreButtonInStorePage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		storepg = homepg.navigateToStorePage();
+		excelUtil = new ExcelUtilities();
 		storepg.clickOnAddStoreButton();
 		String storeName = excelUtil.readStringData("store", 2, 2);
 		storepg.enterValueToStoreName(storeName);
@@ -68,16 +67,23 @@ public class StorePageTest extends AutomationBase {
 		storepg.submit();
 		storepg.searchForStoreValue(storeName);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreMailFromSearch(), "aaa@gmail.com", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreNameFromSearch(), storeName, AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreMailFromSearch(), storeMail, AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStorePhoneFromSearch(), storeNumber, AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCountryFromSearch(), storeCountry, AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreCityFromSearch(), storeCity, AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		storepg.closeTheWindow();
 	}
 
-	@Test(priority = 9, enabled = true)
+	@Test(priority = 9, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedStoreValues_AfterClickingEditButtonInStorePage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		storepg = homepg.navigateToStorePage();
+		excelUtil = new ExcelUtilities();
 		String storeName = excelUtil.readStringData("store", 11, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnEditIcon();
@@ -86,21 +92,26 @@ public class StorePageTest extends AutomationBase {
 		storepg.clickOnEditSubmitButton();
 		storepg.searchForStoreValue(storeName);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(storepg.getStoreNameFromSearch(), "AAA", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreMailFromSearch(), "abcd@gmail.com", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStorePhoneFromSearch(), "9498571245", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreCountryFromSearch(), "INDIA", AutomationConstants.linkDisplayCheck);
-		soft.assertEquals(storepg.getStoreCityFromSearch(), "ADOOR", AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreNameFromSearch(), storeName, AutomationConstants.linkDisplayCheck);
+		soft.assertEquals(storepg.getStoreMailFromSearch(), editMail, AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		storepg.closeTheWindow();
 	}
 
-	@Test(priority = 10, enabled = true)
+	@Test(priority = 10, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheDeleteIcon_AfterClickingDeleteButtonInStorePage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		storepg = homepg.navigateToStorePage();
+		excelUtil = new ExcelUtilities();
 		String storeName = excelUtil.readStringData("store", 15, 2);
 		storepg.searchForStoreValue(storeName);
 		storepg.clickOnDeleteIcon();
 		storepg.searchForStoreValue(storeName);
 		Assert.assertEquals(storepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+		storepg.closeTheWindow();
 	}
 }

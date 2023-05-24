@@ -7,11 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class CustomerPage {
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public CustomerPage(WebDriver driver) {
 		this.driver = driver;
@@ -125,10 +127,12 @@ public class CustomerPage {
 	 * 
 	 */
 	public String getCustomerNameFromSearchResult() {
+		waitUtil.waitForVisibilityOfElement(driver, customerName_SearchResult, 10);
 		return actionUtil.getElementText(driver, customerName_SearchResult);
 	}
 
 	public String getCustomerPhoneFromSearchResult() {
+		waitUtil.waitForVisibilityOfElement(driver, customerPhone_SearchResult, 10);
 		return actionUtil.getElementText(driver, customerPhone_SearchResult);
 	}
 
@@ -164,6 +168,10 @@ public class CustomerPage {
 
 	public void clickOnCustomerDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, customerConfirmDeleteMsg);
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class ExpenseInCategoriesPage {
 
@@ -15,6 +16,7 @@ public class ExpenseInCategoriesPage {
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public ExpenseInCategoriesPage(WebDriver driver) {
 		this.driver = driver;
@@ -124,6 +126,10 @@ public class ExpenseInCategoriesPage {
 
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, expenseConfirmDeleteMsg);
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class WaiterPage {
 
@@ -15,6 +16,7 @@ public class WaiterPage {
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public WaiterPage(WebDriver driver) {
 		this.driver = driver;
@@ -175,6 +177,10 @@ public class WaiterPage {
 
 	public void clickOnWaiterDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, waiterConfirmDeleteMsg);
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 
 }

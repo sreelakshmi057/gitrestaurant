@@ -7,12 +7,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class LogoutPage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public LogoutPage(WebDriver driver) {
 		this.driver = driver;

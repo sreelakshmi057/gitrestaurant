@@ -9,11 +9,11 @@
       </run>
     </groups>
     <classes>
-      <class name="com.test.StorePageTest">
+      <class name="com.test.CustomerPageTest">
         <methods>
-          <include name="validateAddStorePageHasElementsDisplayed_WhenAddStoreButtonIsClicked"/>
+          <include name="validateTheEnteredValues_AfterClickingAddCustomerButtonInCustomersPageInPeopleLink" invocation-numbers="0 1"/>
         </methods>
-      </class> <!-- com.test.StorePageTest -->
+      </class> <!-- com.test.CustomerPageTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

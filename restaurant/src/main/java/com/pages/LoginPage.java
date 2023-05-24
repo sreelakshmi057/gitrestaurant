@@ -7,11 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class LoginPage {
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -49,5 +51,4 @@ public class LoginPage {
 		clickLoginButton();
 		return new HomePage(driver);
 	}
-
 }

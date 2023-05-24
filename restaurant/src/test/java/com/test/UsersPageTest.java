@@ -1,13 +1,8 @@
 package com.test;
 
-import java.util.List;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -20,7 +15,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class UsersPageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	UsersPage userpg;
 	Properties prop;
@@ -28,19 +22,14 @@ public class UsersPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
 
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	@Test(priority = 36, enabled = true)
+	public void validateAddUsersPageInSettingsPageHasElementsDisplayed() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		userpg = homepg.navigateToUsersPage();
 		excelUtil = new ExcelUtilities();
-	}
-
-	@Test(priority = 36, enabled = true)
-	public void validateAddUsersPageInSettingsPageHasElementsDisplayed() {
 		userpg.clickOnAddUsers();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(userpg.isUserNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -49,10 +38,17 @@ public class UsersPageTest extends AutomationBase {
 		soft.assertTrue(userpg.isPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(userpg.isConfirmPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		userpg.closeTheWindow();
 	}
 
-	@Test(priority = 37, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 37, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredUserValuesInUsersPage_InTheCorrespondingFields() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		userpg = homepg.navigateToUsersPage();
+		excelUtil = new ExcelUtilities();
 		userpg.clickOnAddUsers();
 		String user_name = excelUtil.readStringData("users", 2, 2);
 		userpg.enterValueToUserName(user_name);
@@ -66,6 +62,7 @@ public class UsersPageTest extends AutomationBase {
 		userpg.enterValueToConfirmPassword(user_password);
 		userpg.clickOnSubmit();
 		Assert.assertTrue(userpg.getSearchResultOfTheAddedUserValues(), AutomationConstants.errorMessage);
+		userpg.closeTheWindow();
 	}
 
 }

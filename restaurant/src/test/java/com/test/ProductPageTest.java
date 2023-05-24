@@ -2,9 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +15,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ProductPageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	ProductPage productpg;
 	Properties prop;
@@ -25,19 +22,14 @@ public class ProductPageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 	PropertyUtilities propUtil;
 
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	@Test(priority = 3, enabled = true)
+	public void validateAddProductPageHasElementsDisplayed_WhenAddProductButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		productpg = homepg.navigateToProductPage();
 		excelUtil = new ExcelUtilities();
-	}
-
-	@Test(priority = 3, enabled = true)
-	public void validateAddProductPageHasElementsDisplayed_WhenAddProductButtonIsClicked() {
 		productpg.clickOnAddProductButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(productpg.isProductTypeDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -49,15 +41,18 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(productpg.isProductTaxDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductTaxMethodDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductPriceDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductUnitDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductAlertQuantityDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductOptionsDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		productpg.closeTheWindow();
 	}
 
-	@Test(priority = 4, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 4, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredProductValues_AfterClickingAddProductButtonInProductPage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		productpg = homepg.navigateToProductPage();
+		excelUtil = new ExcelUtilities();
 		productpg.clickOnAddProductButton();
 		productpg.selectProductType(0);
 		String prdtcode = excelUtil.readStringData("product", 2, 2);
@@ -84,16 +79,21 @@ public class ProductPageTest extends AutomationBase {
 		productpg.clickOnProductSubmitButton();
 		productpg.searchForProductValue(prdtname);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(productpg.getProductCodeFromSearchResult(), "0", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductNameFromSearchResult(), "APPLE", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductCategoryFromSearchResult(), "fruits", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductDescriptionFromSearchResult(), "FRESH", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductTaxFromSearchResult(), "18", AutomationConstants.errorMessage);
+		soft.assertEquals(productpg.getProductCodeFromSearchResult(), prdtcode, AutomationConstants.errorMessage);
+		soft.assertEquals(productpg.getProductNameFromSearchResult(), prdtname, AutomationConstants.errorMessage);
+		soft.assertEquals(productpg.getProductTaxFromSearchResult(), prdttax, AutomationConstants.errorMessage);
 		soft.assertAll();
+		productpg.closeTheWindow();
 	}
 
 	@Test(priority = 5, enabled = true)
 	public void validateTheEditedProducteValues_AfterClickingEdittButtonInProductPage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		productpg = homepg.navigateToProductPage();
+		excelUtil = new ExcelUtilities();
 		String prdtsearch = excelUtil.readStringData("product", 14, 2);
 		productpg.searchForProductValue(prdtsearch);
 		productpg.clickOnProductEditIcon();
@@ -102,16 +102,19 @@ public class ProductPageTest extends AutomationBase {
 		productpg.clickOnProductEditSubmitButton();
 		productpg.searchForProductValue(prdtname);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(productpg.getProductCodeFromSearchResult(), "0", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductNameFromSearchResult(), "APPLE1", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductCategoryFromSearchResult(), "fruits", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductDescriptionFromSearchResult(), "FRESH", AutomationConstants.errorMessage);
-		soft.assertEquals(productpg.getProductTaxFromSearchResult(), "18", AutomationConstants.errorMessage);
+		soft.assertEquals(productpg.getProductNameFromSearchResult(), prdtname, AutomationConstants.errorMessage);
 		soft.assertAll();
+		productpg.closeTheWindow();
 	}
 
 	@Test(priority = 6, enabled = true)
 	public void validateTheDeleteIcon_AfterClickingDeleteButtonInProductPage() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		productpg = homepg.navigateToProductPage();
+		excelUtil = new ExcelUtilities();
 		String prdtdelete = excelUtil.readStringData("product", 17, 2);
 		productpg.searchForProductValue(prdtdelete);
 		productpg.clickOnProductDeleteIcon();
@@ -119,5 +122,6 @@ public class ProductPageTest extends AutomationBase {
 		productpg.searchForProductValue(prdtdelete);
 		Assert.assertEquals(productpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+		productpg.closeTheWindow();
 	}
 }

@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.test.ExpenseInCategoriesTestPage">
+      <class name="com.test.SupplierPageTest">
         <methods>
+          <include name="validateTheEnteredSupplierValues_AfterClickingAddSupplierButtonInSupplierPageInPeopleLink"/>
+          <include name="validateTheDeleteIcon_AfterClickingDeleteButtonInSupplierPageInPeopleLink"/>
+          <include name="validateAddSupplierPageInPeopleLinkHasElementsDisplayed_WhenAddSupplierButtonIsClicked"/>
           <include name="preLaunch"/>
-          <include name="validateEnteredProductValues"/>
-          <include name="prerun"/>
+          <include name="validateTheEditedSupplierValues_AfterClickingEditButtonInSupplierPageInPeopleLink"/>
         </methods>
-      </class> <!-- com.test.ExpenseInCategoriesTestPage -->
+      </class> <!-- com.test.SupplierPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

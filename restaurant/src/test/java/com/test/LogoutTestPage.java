@@ -1,11 +1,8 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.base.AutomationBase;
@@ -16,25 +13,19 @@ import com.pages.LogoutPage;
 import com.utilities.PropertyUtilities;
 
 public class LogoutTestPage extends AutomationBase {
-	WebDriver driver;
 	LogoutPage logoutpg;
 	Properties prop;
 	HomePage homepg;
 	LoginPage loginpg;
 	PropertyUtilities propUtil;
 
-	@BeforeMethod
-	public void prerun() throws IOException {
-		driver = getDriver();
+	@Test(priority = 38, enabled = true)
+	public void validateLogoutPage_ByClickingLogoutLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		logoutpg = homepg.navigateToLogoutPage();
-	}
-
-	@Test(priority = 38, enabled = true)
-	public void validateLogoutPage_ByClickingLogoutLink() {
 		logoutpg.clickOnLogout();
 		Assert.assertTrue(logoutpg.isLoginButtonDisplayed(), AutomationConstants.logoutCheck);
 	}

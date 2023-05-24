@@ -10,12 +10,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class UsersPage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public UsersPage(WebDriver driver) {
 		this.driver = driver;
@@ -145,6 +147,10 @@ public class UsersPage {
 			}
 	}
 		return status;
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 
 }

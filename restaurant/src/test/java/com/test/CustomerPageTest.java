@@ -2,9 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,25 +15,19 @@ import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
 
 public class CustomerPageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	CustomerPage customerpg;
 	Properties prop;
 	HomePage homepg;
 	PropertyUtilities propUtil;
 
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	@Test(priority = 15, enabled = true, groups = { "smoke" }, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddCustomersPageInPeopleLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		customerpg = homepg.navigateToCustomersInPeopleLink();
-	}
-
-	@Test(priority = 15, enabled = true)
-	public void validateAddCustomersPageInPeopleLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		customerpg.clickOnAddCustomerButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(customerpg.isCustomerNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -45,9 +37,15 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 16, enabled = true, dataProvider = "customer", dataProviderClass = DataSupplier.class)
+	@Test(priority = 16, enabled = true, dataProvider = "customer", dataProviderClass = DataSupplier.class, groups = {
+			"smoke" }, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredValues_AfterClickingAddCustomerButtonInCustomersPageInPeopleLink(String name,
 			String phone, String mail, String discount) {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		customerpg = homepg.navigateToCustomersInPeopleLink();
 		customerpg.clickOnAddCustomerButton();
 		customerpg.enterValueToCustomerName(name);
 		customerpg.enterValueToCustomerPhone(phone);
@@ -56,17 +54,20 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.clickOnCustomerSubmitButton();
 		customerpg.searchForCustomerValue(name);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC", AutomationConstants.errorMessage);
-		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "1234567567",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), name, AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
 	}
 
-	@Test(priority = 17, enabled = true, dataProvider = "customeredit", dataProviderClass = DataSupplier.class)
+	@Test(priority = 17, enabled = true, dataProvider = "customeredit", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedCustomerValues_AfterClickingAddEditButtonInCustomersPageInPeopleLink(String name,
 			String phone, String mail, String discount) {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		customerpg = homepg.navigateToCustomersInPeopleLink();
 		customerpg.searchForCustomerValue(name);
 		customerpg.clickOnCustomerEditIcon();
 		customerpg.enterValueToCustomerPhone(phone);
@@ -75,22 +76,27 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.clickOnCustomerEditSubmitButton();
 		customerpg.searchForCustomerValue(phone);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), "AAC", AutomationConstants.errorMessage);
-		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), "7888888888",
-				AutomationConstants.errorMessage);
-		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), "aac@gmail.com",
-				AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerNameFromSearchResult(), name, AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
+		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
+		customerpg.closeTheWindow();
 	}
 
-	@Test(priority = 18, enabled = true, dataProvider = "customerdelete", dataProviderClass = DataSupplier.class)
+	@Test(priority = 18, enabled = true, dataProvider = "customerdelete", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheDeleteIcon_AfterClickingDeleteButtonInCustomersPageInPeopleLink(String phone) {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		customerpg = homepg.navigateToCustomersInPeopleLink();
 		customerpg.searchForCustomerValue(phone);
 		customerpg.clickOnCustomerDeleteIcon();
 		customerpg.clickOnCustomerDeleteConfirmMessage();
 		customerpg.searchForCustomerValue(phone);
 		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+		customerpg.closeTheWindow();
 	}
 
 }

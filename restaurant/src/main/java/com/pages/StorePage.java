@@ -7,12 +7,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class StorePage {
 
 	WebDriver driver;
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil = new WebbrowserUtilities();
 
 	public StorePage(WebDriver driver) {
 		this.driver = driver;
@@ -197,4 +199,7 @@ public class StorePage {
 		return actionUtil.getElementText(driver, storedelete_searchResult);
 	}
 
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
+	}
 }

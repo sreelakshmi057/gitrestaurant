@@ -6,10 +6,13 @@
 			<include name="smoke"></include>
 		</run>
 	</groups>
+	<listeners>
+		<listener class-name="com.listeners.TestListeners" />
+	</listeners>
 	<test thread-count="5" name="Test">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-				<class name="com.test.StorePageTest"/>				
+				<class name="com.test.CustomerPageTest"/>				
 		</classes>
 	</test>
 </suite> <!-- Suite -->

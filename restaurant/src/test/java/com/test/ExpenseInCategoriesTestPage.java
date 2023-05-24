@@ -2,9 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +15,6 @@ import com.utilities.ExcelUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpenseInCategoriesTestPage extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	ExpenseInCategoriesPage cat_expensepg;
 	Properties prop;
@@ -25,40 +22,49 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
 
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	@Test(priority = 30, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddExpensePageInCategoriesLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
 		excelUtil = new ExcelUtilities();
-	}
-
-	@Test(priority = 30, enabled = true)
-	public void validateAddExpensePageInCategoriesLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(cat_expensepg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		cat_expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 31, enabled = true)
+	@Test(priority = 31, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredCategoryValues_AfterClickingAddCustomerButtonInExpensePageInCategoryLink() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
+		excelUtil = new ExcelUtilities();
 		cat_expensepg.clickOnAddExpenseCategoryButton();
 		String cat_name = excelUtil.readStringData("category", 2, 2);
 		cat_expensepg.enterValueToCategoryName(cat_name);
 		cat_expensepg.clickOnCategorySubmitButton();
 		cat_expensepg.searchForCategoryProductValue(cat_name);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_EXPENSE",
+		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), cat_name,
 				"Failure Message: No matching records found");
 		soft.assertAll();
+		cat_expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 32, enabled = true)
+	@Test(priority = 32, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedCategoryValues_AfterClickingEditButtonInExpensePageInCategoryLink() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
+		excelUtil = new ExcelUtilities();
 		String cat_search = excelUtil.readStringData("category", 5, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_search);
 		cat_expensepg.clickOnProductEditIcon();
@@ -67,13 +73,20 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg.clickOnProductEditSubmitButton();
 		cat_expensepg.searchForCategoryProductValue(cat_editname);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), "APPLE_SREE_EXPENSE",
+		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), cat_editname,
 				AutomationConstants.errorMessage);
 		soft.assertAll();
+		cat_expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 33, enabled = false)
+	@Test(priority = 33, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheDeleteIcon_AfterClickingDeleteButtonInExpensePageInCategoryLink() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
+		excelUtil = new ExcelUtilities();
 		String cat_deletesearch = excelUtil.readStringData("category", 9, 2);
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		cat_expensepg.clickOnProductDeleteIcon();
@@ -81,6 +94,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+		cat_expensepg.closeTheWindow();
 	}
 
 }

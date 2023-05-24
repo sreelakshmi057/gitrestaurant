@@ -2,7 +2,6 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,15 +12,13 @@ import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
 
 public class LoginPageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	HomePage homepg;
 	Properties prop;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateLoginPage_ByEnteringUsernameAndPassword() {
-		driver = getDriver();
 		loginpg = new LoginPage(driver);
 		homepg = new HomePage(driver);
 		propUtil = new PropertyUtilities();

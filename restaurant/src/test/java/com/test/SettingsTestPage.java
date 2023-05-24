@@ -2,8 +2,6 @@ package com.test;
 
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +14,6 @@ import com.utilities.GenericUtilities;
 import com.utilities.PropertyUtilities;
 
 public class SettingsTestPage extends AutomationBase {
-	WebDriver driver;
 	LoginPage loginpg;
 	SettingsPage settingpg;
 	Properties prop;
@@ -24,18 +21,13 @@ public class SettingsTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 	GenericUtilities genericUtil = new GenericUtilities();
 
-	@BeforeMethod
-	public void prerun() {
-		driver = getDriver();
+	@Test(priority = 34, enabled = true)
+	public void validateSettingsPageHasElementsDisplayed_WhileClickingOnSettingsLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
 		settingpg = homepg.navigateToSettingsPage();
-	}
-
-	@Test(priority = 34, enabled = true)
-	public void validateSettingsPageHasElementsDisplayed_WhileClickingOnSettingsLink() {
 		settingpg.clickOnCompanyName();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(settingpg.isCompanyNameDisplayed(), AutomationConstants.linkDisplayCheck);
@@ -46,10 +38,16 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertTrue(settingpg.isStripeSecretKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretPublishedKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		settingpg.closeTheWindow();
 	}
 
-	@Test(priority = 35, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 35, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateUpdateSettingsInSettingsPage_ByEnteringValuesInTheFieldsProvided() {
+		loginpg = new LoginPage(driver);
+		propUtil = new PropertyUtilities();
+		prop = PropertyUtilities.getProperty("config.properties");
+		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
+		settingpg = homepg.navigateToSettingsPage();
 		settingpg.clickOnCompanyName();
 		String company_Name = genericUtil.generateAlphabeticData(8);
 		settingpg.enterValueToCompanyName(company_Name);
@@ -63,7 +61,8 @@ public class SettingsTestPage extends AutomationBase {
 		settingpg.enterValueToDefaultTax(code);
 		settingpg.clickOnSubmitButton();
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(company_Name,company_Name );
+		soft.assertEquals(company_Name, company_Name);
 		soft.assertAll();
+		settingpg.closeTheWindow();
 	}
 }

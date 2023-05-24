@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class ProductInCategoriesPage {
 
@@ -15,6 +16,7 @@ public class ProductInCategoriesPage {
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public ProductInCategoriesPage(WebDriver driver) {
 		this.driver = driver;
@@ -125,6 +127,10 @@ public class ProductInCategoriesPage {
 
 	public void clickOnProductDeleteConfirmMessage() {
 		actionUtil.clickElement(driver, categoryConfirmDeleteMsg);
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 
 }

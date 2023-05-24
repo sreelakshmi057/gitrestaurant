@@ -181,4 +181,7 @@ public class SettingsPage {
 		genericUtil.SelectElementByIndex(driver, rounding, value);
 	}
 
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
+	}
 }

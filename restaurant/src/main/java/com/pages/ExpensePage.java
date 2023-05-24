@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.GenericUtilities;
 import com.utilities.WaitUtilities;
 import com.utilities.WebActionUtilities;
+import com.utilities.WebbrowserUtilities;
 
 public class ExpensePage {
 
@@ -15,6 +16,7 @@ public class ExpensePage {
 	WebActionUtilities actionUtil = new WebActionUtilities();
 	GenericUtilities genericUtil = new GenericUtilities();
 	WaitUtilities waitUtil = new WaitUtilities();
+	WebbrowserUtilities brwsrUtil= new WebbrowserUtilities();
 
 	public ExpensePage(WebDriver driver) {
 		this.driver = driver;
@@ -167,6 +169,7 @@ public class ExpensePage {
 	}
 
 	public String getExpenseReferenceFromSearchResult() {
+		waitUtil.waitForVisibilityOfElement(driver, expenseReference_SearchResult, 10);
 		return actionUtil.getElementText(driver, expenseReference_SearchResult);
 	}
 
@@ -217,5 +220,9 @@ public class ExpensePage {
 
 	public void clickOnExpenseDeleteOkConfirmMessage() {
 		actionUtil.clickElement(driver, expenseConfirmDeleteOkButton);
+	}
+	
+	public void closeTheWindow() {
+		brwsrUtil.browserQuitPage(driver);
 	}
 }
