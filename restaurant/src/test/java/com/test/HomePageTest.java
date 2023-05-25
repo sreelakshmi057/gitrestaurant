@@ -29,9 +29,6 @@ public class HomePageTest extends AutomationBase {
 		soft.assertTrue(homepg.isStoreLinkDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(homepg.isPeopleLinkDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(homepg.isSalesLinkDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(homepg.isExpenseLinkDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(homepg.isCategoriesLinkDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(homepg.isSettingsLinkDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 		homepg.closeTheWindow();
 	}

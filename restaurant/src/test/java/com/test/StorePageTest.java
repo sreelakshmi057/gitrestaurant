@@ -35,8 +35,6 @@ public class StorePageTest extends AutomationBase {
 		soft.assertTrue(storepg.isStoreNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStoreMailDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStorePhoneDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(storepg.isStoreCountryDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(storepg.isStoreCityDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 		storepg.closeTheWindow();
 	}

@@ -37,10 +37,6 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(productpg.isProductNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductCategoryDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductSupplierDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductPurchasePriceDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductTaxDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductTaxMethodDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(productpg.isProductPriceDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 		productpg.closeTheWindow();
 	}

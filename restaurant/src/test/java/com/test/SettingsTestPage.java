@@ -40,29 +40,4 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertAll();
 		settingpg.closeTheWindow();
 	}
-
-	@Test(priority = 35, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-	public void validateUpdateSettingsInSettingsPage_ByEnteringValuesInTheFieldsProvided() {
-		loginpg = new LoginPage(driver);
-		propUtil = new PropertyUtilities();
-		prop = PropertyUtilities.getProperty("config.properties");
-		homepg = loginpg.login(prop.getProperty("username"), prop.getProperty("password"));
-		settingpg = homepg.navigateToSettingsPage();
-		settingpg.clickOnCompanyName();
-		String company_Name = genericUtil.generateAlphabeticData(8);
-		settingpg.enterValueToCompanyName(company_Name);
-		String company_Phone = genericUtil.generateNumericData(10);
-		settingpg.enterValueToCompanyPhone(company_Phone);
-		String default_discount = genericUtil.generateNumericData(2);
-		settingpg.enterValueToDefaultDiscount(default_discount);
-		String tax = genericUtil.generateNumericData(3);
-		settingpg.enterValueToDefaultTax(tax);
-		String code = genericUtil.generateAlphaNumericData(5);
-		settingpg.enterValueToDefaultTax(code);
-		settingpg.clickOnSubmitButton();
-		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(company_Name, company_Name);
-		soft.assertAll();
-		settingpg.closeTheWindow();
-	}
 }

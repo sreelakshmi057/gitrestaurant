@@ -19,7 +19,7 @@ public class LogoutTestPage extends AutomationBase {
 	LoginPage loginpg;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 38, enabled = true)
+	@Test(priority = 37, enabled = true)
 	public void validateLogoutPage_ByClickingLogoutLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();

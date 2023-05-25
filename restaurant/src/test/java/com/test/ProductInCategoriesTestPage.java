@@ -57,7 +57,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		categoriespg.closeTheWindow();
 	}
 
-	@Test(priority = 28, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 28, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedCategoryValues_AfterClickingEditButtonInProductPageInCategoryLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();

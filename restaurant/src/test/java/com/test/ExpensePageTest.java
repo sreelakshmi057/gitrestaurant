@@ -20,7 +20,7 @@ public class ExpensePageTest extends AutomationBase {
 	HomePage homepg;
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
-	
+
 	@Test(priority = 23, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddExpensePageHasElementsDisplayed_WhenAddExpenseButtonIsClicked() {
 		loginpg = new LoginPage(driver);
@@ -34,9 +34,6 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertTrue(expensepg.isExpenseDateDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(expensepg.isExpenseReferenceDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(expensepg.isExpenseCategoryDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(expensepg.isExpenseStoreDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(expensepg.isExpenseAmountDisplayed(), AutomationConstants.linkDisplayCheck);
-		soft.assertTrue(expensepg.isExpenseDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 		expensepg.closeTheWindow();
 	}

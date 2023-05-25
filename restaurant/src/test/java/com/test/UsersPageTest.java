@@ -22,7 +22,7 @@ public class UsersPageTest extends AutomationBase {
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
 
-	@Test(priority = 36, enabled = true)
+	@Test(priority = 35, enabled = true)
 	public void validateAddUsersPageInSettingsPageHasElementsDisplayed() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -41,7 +41,7 @@ public class UsersPageTest extends AutomationBase {
 		userpg.closeTheWindow();
 	}
 
-	@Test(priority = 37, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 36, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredUserValuesInUsersPage_InTheCorrespondingFields() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();

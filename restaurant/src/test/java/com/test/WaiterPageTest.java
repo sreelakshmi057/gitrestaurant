@@ -35,7 +35,6 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertTrue(waiterpg.isWaiterEmailDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(waiterpg.isWaiterStoreDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		waiterpg.closeTheWindow();
 	}
 
 	@Test(priority = 12, enabled = true, dataProvider = "waiter", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)

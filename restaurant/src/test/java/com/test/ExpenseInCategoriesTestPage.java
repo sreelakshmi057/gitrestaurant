@@ -12,6 +12,7 @@ import com.pages.ExpenseInCategoriesPage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.ExcelUtilities;
+import com.utilities.GenericUtilities;
 import com.utilities.PropertyUtilities;
 
 public class ExpenseInCategoriesTestPage extends AutomationBase {
@@ -21,6 +22,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 	HomePage homepg;
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
+	GenericUtilities genericUtil = new GenericUtilities();
 
 	@Test(priority = 30, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddExpensePageInCategoriesLinkHasElementsDisplayed_WhenAddCustomerButtonIsClicked() {
@@ -46,7 +48,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg = homepg.navigateToExpenseInCategoriesPage();
 		excelUtil = new ExcelUtilities();
 		cat_expensepg.clickOnAddExpenseCategoryButton();
-		String cat_name = excelUtil.readStringData("category", 2, 2);
+		String cat_name = genericUtil.generateAlphabeticData(8);
 		cat_expensepg.enterValueToCategoryName(cat_name);
 		cat_expensepg.clickOnCategorySubmitButton();
 		cat_expensepg.searchForCategoryProductValue(cat_name);
