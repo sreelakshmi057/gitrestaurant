@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 import com.google.common.io.Files;
 
 public class GenericUtilities {
-	WebDriver driver;
 	Select select;
 	
 	/**

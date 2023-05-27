@@ -28,6 +28,7 @@ public class TestListeners implements ITestListener {
 	ExtentReports extent;
 	static ExtentTest test;
 	String testName;
+	WebDriver driver;
 	String reportPath = System.getProperty("user.dir") + "/Reports/";
 	AutomationBase base = new AutomationBase();
 
@@ -45,7 +46,7 @@ public class TestListeners implements ITestListener {
 	public void onTestStart(ITestResult result) {
 		try {
 			Object currentClass = result.getInstance();
-			WebDriver driver = base.driver;
+			driver = base.driver;
 //			Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 //			extent.setSystemInfo("Browser", cap.getBrowserName());
 //			extent.setSystemInfo("BrowserVersion", cap.getBrowserVersion());
@@ -68,16 +69,19 @@ public class TestListeners implements ITestListener {
 	}
 
 	public void onTestFailure(ITestResult result) {
+		driver = base.driver;
 		System.out.println(
 				"=============================TEST CASE : " + testName + ":FAILED==============================");
 		test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED!!", ExtentColor.RED));
 		String path = System.getProperty("user.dir") + "/test-output/" + System.currentTimeMillis() + ".png";
-		File scrFile = ((TakesScreenshot) (result.getInstance())).getScreenshotAs(OutputType.FILE);
+		File scrFile = ((TakesScreenshot) ((AutomationBase) result.getInstance()).getDriver())
+				.getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(scrFile, new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		test.fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
 

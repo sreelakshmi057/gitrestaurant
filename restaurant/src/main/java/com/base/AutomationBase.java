@@ -1,26 +1,15 @@
 package com.base;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.constants.AutomationConstants;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtilities;
@@ -37,7 +26,6 @@ public class AutomationBase {
 	@Parameters("browserName")
 	public void preLaunch(String browserName) {
 		launchBrowser(browserName);
-		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
@@ -47,7 +35,6 @@ public class AutomationBase {
 	@Parameters("browserName")
 	public void grouping(String browserName) {
 		launchBrowser(browserName);
-		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
 		prop = PropertyUtilities.getProperty("config.properties");
 		brwsrUtil.launchUrl(driver, prop.getProperty("url"));
@@ -86,20 +73,9 @@ public class AutomationBase {
 		driver = new FirefoxDriver();
 		brwsrUtil.browserMaximize(driver);
 	}
-	
-//	@AfterMethod(alwaysRun = true)
-//	public void onTestFailure(ITestResult result) {
-//		System.out.println(
-//				"=============================TEST CASE : " + testName + ":FAILED==============================");
-//		test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED!!", ExtentColor.RED));
-//		String path = System.getProperty("user.dir") + "/test-output/" + System.currentTimeMillis() + ".png";
-//		File scrFile = ((TakesScreenshot) (result.getInstance())).getScreenshotAs(OutputType.FILE);
-//		try {
-//			FileUtils.copyFile(scrFile, new File(path));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		test.fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(path).build());
-//		driver.quit();
-//	}
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
 }

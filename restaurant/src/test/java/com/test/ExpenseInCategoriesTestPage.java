@@ -39,7 +39,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg.closeTheWindow();
 	}
 
-	@Test(priority = 31, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 31, enabled = true)
 	public void validateTheEnteredCategoryValues_AfterClickingAddCustomerButtonInExpensePageInCategoryLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
