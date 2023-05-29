@@ -3,6 +3,7 @@ package com.test;
 import java.util.Properties;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -22,7 +23,7 @@ public class ProductPageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 3, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddProductPageHasElementsDisplayed_WhenAddProductButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -38,7 +39,6 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(productpg.isProductCategoryDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(productpg.isProductSupplierDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		productpg.closeTheWindow();
 	}
 
 	@Test(priority = 4, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -79,7 +79,6 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertEquals(productpg.getProductNameFromSearchResult(), prdtname, AutomationConstants.errorMessage);
 		soft.assertEquals(productpg.getProductTaxFromSearchResult(), prdttax, AutomationConstants.errorMessage);
 		soft.assertAll();
-		productpg.closeTheWindow();
 	}
 
 	@Test(priority = 5, enabled = true)
@@ -100,7 +99,6 @@ public class ProductPageTest extends AutomationBase {
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(productpg.getProductNameFromSearchResult(), prdtname, AutomationConstants.errorMessage);
 		soft.assertAll();
-		productpg.closeTheWindow();
 	}
 
 	@Test(priority = 6, enabled = true)
@@ -118,6 +116,10 @@ public class ProductPageTest extends AutomationBase {
 		productpg.searchForProductValue(prdtdelete);
 		Assert.assertEquals(productpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+	}
+	
+	@AfterMethod
+	public void postRun() {
 		productpg.closeTheWindow();
 	}
 }

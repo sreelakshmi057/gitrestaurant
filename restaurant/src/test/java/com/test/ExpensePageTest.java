@@ -2,6 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -35,7 +36,6 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertTrue(expensepg.isExpenseReferenceDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(expensepg.isExpenseCategoryDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		expensepg.closeTheWindow();
 	}
 
 	@Test(priority = 24, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -64,7 +64,6 @@ public class ExpensePageTest extends AutomationBase {
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), exp_ref, AutomationConstants.errorMessage);
 		soft.assertAll();
-		expensepg.closeTheWindow();
 	}
 
 	@Test(priority = 25, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -88,6 +87,10 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertEquals(expensepg.getExpenseReferenceFromSearchResult(), exp_editref,
 				AutomationConstants.errorMessage);
 		soft.assertAll();
+	}
+	
+	@AfterMethod
+	public void postRun() {
 		expensepg.closeTheWindow();
 	}
 }

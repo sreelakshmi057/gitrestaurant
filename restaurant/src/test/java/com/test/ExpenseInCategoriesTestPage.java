@@ -3,6 +3,7 @@ package com.test;
 import java.util.Properties;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -36,7 +37,6 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(cat_expensepg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		cat_expensepg.closeTheWindow();
 	}
 
 	@Test(priority = 31, enabled = true)
@@ -56,7 +56,6 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), cat_name,
 				"Failure Message: No matching records found");
 		soft.assertAll();
-		cat_expensepg.closeTheWindow();
 	}
 
 	@Test(priority = 32, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -78,7 +77,6 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertEquals(cat_expensepg.getExpenseCategoryNameFromSearchResult(), cat_editname,
 				AutomationConstants.errorMessage);
 		soft.assertAll();
-		cat_expensepg.closeTheWindow();
 	}
 
 	@Test(priority = 33, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -96,6 +94,10 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		cat_expensepg.searchForCategoryProductValue(cat_deletesearch);
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+	}
+	
+	@AfterMethod
+	public void postRun() {
 		cat_expensepg.closeTheWindow();
 	}
 

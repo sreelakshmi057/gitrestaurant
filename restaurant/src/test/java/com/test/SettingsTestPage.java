@@ -2,6 +2,7 @@ package com.test;
 
 import java.util.Properties;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -38,6 +39,11 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertTrue(settingpg.isStripeSecretKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretPublishedKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
+		//settingpg.closeTheWindow();
+	}
+	
+	@AfterMethod
+	public void postRun() {
 		settingpg.closeTheWindow();
 	}
 }

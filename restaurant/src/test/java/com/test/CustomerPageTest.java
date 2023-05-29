@@ -3,6 +3,7 @@ package com.test;
 import java.util.Properties;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -80,7 +81,6 @@ public class CustomerPageTest extends AutomationBase {
 		soft.assertEquals(customerpg.getCustomerPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
 		soft.assertEquals(customerpg.getCustomerEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
-		customerpg.closeTheWindow();
 	}
 
 	@Test(priority = 18, enabled = true, dataProvider = "customerdelete", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -96,6 +96,10 @@ public class CustomerPageTest extends AutomationBase {
 		customerpg.searchForCustomerValue(phone);
 		Assert.assertEquals(customerpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
+	}
+
+	@AfterMethod
+	public void postRun() {
 		customerpg.closeTheWindow();
 	}
 
