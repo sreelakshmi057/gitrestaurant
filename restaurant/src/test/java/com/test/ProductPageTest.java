@@ -81,7 +81,7 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEditedProducteValues_AfterClickingEdittButtonInProductPage() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();

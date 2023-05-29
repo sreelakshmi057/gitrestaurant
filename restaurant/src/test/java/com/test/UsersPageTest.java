@@ -39,7 +39,6 @@ public class UsersPageTest extends AutomationBase {
 		soft.assertTrue(userpg.isPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(userpg.isConfirmPasswordDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//userpg.closeTheWindow();
 	}
 
 	@Test(priority = 36, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -63,7 +62,6 @@ public class UsersPageTest extends AutomationBase {
 		userpg.enterValueToConfirmPassword(user_password);
 		userpg.clickOnSubmit();
 		Assert.assertTrue(userpg.getSearchResultOfTheAddedUserValues(), AutomationConstants.errorMessage);
-		//userpg.closeTheWindow();
 	}
 	
 	@AfterMethod
