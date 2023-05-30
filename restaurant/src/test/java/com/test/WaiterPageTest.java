@@ -59,7 +59,6 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertEquals(waiterpg.getWaiterStoreFromSearchResult(), store, AutomationConstants.errorMessage);
 		soft.assertAll();
-		//waiterpg.closeTheWindow();
 	}
 
 	@Test(priority = 13, enabled = true, dataProvider = "waiteredit", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -81,7 +80,6 @@ public class WaiterPageTest extends AutomationBase {
 		soft.assertEquals(waiterpg.getWaiterPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
 		soft.assertEquals(waiterpg.getWaiterEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
-		//waiterpg.closeTheWindow();
 	}
 
 	@Test(priority = 14, enabled = true, dataProvider = "waiterdelete", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -97,7 +95,6 @@ public class WaiterPageTest extends AutomationBase {
 		waiterpg.searchForStoreValue(phone);
 		Assert.assertEquals(waiterpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-		//waiterpg.closeTheWindow();
 	}
 	
 	@AfterMethod

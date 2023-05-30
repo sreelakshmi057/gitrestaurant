@@ -7,13 +7,13 @@
 	<test thread-count="1" name="Test1">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<class name="com.test.CustomerPageTest" />
+			<class name="com.test.LoginPageTest" />
 		</classes>
 	</test> <!-- Test -->
 	<test thread-count="1" name="Test2">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<class name="com.test.ExpenseInCategoriesTestPage" />
+			<class name="com.test.LogoutTestPage" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -7,8 +7,8 @@
 	<test thread-count="5" name="Test">
 		<parameter name="browserName" value="chrome" />
 		<classes>
-			<class name="com.test.CustomerPageTest" />
-			<class name="com.test.ExpenseInCategoriesTestPage" />
+			<class name="com.test.LoginPageTest" />
+			<class name="com.test.HomePageTest" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

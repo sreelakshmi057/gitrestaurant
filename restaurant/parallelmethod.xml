@@ -10,7 +10,7 @@
 			<class name="com.test.WaiterPageTest">
 				<methods>
 					<include name="validateAddWaiterPageHasElementsDisplayed_WhenAddWaitererButtonIsClicked" />
-					<include name="validateTheEnteredValuesInWaiterPage_AfterClickingAddWaitererButtonInWaiterPage" />
+					<include name="validateTheEnteredValuesInWaiterPage_AfterClickingAddWaitererButtonInWaiterPage"/>
 				</methods>
 			</class>
 		</classes>
