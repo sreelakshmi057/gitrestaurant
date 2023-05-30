@@ -7,10 +7,10 @@
 	<test thread-count="5" name="Test">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<class name="com.test.WaiterPageTest">
+			<class name="com.test.ProductInCategoriesTestPage">
 				<methods>
-					<include name="validateAddWaiterPageHasElementsDisplayed_WhenAddWaitererButtonIsClicked" />
-					<include name="validateTheEnteredValuesInWaiterPage_AfterClickingAddWaitererButtonInWaiterPage"/>
+					<include name="validateAddCategoryPageInProductPageInCategoriesLinkHasElementsDisplayed_WhenAddCategoryButtonIsClicked" />
+					<include name="validateTheEnteredCategoryValues_AfterClickingAddCategoryButtonInProductPageInCategoryLink" />
 				</methods>
 			</class>
 		</classes>

@@ -23,7 +23,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
 
-	@Test(priority = 26, enabled = true)
+	@Test(priority = 26, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddCategoryPageInProductPageInCategoriesLinkHasElementsDisplayed_WhenAddCategoryButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -35,10 +35,9 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(categoriespg.isCategoryNameDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//categoriespg.closeTheWindow();
 	}
 
-	@Test(priority = 27, enabled = true)
+	@Test(priority = 27, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredCategoryValues_AfterClickingAddCategoryButtonInProductPageInCategoryLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -55,7 +54,6 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), exp_name,
 				"Failure Message: No matching records found");
 		soft.assertAll();
-		//categoriespg.closeTheWindow();
 	}
 
 	@Test(priority = 28, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -77,7 +75,6 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		soft.assertEquals(categoriespg.getCategoryProductNameFromSearchResult(), exp_editname,
 				AutomationConstants.errorMessage);
 		soft.assertAll();
-		//categoriespg.closeTheWindow();
 	}
 
 	@Test(priority = 29, enabled = true)
@@ -95,7 +92,6 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		categoriespg.searchForCategoryProductValue(exp_searchname);
 		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-		//categoriespg.closeTheWindow();
 	}
 	
 	@AfterMethod
