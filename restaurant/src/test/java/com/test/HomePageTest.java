@@ -32,7 +32,7 @@ public class HomePageTest extends AutomationBase {
 		soft.assertTrue(homepg.isSalesLinkDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		homepg.closeTheWindow();

@@ -22,7 +22,7 @@ public class WaiterPageTest extends AutomationBase {
 	HomePage homepg;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 11, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 11, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddWaiterPageHasElementsDisplayed_WhenAddWaitererButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -96,7 +96,7 @@ public class WaiterPageTest extends AutomationBase {
 		Assert.assertEquals(waiterpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		waiterpg.closeTheWindow();

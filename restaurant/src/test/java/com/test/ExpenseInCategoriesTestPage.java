@@ -79,7 +79,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 33, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 33, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheDeleteIcon_AfterClickingDeleteButtonInExpensePageInCategoryLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -95,7 +95,7 @@ public class ExpenseInCategoriesTestPage extends AutomationBase {
 		Assert.assertEquals(cat_expensepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		cat_expensepg.closeTheWindow();

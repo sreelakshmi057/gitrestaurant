@@ -23,7 +23,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 	PropertyUtilities propUtil;
 	ExcelUtilities excelUtil;
 
-	@Test(priority = 26, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 26, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddCategoryPageInProductPageInCategoriesLinkHasElementsDisplayed_WhenAddCategoryButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -37,7 +37,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 27, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 27, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateTheEnteredCategoryValues_AfterClickingAddCategoryButtonInProductPageInCategoryLink() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -93,7 +93,7 @@ public class ProductInCategoriesTestPage extends AutomationBase {
 		Assert.assertEquals(categoriespg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		categoriespg.closeTheWindow();

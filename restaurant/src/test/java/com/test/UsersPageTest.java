@@ -63,7 +63,7 @@ public class UsersPageTest extends AutomationBase {
 		userpg.clickOnSubmit();
 		Assert.assertTrue(userpg.getSearchResultOfTheAddedUserValues(), AutomationConstants.errorMessage);
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		userpg.closeTheWindow();

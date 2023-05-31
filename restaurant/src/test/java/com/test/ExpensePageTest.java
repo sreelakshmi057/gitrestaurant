@@ -88,7 +88,7 @@ public class ExpensePageTest extends AutomationBase {
 				AutomationConstants.errorMessage);
 		soft.assertAll();
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		expensepg.closeTheWindow();

@@ -37,7 +37,6 @@ public class StorePageTest extends AutomationBase {
 		soft.assertTrue(storepg.isStoreMailDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(storepg.isStorePhoneDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//storepg.closeTheWindow();
 	}
 
 	@Test(priority = 8, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -72,7 +71,6 @@ public class StorePageTest extends AutomationBase {
 		soft.assertEquals(storepg.getStoreCountryFromSearch(), storeCountry, AutomationConstants.linkDisplayCheck);
 		soft.assertEquals(storepg.getStoreCityFromSearch(), storeCity, AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//storepg.closeTheWindow();
 	}
 
 	@Test(priority = 9, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -94,7 +92,6 @@ public class StorePageTest extends AutomationBase {
 		soft.assertEquals(storepg.getStoreNameFromSearch(), storeName, AutomationConstants.linkDisplayCheck);
 		soft.assertEquals(storepg.getStoreMailFromSearch(), editMail, AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//storepg.closeTheWindow();
 	}
 
 	@Test(priority = 10, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -111,9 +108,8 @@ public class StorePageTest extends AutomationBase {
 		storepg.searchForStoreValue(storeName);
 		Assert.assertEquals(storepg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-		//storepg.closeTheWindow();
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		storepg.closeTheWindow();

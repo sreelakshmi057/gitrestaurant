@@ -39,9 +39,8 @@ public class SettingsTestPage extends AutomationBase {
 		soft.assertTrue(settingpg.isStripeSecretKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(settingpg.isStripeSecretPublishedKeyDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//settingpg.closeTheWindow();
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		settingpg.closeTheWindow();

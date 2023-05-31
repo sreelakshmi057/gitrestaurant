@@ -23,7 +23,7 @@ public class ProductPageTest extends AutomationBase {
 	ExcelUtilities excelUtil;
 	PropertyUtilities propUtil;
 
-	@Test(priority = 3, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 3, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddProductPageHasElementsDisplayed_WhenAddProductButtonIsClicked() {
 		loginpg = new LoginPage(driver);
 		propUtil = new PropertyUtilities();
@@ -117,7 +117,7 @@ public class ProductPageTest extends AutomationBase {
 		Assert.assertEquals(productpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		productpg.closeTheWindow();

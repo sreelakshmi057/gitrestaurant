@@ -36,7 +36,6 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertTrue(supplierpg.isSupplierEmailDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertTrue(supplierpg.isSupplierDescriptionDisplayed(), AutomationConstants.linkDisplayCheck);
 		soft.assertAll();
-		//supplierpg.closeTheWindow();
 	}
 
 	@Test(priority = 20, enabled = true, dataProvider = "supplier", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -59,8 +58,6 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
 		soft.assertEquals(supplierpg.getSupplierEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
-		//supplierpg.closeTheWindow();
-
 	}
 
 	@Test(priority = 21, enabled = true, dataProvider = "supplieredit", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -82,7 +79,6 @@ public class SupplierPageTest extends AutomationBase {
 		soft.assertEquals(supplierpg.getSupplierPhoneFromSearchResult(), phone, AutomationConstants.errorMessage);
 		soft.assertEquals(supplierpg.getSupplierEmailFromSearchResult(), mail, AutomationConstants.errorMessage);
 		soft.assertAll();
-		//supplierpg.closeTheWindow();
 	}
 
 	@Test(priority = 22, enabled = true, dataProvider = "supplierdelete", dataProviderClass = DataSupplier.class, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
@@ -98,9 +94,8 @@ public class SupplierPageTest extends AutomationBase {
 		supplierpg.searchForStoreValue(phone);
 		Assert.assertEquals(supplierpg.getTheSearchResultOfDeletedEntry(), AutomationConstants.errorMessage,
 				AutomationConstants.deleteCheck);
-		//supplierpg.closeTheWindow();
 	}
-	
+
 	@AfterMethod
 	public void postRun() {
 		supplierpg.closeTheWindow();
