@@ -12,7 +12,7 @@ public class JavaScriptExecutorUtilities {
 	 * 
 	 * @param element
 	 */
-	public void elementClickUsingJavaScriptExecutor(WebElement element,WebDriver driver) {
+	public void elementClickUsingJavaScriptExecutor(WebElement element, WebDriver driver) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("argument[0].click();", element);
 	}

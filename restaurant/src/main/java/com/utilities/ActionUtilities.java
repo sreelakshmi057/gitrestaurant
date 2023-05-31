@@ -13,7 +13,7 @@ public class ActionUtilities {
 	 * @param element
 	 */
 
-	public void moveToElementAndClick(WebElement element,WebDriver driver) {
+	public void moveToElementAndClick(WebElement element, WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.moveToElement(element).click().build().perform();
@@ -27,7 +27,7 @@ public class ActionUtilities {
 	 * 
 	 * @param element
 	 */
-	public void doubleClick(WebElement element,WebDriver driver) {
+	public void doubleClick(WebElement element, WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.doubleClick(element).build().perform();
@@ -42,7 +42,7 @@ public class ActionUtilities {
 	 * @param element
 	 */
 
-	public void clickAndHold(WebElement element,WebDriver driver) {
+	public void clickAndHold(WebElement element, WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.clickAndHold(element).release().build().perform();

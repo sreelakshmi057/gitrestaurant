@@ -29,7 +29,7 @@ public class WaitUtilities {
 		}
 	}
 	
-	public void implicitWait(WebDriver driver, long j) {
+	public void implicitWait(WebDriver driver,long j) {
 		try {
 			driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(j));
 		} catch (Exception e) {

@@ -136,7 +136,7 @@ public class UsersPage {
 		return actionUtil.getElementText(driver, role_searchResult);
 	}
 	
-	public boolean getSearchResultOfTheAddedUserValues() {
+	public boolean getSearchResultOfTheAddedUsersValues() {
 		List<WebElement> username = driver.findElements(By.xpath("//table[@class='table']//tr//td"));
 		boolean status = false;
 		for (WebElement element : username) {

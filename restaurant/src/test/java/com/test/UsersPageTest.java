@@ -61,7 +61,7 @@ public class UsersPageTest extends AutomationBase {
 		userpg.enterValueToPassword(user_password);
 		userpg.enterValueToConfirmPassword(user_password);
 		userpg.clickOnSubmit();
-		Assert.assertTrue(userpg.getSearchResultOfTheAddedUserValues(), AutomationConstants.errorMessage);
+		Assert.assertTrue(userpg.getSearchResultOfTheAddedUsersValues(), AutomationConstants.errorMessage);
 	}
 
 	@AfterMethod
