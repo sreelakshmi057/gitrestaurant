@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class JavaScriptExecutorUtilities {
-	WebDriver driver;
 	JavascriptExecutor js;
 
 	/**
@@ -13,7 +12,7 @@ public class JavaScriptExecutorUtilities {
 	 * 
 	 * @param element
 	 */
-	public void elementClickUsingJavaScriptExecutor(WebElement element) {
+	public void elementClickUsingJavaScriptExecutor(WebElement element,WebDriver driver) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("argument[0].click();", element);
 	}
@@ -23,7 +22,7 @@ public class JavaScriptExecutorUtilities {
 	 * 
 	 * @param element
 	 */
-	public void scrollToElementUsingJavaScriptExecutor(WebElement element) {
+	public void scrollToElementUsingJavaScriptExecutor(WebElement element,WebDriver driver) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
@@ -34,7 +33,7 @@ public class JavaScriptExecutorUtilities {
 	 * @param a
 	 * @param b
 	 */
-	public void scrollFromTopToBottomUsingJavaScriptExecutor(int a, int b) {
+	public void scrollFromTopToBottomUsingJavaScriptExecutor(int a, int b,WebDriver driver) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(a,b)");
 	}
@@ -45,7 +44,7 @@ public class JavaScriptExecutorUtilities {
 	 * @param a
 	 * @param b
 	 */
-	public void scrollFromBottomToTopUsingJavaScriptExecutor(int a, int b) {
+	public void scrollFromBottomToTopUsingJavaScriptExecutor(int a, int b,WebDriver driver) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(a,b)");
 	}

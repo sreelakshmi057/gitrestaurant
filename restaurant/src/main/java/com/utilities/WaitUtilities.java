@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtilities {
-	WebDriver driver;
 	public WebDriverWait wait;
 
 	/**
@@ -25,6 +24,14 @@ public class WaitUtilities {
 	public void implicitWait(WebDriver driver, int i) {
 		try {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(i));
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while implementing implicit wait");
+		}
+	}
+	
+	public void implicitWait(WebDriver driver, long j) {
+		try {
+			driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(j));
 		} catch (Exception e) {
 			throw new RuntimeException("Exception while implementing implicit wait");
 		}

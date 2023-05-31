@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class ActionUtilities {
-	WebDriver driver;
 	Actions action;
 
 	/**
@@ -14,7 +13,7 @@ public class ActionUtilities {
 	 * @param element
 	 */
 
-	public void moveToElementAndClick(WebElement element) {
+	public void moveToElementAndClick(WebElement element,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.moveToElement(element).click().build().perform();
@@ -28,7 +27,7 @@ public class ActionUtilities {
 	 * 
 	 * @param element
 	 */
-	public void doubleClick(WebElement element) {
+	public void doubleClick(WebElement element,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.doubleClick(element).build().perform();
@@ -43,7 +42,7 @@ public class ActionUtilities {
 	 * @param element
 	 */
 
-	public void clickAndHold(WebElement element) {
+	public void clickAndHold(WebElement element,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.clickAndHold(element).release().build().perform();
@@ -58,7 +57,7 @@ public class ActionUtilities {
 	 * @param element
 	 * @param value
 	 */
-	public void clickAndSendKeys(WebElement element, String value) {
+	public void clickAndSendKeys(WebElement element, String value,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.click(element).sendKeys(value).build().perform();
@@ -72,7 +71,7 @@ public class ActionUtilities {
 	 * 
 	 * @param element
 	 */
-	public void contextClick(WebElement element) {
+	public void contextClick(WebElement element,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.contextClick(element).build().perform();
@@ -87,7 +86,7 @@ public class ActionUtilities {
 	 * @param source
 	 * @param target
 	 */
-	public void dragAndDrop(WebElement source, WebElement target) {
+	public void dragAndDrop(WebElement source,WebDriver driver, WebElement target) {
 		action = new Actions(driver);
 		try {
 			action.dragAndDrop(source, target).build().perform();
@@ -101,7 +100,7 @@ public class ActionUtilities {
 	 * 
 	 * @param element
 	 */
-	public void moveToElementAndContextClick(WebElement element) {
+	public void moveToElementAndContextClick(WebElement element,WebDriver driver) {
 		action = new Actions(driver);
 		try {
 			action.moveToElement(element).contextClick().build().perform();
